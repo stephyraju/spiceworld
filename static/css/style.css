@@ -18,3 +18,17 @@ body {
   left: 70%;
   transform: translate(-50%, -50%);
 }
+/*--------Footer---------*/
+.page-footer {
+    min-height: 50px;    
+}      
+.footer-content{
+  display:flex;
+}
+
+.social-icon {
+  margin: 10px;
+  font-size: 1.6rem;
+  color: white;
+}
+
