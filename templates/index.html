@@ -1,7 +1,41 @@
 {% extends 'base.html'%}   {% block content %}
 <section class="title-container">
  <img src="{{ url_for('static', filename='images/titleimg.jpg') }}" alt="title image">
- <div class="intro-content">Everyday Cooking Recipes</div>   
+ <div class="intro-content">
+ <h5>Everyday Cooking Recipes</h5>
+ </div>   
 </section>
+<section class="catergory-container">
+ <div class="row">
+      <div class="col s1">
+      <!-- Dropdown Trigger -->
+  <a class='dropdown-trigger' href='#' data-target='dropdown1'>Breakfast</a>
+</div>
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a href="#!">three</a></li>
+    <li><a href="#!">view_module</i>four</a></li>
+    <li><a href="#!">cloud</i>five</a></li>
+  </ul>
+        
+      <div class="col s1">starter</div>
+      <div class="col s1">Main</div>
+      <div class="col s1">Desserts</div>
+      <div class="col s1">Snack</div>
+      <div class="col s1">Beverages</div>
+      <div class="col s1">Breakfast</div>
+      <div class="col s1">starter</div>
+      <div class="col s1">Main</div>
+      <div class="col s1">Desserts</div>
+      <div class="col s1">Snack</div>
+      <div class="col s1">Beverages</div>
+    </div>
+</section>
+
+
+
 
 {% endblock %}

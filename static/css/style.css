@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
+
 body {
-    background-color: red;
+  background-color: #F5D6C6;
+  font-family: "Courgette&display", sans-serif;
+  min-height: 100vh;
+}
+/*--------Title----------*/
+
+.title-container{
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.intro-content{
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
 }
