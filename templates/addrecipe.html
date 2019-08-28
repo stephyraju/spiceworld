@@ -14,6 +14,7 @@
             </div>
             <div class="row">
                 <div class="col m10 offset-m1">
+                    <!-- Category -->
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-utensils material-icons prefix"></i>
@@ -26,6 +27,7 @@
                             <label>Category</label>
                         </div>
                     </div>
+                    <!-- Cusine -->
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-globe-asia material-icon prefix"></i>
@@ -38,6 +40,7 @@
                             <label>Cusine</label>
                         </div>
                     </div>
+                    <!-- Cooking Time -->
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-clock material-icons prefix"></i>
@@ -49,6 +52,7 @@
             </div>
             <div class="row">
                 <div class="col m10 offset-m1">
+                    <!-- Difficulty -->
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-signal material-icons prefix"></i>
@@ -61,6 +65,7 @@
                             <label>Difficulty</label>
                         </div>
                     </div>
+                    <!-- Serves -->
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-users material-icons prefix"></i>
@@ -68,6 +73,7 @@
                             <label>Serves</label>
                         </div>
                     </div>
+                    <!-- Allergens -->
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-exclamation-triangle material-icon prefix"></i>
@@ -82,7 +88,33 @@
                     </div>
 
                 </div>
-            </div>           
+            </div>
+            <!--Image Url-->
+            <div class="row col s10 offset-s1">
+                <div class="input-field ">
+                    <i class="fas fa-camera material-icons prefix"></i>
+                    <input id="img_url" name="img_url" class="validate" type="url" minlength="15" placeholder="Recipe Image URL" pattern="https?://.+">
+                    <label for="img_url">Image Url</label>
+                </div>
+            </div>
+
+            <!--Ingredients-->
+            <div class="row col s10 offset-s1">
+            <h6><strong>Ingredients</strong></h6>
+                <div class="input-field">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Ingredients</label>
+                </div>
+            </div>
+            <!--Method-->
+            <div class="row col s10 offset-s1">
+            <h6><strong>Direction</strong></h6>
+                <div class="input-field">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Direction</label>
+                </div>
+            </div>
+
         </form>
     </div>
 </section>
