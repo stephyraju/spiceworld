@@ -18,6 +18,11 @@ def get_recipes():
 def add_recipe():
      return render_template("addrecipe.html",  
                categories=mongo.db.categories.find())
+               
+@app.route('/view_recipes')
+def view_recipes():
+     return render_template("recipes.html",  
+               categories=mongo.db.categories.find())
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
