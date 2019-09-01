@@ -1,16 +1,37 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
 
 body {
-  background-color: #F5D6C6;
+  background-color: F0F0F0;
   font-family: "Courgette&display", sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  
 }
 page-container{
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
+/* -------- Nav Bar ----------*/
+
+nav {
+     font-family: 'Courgette';
+}
+
+nav .brand-logo {
+    color: #ff6e40;
+    font-size: 3rem;
+    font-family: 'Courgette', cursive;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+}
+nav ul a {
+  color:#2d2d2d;
+  font-size: 1.7rem;
+  font-family: 'Courgette';
+}
+
 /*--------Title----------*/
 
 .title-container{
