@@ -5,7 +5,8 @@ body {
   font-family: "Courgette&display", sans-serif;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;  
+  min-height: 100vh; 
+  overflow-x: hidden;
 }
 page-container{
   max-width: 100%;
@@ -52,9 +53,10 @@ nav ul .active {
   text-align: center;
   color: white;
   width:100%;
+  margin: 20px 30px;
 }
 .title-container img{
-  display: block;
+    display: block;
     width: 100%;
     height: 25vh;
     object-fit: cover;
@@ -67,15 +69,25 @@ nav ul .active {
   transform: translate(-50%, -50%);
 }
 /*--------Footer---------*/
+
+.page-footer i{
+  color:#2d2d2d;
+}
+.page-footer i:hover{
+   color:#ff6e40;
+}
 .page-footer {
-    min-height: 50px;    
+    min-height: 45px;    
 }      
 .footer-content{
   display:flex;
+  color:#2d2d2d;
+}
+.copyright{
+  padding-top: 10px;
 }
 .social-icon {
   margin: 10px;
-  font-size: 1.6rem;
   color: white;
+  font-size: 1.7rem;
 }
-
