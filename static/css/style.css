@@ -26,10 +26,23 @@ nav .brand-logo {
     -o-transition: 0.2s;
     transition: 0.2s;
 }
+
+@media screen and (min-width: 993px){
+nav .brand-logo {
+    margin-left: 2.3rem;
+}
+}
 nav ul a {
   color:#2d2d2d;
   font-size: 1.7rem;
   font-family: 'Courgette';
+}
+nav ul a:hover,
+nav ul .active {
+  color:#ff6e40;
+}
+.fa-bars{
+  color: #ff6e40;
 }
 
 /*--------Title----------*/
