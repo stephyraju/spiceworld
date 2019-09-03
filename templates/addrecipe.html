@@ -1,17 +1,26 @@
 {% extends 'base.html'%} {% block content %}
-<section class="page-container">
+<section class="container">
     <div class="row center">
-        <h2>Add Your Recipe</h2>
+        <h3>Add Your Recipe</h3>
     </div>
     <div class="row">
-        <form action="{{ url_for('add_recipe') }}" method="POST" class="col s12">
+        <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
+            <!-- Author -->
+            <div class="row">
+                <div class="input-field col s10 offset-s1">
+                    <h5><strong>Author:</strong></h5>
+                    <input placeholder="Your Name" id="author" name="author" type="text" class="validate" required="">
+                </div>
+            </div>
             <!-- recipe name -->
             <div class="row">
-                <div class="input-field col s10 offset-s1 center">
+                <div class="input-field col s10 offset-s1">
                     <h5><strong>Recipe Name:</strong></h5>
                     <input placeholder="Recipe Name" id="recipe_name" name="recipe_name" type="text" class="validate" required="">
                 </div>
             </div>
+
+            <!-- Category -->
             <div class="row">
                 <div class="col m10 offset-m1">
                     <!-- Category -->
@@ -27,18 +36,18 @@
                             <label>Category</label>
                         </div>
                     </div>
-                    
-                    <!-- Cusine -->
+
+                    <!-- Cuisine -->
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-globe-asia material-icon prefix"></i>
                             <select id="cuisine" name="cuisine" class="validate" required>
                            <option value="" disabled selected>Cuisine</option>
-                            {% for cat in categories %}
-                           <option value="{{cat.cusine}}">{{cat.cusine}}</option>
-                           {% endfor %}
+                           {% for cuisine in cuisines %}
+                                    <option value="{{cuisine.cuisine}}">{{cuisine.cuisine}}</option>
+                                {% endfor %}
                            </select>
-                            <label>Cusine</label>
+                            <label>Cuisine</label>
                         </div>
                     </div>
                     <!-- Cooking Time -->
@@ -59,9 +68,9 @@
                             <i class="fas fa-signal material-icons prefix"></i>
                             <select id="difficulty" name="" class="validate" required>
                            <option value="" disabled selected>Difficulty</option>
-                            {% for cat in categories %}
-                           <option value="{{cat.difficulty}}">{{cat.difficulty}}</option>
-                           {% endfor %}
+                                {% for level in difficulty%}
+                                    <option value="{{level.difficulty}}">{{level.difficulty}}</option>
+                                {% endfor %}
                            </select>
                             <label>Difficulty</label>
                         </div>
@@ -80,9 +89,9 @@
                             <i class="fas fa-exclamation-triangle material-icon prefix"></i>
                             <select id="allergens" name="allergens" class="validate" required>
                            <option value="" disabled selected>Allergens</option>
-                            {% for cat in categories %}
-                           <option value="{{cat.allergens}}">{{cat.allergens}}</option>
-                           {% endfor %}
+                            {% for allergen in allergens %}
+                            <option class="allergens" value="{{allergen.allergen}}">{{allergen.allergen}}</option>
+                            {% endfor %}
                            </select>
                             <label>Allergens</label>
                         </div>
@@ -101,23 +110,50 @@
 
             <!--Ingredients-->
             <div class="row col s10 offset-s1">
-            <h6><strong>Ingredients</strong></h6>
-                <div class="input-field">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Ingredients</label>
+
+                <div class="card background">
+                    <div class="card-content">
+                        <span class="card-title center">Ingredients</span>
+
+                        <div class="addIngredient">
+                            <div class="input-field whites-4">
+                                <input id="ingredients" type="text" placeholder="Tomato -500grms" name="ingredients" required>
+                            </div>
+                        </div>
+                        <div class="new-ingredient ingredient">
+                            <div class="input-field whites-4">
+                                <input id="ingredient-new" type="text" class="ingredient validate" placeholder="Ingredient" name="ingredient" minlength="1" maxlength="10" required>
+                            </div>
+                        </div>
+                        <!-- add button -->
+                        <a id="add_ingredient" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
+                        <a id="remove_ingredient" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                    </div>
                 </div>
             </div>
             <!--Method-->
             <div class="row col s10 offset-s1">
-            <h6><strong>Method</strong></h6>
-                <div class="input-field">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Method</label>
+                <div class="card background">
+                    <div class="card-content">
+                        <span class="card-title center">Method</span>
+                        <div class="input-field whites-4">
+                            <textarea id="textarea1" class="materialize-textarea validate" placeholder="Method" name="method" minlength="5" maxlength="600"></textarea>
+                        </div>
+
+                        <div class="new-step method">
+                            <div class="input-field whites-4">
+                                <input id="new-step" type="text" class="method validate" placeholder="Next step" name="method" minlength="5" maxlength="600" required>
+                            </div>
+                        </div>
+                        <a id="add_method" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
+                        <a id="remove_method" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                    </div>
                 </div>
             </div>
-         <div class="row col s10 offset-s1">
-         <a class="waves-effect waves-light btn-small">Add Recipe</a>
-         </div>
+            <!--Submit button-->
+            <div class="row col s10 offset-s1">
+                <button class="btn waves-effect waves-light btn-small grey darken-4" type="submit" name="action">Submit</button>
+            </div>
         </form>
     </div>
 </section>
