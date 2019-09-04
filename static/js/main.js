@@ -24,6 +24,22 @@ $(document).ready(function(){
     });
  
  
- 
+var methodField = $(".method").length;
+    /* add new cloned item */
+    $("#add-method").on("click", function () {
+        /* clone and remove existing values */
+        $(".new-step:first").clone().insertBefore("#add-method").find("input[type='text'], select, textarea").val("");
+        /* increase counter so original direction is never removed */
+        methodField += 1;
+    });
+    /* delete last cloned item */
+    $("#remove-method").on("click", function () {
+        if ( methodField > 1) {
+            /* only remove the :last item */
+            $(this).siblings(".new-step:last").remove();
+            /* ensure original direction line never gets deleted */
+            methodField -= 1;
+        }
+    }); 
     
 

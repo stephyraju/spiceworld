@@ -103,8 +103,8 @@
             <div class="row col s10 offset-s1">
                 <div class="input-field ">
                     <i class="fas fa-camera material-icons prefix"></i>
-                    <input id="img_url" name="img_url" class="validate" type="url" minlength="15" placeholder="Recipe Image URL" pattern="https?://.+">
-                    <label for="img_url">Image Url</label>
+                    <input id="image_url" name="image_url" class="validate" type="url" minlength="15" placeholder="Recipe Image URL" pattern="https?://.+">
+                    <label for="image_url">Image Url</label>
                 </div>
             </div>
 
@@ -117,12 +117,12 @@
 
                         <div class="addIngredient">
                             <div class="input-field whites-4">
-                                <input id="ingredients" type="text" placeholder="Tomato -500grms" name="ingredients" required>
+                                <input id="ingredients" type="text" placeholder="Tomato -500grms" name="ingredients[]" required>
                             </div>
                         </div>
                         <div class="new-ingredient ingredient">
                             <div class="input-field whites-4">
-                                <input id="ingredient-new" type="text" class="ingredient validate" placeholder="Ingredient" name="ingredient" minlength="1" maxlength="10" required>
+                                <input id="ingredient-new" type="text" class="ingredient validate" placeholder="Ingredient" name="ingredients[]" minlength="1" maxlength="10" required>
                             </div>
                         </div>
                         <!-- add button -->
@@ -137,7 +137,7 @@
                     <div class="card-content">
                         <span class="card-title center">Method</span>
                         <div class="input-field whites-4">
-                            <textarea id="textarea1" class="materialize-textarea validate" placeholder="Method" name="method" minlength="5" maxlength="600"></textarea>
+                            <textarea id="methods" class="materialize-textarea validate" placeholder="Method" name="method" minlength="5" maxlength="600"></textarea>
                         </div>
 
                         <div class="new-step method">

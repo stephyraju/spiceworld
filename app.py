@@ -26,10 +26,16 @@ def add_recipe():
                allergens=mongo.db.allergens.find())
                
  
-@app.route('/insert_recipe', methods=['GET', 'POST'])
+@app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
+    print(request.form)
+    print(request.form.getlist('ingredients[]'))
+    print(request.form.to_dict())
     recipes = mongo.db.recipes
-    recipes.insert_one(request.form.to_dict())
+    data = request.form.to_dict()
+    data.update({'ingredients':request.form.getlist('ingredients[]')})
+    del data['ingredients[]']
+    recipes.insert_one(data)
     return redirect(url_for('get_recipes'))              
                
 @app.route('/view_recipes', methods=['POST', 'GET'])
