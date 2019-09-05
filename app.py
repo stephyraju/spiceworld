@@ -12,9 +12,21 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
 mongo = PyMongo(app)
 
 @app.route('/')
-@app.route('/get_recipes')
-def get_recipes():
+@app.route('/index')
+def index():
      return render_template("index.html", recipes=mongo.db.recipes.find())
+     
+#@app.route('/get_recipes',methods=['POST','GET'])
+#def get_recipes():
+ #   return render_template("recipes.html", recipes=mongo.db.recipes.find()) 
+    
+@app.route("/get_recipes", methods=['POST', 'GET'])
+def get_recipes():
+      
+    return render_template('recipes.html',
+                         recipes=mongo.db.recipes.find(),
+                         categories = mongo.db.categories.find())
+
      
 @app.route('/add_recipe')
 def add_recipe():
@@ -38,13 +50,10 @@ def insert_recipe():
     recipes.insert_one(data)
     return redirect(url_for('get_recipes'))              
                
-@app.route('/view_recipes', methods=['POST', 'GET'])
+@app.route('/view_recipes', methods=['GET'])
 def view_recipes():
-     return render_template("recipes.html",  
+     return render_template("view.html",  
                categories=mongo.db.categories.find())
-
-
-
 
     
 if __name__ == '__main__':

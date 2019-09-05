@@ -1,46 +1,28 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html' %} {% block content %}
 
-
-<div class="container">
-<div class="row">
- 
-    <div class="col s6 l4">
-    {% for recipe in recipes %}
-      <div class="card card-action">
-        <div class="card-image waves-effect waves-block">  
-        <img src="{{recipe.image_url}}" class="activator" alt="Card image" style="width:100%">
-        
+<section id="filters">
+</section>
+<section id="card-display">
+  {% for recipe in recipes %}
+  <div class="row">
+    <div class="col s12 m6 l3">
+      <div class="card">
+        <div class="card-image hoverable">
+          <a class="waves-effect" href="{{ url_for('view_recipes') }}"> <img src="{{recipe.image_url}}" class="responsive-img" alt="image of recipe"></a>
         </div>
-        <div class="card-content center-align">
-          <p></p>
+        <div class="card-content">
+          <span class="black-text card-title">{{ recipe.recipe_name }}</span>
+          <span>{{recipe.category_name}} </span> 
+          <span>{{ recipe.difficulty }}</span>
+          <p class="black-text">{{ recipe_name }} </p>
         </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>        
- 
-</div>
-
-{% endblock content %}
- <!--
- <div class="card">
-    <div class="row">
-      <div class="col s6 l4 xl3">
-        {% for recipe in recipes%}
-        <div class="card">
-          <div class="card-image waves-effect">
-            <div class="card-action">
-              <a href="{{ url_for('view', id=recipe._id) }}">
-              <img src="{{ url_for('static', filename='images/sidenav.png') }}">
-              </a>
-            </div>
-          </div>
-          <div class="card-content">
-            <p>Prawn Cocktail</p>
-          </div>
+        <div class="card-action">
+          <a href="{{ url_for('view_recipes') }}">View Recipe</a>
+          <span class="black-text right" id="likes"><span>likes</span><i class="material-icons red-text right" id="like">favorite</i></span>
         </div>
-        {% endfor %}
       </div>
     </div>
   </div>
-  -->
+  {% endfor %}
+  <section>
+    {% endblock %}
