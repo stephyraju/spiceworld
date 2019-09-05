@@ -1,0 +1,119 @@
+{% extends 'base.html' %} {% block content %}
+
+<section class="section-container">
+    <div class="container recipe-view">
+        <div class="row card recipe-card">
+            <div class="col s12 l4 center-align card-image">
+                <img height="400" width="375" src="{{ url_for('static', filename='images/sidenav.png') }}" alt="recipe image" class="responsive-img materialboxed">
+            </div>
+            <div class="col s12 l8 center-align">
+                <div class="recipe-header">
+                    <h4>Recipe Name </h4>
+                </div>
+                <div class="author">
+                    Recipe By : Stephy
+                </div>
+                <div class="row ">
+                    <div class="col s5 offset-s1 left-align">
+                        <div>
+                            <p> <i class="fas fa-clock" style="color:rgb(109, 174, 177);"></i> Cooking Time: 50 Min
+                            </p>
+                        </div>
+
+                        <div>
+                            <p> <i class="fas fa-fire" style="color:rgb(109, 174, 177);"></i> Difficulty:Easy
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col s5 left-align">
+                        <div>
+                            <p> <i class="fas fa-utensils" style="color:rgb(109, 174, 177);"></i> Category: 50 Min
+                            </p>
+                        </div>
+                        <div>
+                            <p> <i class="fas fa-users" style="color:rgb(109, 174, 177);"></i> Serves:5
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 recipe-description">
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s10 ">
+                        <i class="fas fa-exclamation-circle red-text"></i> Allergens : Egg,Wheat
+                    </div>
+                </div>
+</section>
+<section id="Ingredients-Preparation">
+    <div class="container">
+        <div class="row ">
+            <!-- ingredient -->
+            <div class="col s12 m4 offset-s1 offset-m1 ingredients">
+                <div class="row">
+                    <div class="col s12 ingredients">
+                        <h5>Ingredients</h5>
+                        <br>
+                        <ol class"striped">
+                            <li>
+                                ingredient
+                            </li>
+                            <br>
+                            <li>
+                                ingredient
+                            </li>
+                            </br>
+                            <li>
+                                ingredient
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- Preparation -->
+            <div class="col s12  m7 preparation">
+                <div class="row">
+                    <div class="col s12">
+                        <h5 class="center">Preparation Method</h5>
+                        <br>
+                        <ol>
+                            <li>
+                                instructionvghdasvhijdsahvijhskjvnbjbvuhogsdifh ksejbvjsh
+                            </li>
+                            <div class="divider"></div>
+                            <br>
+                            <li class="collection-item">
+                                instructionflsaknbfhhgufyuhdfijksab hcgiudikjbvhdgufikjfnjh
+                            </li>
+                            <div class="divider"></div>
+                            <br>
+                            <li class="collection-item">
+                                instructionfdrgvregrthjdfgwhejkgbnv hjsnfjhdasvfghwqiofehfb ehugfrqgugu
+                            </li>
+                            <div class="divider"></div>
+                        </ol>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+<section>
+    <div class="container recipe-view">
+        <div class="row card recipe-card">
+        </div>
+    </div>
+</section>
+<section>
+    <div class="row center">
+            <a class="waves-effect waves-light btn">Edit</a>  
+            <a class="waves-effect waves-light btn">Delete</a>
+            <a class="waves-effect waves-light btn right"> <i class="fa fa-thumbs-up"></i></a>
+    </div>
+</section>
+{% endblock %}
