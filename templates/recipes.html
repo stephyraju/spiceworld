@@ -2,10 +2,10 @@
 
 <section id="filters">
 </section>
-<section id="card-display">
+<section id="card-display" class="container">
   <div class="row">
   {% for recipe in recipes %}
-    <div class="col s12 m6 l3">
+    <div class="col s12 m6 l3  recipe-card">
       <div class="card">
         <div class="card-image hoverable">
           <a class="waves-effect waves-light" href="{{ url_for('view_recipes') }}"> <img src="{{recipe.image_url}}" class="responsive-img" alt="image of recipe"></a>
@@ -13,12 +13,11 @@
         <div class="card-content">
           <span class="black-text card-title">{{ recipe.recipe_name }}</span>
           <span>{{recipe.category_name}} </span> 
-          <span>{{ recipe.difficulty }}</span>
           <p class="black-text">{{ recipe_name }} </p>
         </div>
         <div class="card-action">
           <a href="{{ url_for('view_recipes') }}">View Recipe</a>
-          <span class="black-text right" id="likes"><span>likes</span><i class="material-icons red-text right" id="like">favorite</i></span>
+          <span class="black-text right" id="likes"><i class="material-icons red-text right" id="like">favorite</i></span>
         </div>
       </div>
     </div>

@@ -49,10 +49,14 @@ def insert_recipe():
     recipes.insert_one(data)
     return redirect(url_for('get_recipes'))              
                
-@app.route('/view_recipes', methods=['GET'])
-def view_recipes():
-     return render_template("view.html",  
-               categories=mongo.db.categories.find())
+               
+@app.route('/view/recipe_id?=<id>')
+def view(id):
+    
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
+    return render_template('view.html',
+                        title='View Recipe', 
+                        recipe=recipe)
 
     
 if __name__ == '__main__':

@@ -110,6 +110,15 @@ nav ul .active {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.recipe-card .card .card-image img {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 200px; 
+  }
+
+
 /*--------View Recipe---------*/
 li { 
   list-style: square; 
