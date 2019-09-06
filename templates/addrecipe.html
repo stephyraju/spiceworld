@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Description:</strong></h6>
-                    <textarea id="recipe_description" placeholder="Whats your Recipe?" name="recipe_description" class="materialize-textarea" required></textarea>
+                    <textarea id="recipe_description" placeholder="Whats your Recipe?" name="description" class="materialize-textarea" required></textarea>
                 </div>
             </div>
             <!-- Category -->
@@ -144,18 +144,20 @@
                 <div class="col s10 offset-s1">
                     <div class="card background">
                         <div class="card-content">
-                            <span class="card-title center">Method</span>
-                            <div class="input-field whites-4">
-                                <textarea id="methods" class="materialize-textarea validate" placeholder="Method" name="method" minlength="5" maxlength="600"></textarea>
-                            </div>
-
-                            <div class="new-step method">
+                            <span class="card-title center">Preparation</span>
+                            
+                            <div class="addpreparation">
                                 <div class="input-field whites-4">
-                                    <input id="new-step" type="text" class="method validate" placeholder="Next step" name="method" minlength="5" maxlength="600" required>
+                                    <input id="preparation" type="text" placeholder="Preparation Direction" name="preparation" minlength="3" maxlength="600"></textarea>
                                 </div>
                             </div>
-                            <a id="add_method" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
-                            <a id="remove_method" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                            <div class="new-step preparation">
+                                <div class="input-field whites-4">
+                                    <input id="preparation-next" type="text" placeholder="Second Step" name="preparation" minlength="3" maxlength="600" required>
+                                </div>
+                            </div>
+                            <a id="add_step" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
+                            <a id="remove_step" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
                         </div>
                     </div>
                 </div>
