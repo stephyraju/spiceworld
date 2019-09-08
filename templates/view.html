@@ -4,46 +4,48 @@
     <div class="container recipe-view">
         <div class="row card recipe-card">
             <div class="col s12 l4 center-align card-image">
-                <img height="400" width="375" src="{{ url_for('static', filename='images/sidenav.png') }}" alt="recipe image" class="responsive-img materialboxed">
+                <img height="400" width="375" src="{{recipe.image_url}}" alt="recipe image" class="responsive-img materialboxed">
             </div>
             <div class="col s12 l8 center-align">
                 <div class="recipe-header">
-                    <h4>Prawn Coacktail</h4>
+                    <h4>{{recipe.recipe_name}}</h4>
                 </div>
                 <div class="author">
-                    Recipe By : Stephy
+                    <p>Recipe By <span>{{recipe.author}}</span></p>
                 </div>
                 <div class="row ">
                     <div class="col s5 offset-s1 left-align">
                         <div>
-                            <p> <i class="fas fa-clock" style="color:rgb(109, 174, 177);"></i> Cooking Time: 50 Min
+                            <p> <i class="fas fa-clock icon-color"></i> Cooking Time: <span class="">{{recipe.cooking_time}}</span> min
                             </p>
                         </div>
 
                         <div>
-                            <p> <i class="fas fa-fire" style="color:rgb(109, 174, 177);"></i> Difficulty:Easy
+                            <p> <i class="fas fa-fire icon-color"> </i> Difficulty:
+                                <span class="">{{recipe.difficulty}}</span>
                             </p>
                         </div>
                     </div>
                     <div class="col s5 left-align">
                         <div>
-                            <p> <i class="fas fa-utensils" style="color:rgb(109, 174, 177);"></i> Category: 50 Min
+                            <p> <i class="fas fa-utensils icon-color"></i> Category: <span class="">{{recipe.category_name}}</span>
                             </p>
                         </div>
                         <div>
-                            <p> <i class="fas fa-users" style="color:rgb(109, 174, 177);"></i> Serves:5
+                            <p> <i class="fas fa-users icon-color"></i> Serves:
+                                <span class="">{{recipe.serves}}</span>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 recipe-description">
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                        <p><span class="">{{recipe.description}}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s10 ">
-                        <i class="fas fa-exclamation-circle red-text"></i> Allergens : Egg,Wheat
+                        <i class="fas fa-exclamation-circle red-text"></i> Allergens : <span class="">{{recipe.allergens}}</span>
                     </div>
                 </div>
 </section>
@@ -56,18 +58,13 @@
                     <div class="col s12 ingredients">
                         <h5>Ingredients</h5>
                         <br>
-                        <ol class"striped">
+                        <ol class "striped">
+                            {% for ingredient in recipe.ingredients %}
                             <li>
-                                ingredient
+                                {{ ingredient }}
                             </li>
-                            <br>
-                            <li>
-                                ingredient
-                            </li>
-                            </br>
-                            <li>
-                                ingredient
-                            </li>
+
+                            {% endfor %}
                         </ol>
                     </div>
                 </div>
@@ -80,21 +77,12 @@
                         <br>
                         <ol>
                             <li>
-                                instructionvghdasvhijdsahvijhskjvnbjbvuhogsdifh ksejbvjsh
+                                {% for preparation in recipe.preparation %}
+                                <i class="material-icons prefix teal-text tiny">fiber_manual_record</i> {{ preparation }}
+                                <div class="divider"></div>
                             </li>
-                            <div class="divider"></div>
-                            <br>
-                            <li class="collection-item">
-                                instructionflsaknbfhhgufyuhdfijksab hcgiudikjbvhdgufikjfnjh
-                            </li>
-                            <div class="divider"></div>
-                            <br>
-                            <li class="collection-item">
-                                instructionfdrgvregrthjdfgwhejkgbnv hjsnfjhdasvfghwqiofehfb ehugfrqgugu
-                            </li>
-                            <div class="divider"></div>
+                            {% endfor %}
                         </ol>
-
                     </div>
                 </div>
             </div>
@@ -111,9 +99,9 @@
 </section>
 <section>
     <div class="row center container">
-            <a class="waves-effect waves-light btn light-green">Edit</a>  
-            <a class="waves-effect waves-light btn light-green">Delete</a>
-            <a class="waves-effect waves-light btn right red"> <i class="fa fa-thumbs-up"></i></a>
+        <a class="waves-effect waves-light btn light-green">Edit</a>
+        <a class="waves-effect waves-light btn light-green">Delete</a>
+        <a class="waves-effect waves-light btn right red"> <i class="fa fa-thumbs-up"></i></a>
     </div>
 </section>
 {% endblock %}

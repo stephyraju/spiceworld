@@ -122,16 +122,13 @@
                         <div class="card-content">
                             <span class="card-title center">Ingredients</span>
 
-                            <div class="addIngredient">
+                            <div class="addIngredient new-ingredient ingredient">
                                 <div class="input-field whites-4">
-                                    <input id="ingredients" type="text" placeholder="Tomato -500grms" name="ingredients[]" required>
+                                    <input id="ingredients" type="text" placeholder="Tomato -500grms"
+                                    name="ingredients[]" class="ingredients validate" minlength="1" maxlength="100" required>
                                 </div>
                             </div>
-                            <div class="new-ingredient ingredient">
-                                <div class="input-field whites-4">
-                                    <input id="ingredient-new" type="text" class="ingredient validate" placeholder="Ingredient" name="ingredients[]" minlength="1" maxlength="10" required>
-                                </div>
-                            </div>
+                            
                             <!-- add button -->
                             <a id="add_ingredient" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
                             <a id="remove_ingredient" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
@@ -139,23 +136,19 @@
                     </div>
                 </div>
             </div>
-            <!--Direction-->
+            <!--Preparation-->
             <div class="row">
                 <div class="col s10 offset-s1">
                     <div class="card background">
                         <div class="card-content">
                             <span class="card-title center">Preparation</span>
                             
-                            <div class="addpreparation">
+                            <div class="addpreparation preparation new-step">
                                 <div class="input-field whites-4">
                                     <input id="preparation" type="text" placeholder="Preparation Direction" name="preparation" minlength="3" maxlength="600"></textarea>
                                 </div>
                             </div>
-                            <div class="new-step preparation">
-                                <div class="input-field whites-4">
-                                    <input id="preparation-next" type="text" placeholder="Second Step" name="preparation" minlength="3" maxlength="600" required>
-                                </div>
-                            </div>
+                            
                             <a id="add_step" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
                             <a id="remove_step" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
                         </div>
