@@ -1,0 +1,182 @@
+{% extends 'base.html'%} {% block content %}
+<section class="container">
+    <div class="row center">
+        <h3>Edit Your Recipe</h3>
+    </div>
+    <div class="row">
+        <form action="{{ url_for('edit_recipe',id=recipe._id) }}" method="POST" class="col s12">
+            <!-- Author -->
+            <div class="row">
+                <div class="input-field col s10 offset-s1">
+                    <h6><strong>Author:</strong></h6>
+                    <input placeholder="Your Name" id="author" name="author" type="text" class="validate" required="">
+                </div>
+            </div>
+            <!-- recipe name -->
+            <div class="row">
+                <div class="input-field col s10 offset-s1">
+                    <h6><strong>Recipe Name:</strong></h6>
+                    {% if recipe_name is defined %}
+                    <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.recipe_name}}" required=""> {% else %}
+                    <input placeholder="Recipe Name" id="recipe_name" name="recipe_name" type="text" class="validate" required=""> {% endif %}
+                </div>
+            </div>
+            <!-- Description -->
+            <div class="row">
+                <div class="input-field col s10 offset-s1">
+                    <h6><strong>Description:</strong></h6>
+                    <textarea id="recipe_description" placeholder="Whats your Recipe?" name="description" class="materialize-textarea" required></textarea>
+                </div>
+            </div>
+            <!-- Category -->
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <!-- Category -->
+                    <div class="col s6 l4">
+                        <div class="input-field">
+                            <i class="fas fa-utensils material-icons prefix"></i>
+                            <select id="category" name="category_name" class="validate" required>
+                           <option value="" disabled selected>Category</option>
+                            {% for cat in categories %}
+                            {% if cat.category_name == task.category_name%}
+                           <option value="{{cat.category_name}}" selected >{{cat.category_name}}</option>
+                           {% else %}
+                           <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                           {% endif %}
+                           {% endfor %}
+                           </select>
+                            <label>Category</label>
+                        </div>
+                    </div>
+
+                    <!-- Cuisine -->
+                    <div class="col s6 l4">
+                        <div class="input-field">
+                            <i class="fas fa-globe-asia material-icon prefix"></i>
+                            <select id="cuisine" name="cuisine" class="validate" required>
+                           <option value="" disabled selected>Cuisine</option>
+                                    {% for cuisine in cuisines %}
+                                    {% if cuisine.cuisine == recipe.cuisine %}
+                                        <option value="{{cuisine.cuisine}}" selected>{{cuisine.cuisine}}</option>
+                                    {% else %}
+                                        <option value="{{cuisine.cuisine}}">{{cuisine.cuisine}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                           </select>
+                            <label>Cuisine</label>
+                        </div>
+                    </div>
+                    <!-- Cooking Time -->
+                    <div class="col s6 l4">
+                        <div class="input-field">
+                            <i class="fas fa-clock material-icons prefix"></i>
+                            <input id="cooking_time" name="cooking_time" type="number" placeholder="Time in minutes" class="validate" min="1" required="">
+                            <label>Cooking Time(min)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!----Difficulty----->
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <!-- Difficulty -->
+                    <div class="col s6 l4">
+                        <div class="input-field">
+                            <i class="fas fa-signal material-icons prefix"></i>
+                            <select id="difficulty" name="" class="validate" required>
+                           <option value="" disabled selected>Difficulty</option>
+                                {% for level in difficulty %}
+                                    {% if level.difficulty == recipe.difficulty %}
+                                        <option value="{{level.difficulty}}" selected>{{level.difficulty}}</option>
+                                    {% else %}
+                                        <option value="{{level.difficulty}}">{{level.difficulty}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                           </select>
+                            <label>Difficulty</label>
+                        </div>
+                    </div>
+                    <!-- Serves -->
+                    <div class="col s6 l4">
+                        <div class="input-field">
+                            <i class="fas fa-users material-icons prefix"></i>
+                            <input id="serves" name="serves" type="number" class="validate" min="1" required="">
+                            <label>Serves</label>
+                        </div>
+                    </div>
+                    <!-- Allergens -->
+                    <div class="col s6 l4">
+                        <div class="input-field">
+                            <i class="fas fa-exclamation-triangle material-icon prefix"></i>
+                            <select id="allergens" name="allergens" class="validate" required>
+                           <option value="" disabled selected>Allergens</option>
+                            {% for allergen in allergens %}
+                            <option class="allergens" value="{{allergen.allergen}}">{{allergen.allergen}}</option>
+                            {% endfor %}
+                           </select>
+                            <label>Allergens</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--Image Url-->
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="input-field ">
+                        <i class="fas fa-camera material-icons prefix"></i>
+                        <input id="image_url" name="image_url" class="validate" type="url" minlength="15" placeholder="Recipe Image URL" pattern="https?://.+">
+                        <label for="image_url">Image Url</label>
+                    </div>
+                </div>
+            </div>
+            <!--Ingredients-->
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="card background">
+                        <div class="card-content">
+                            <span class="card-title center">Ingredients</span>
+
+                            <div class="addIngredient new-ingredient ingredient">
+                                <div class="input-field whites-4">
+                                    <input id="ingredients" type="text" placeholder="Tomato -500grms" name="ingredients[]" class="ingredients validate" minlength="1" maxlength="100" required>
+                                </div>
+                            </div>
+
+                            <!-- add button -->
+                            <a id="add_ingredient" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
+                            <!-- Remove button -->
+                            <a id="remove_ingredient" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Preparation-->
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="card background">
+                        <div class="card-content">
+                            <span class="card-title center">Preparation</span>
+
+                            <div class="addpreparation preparation new-step">
+                                <div class="input-field whites-4">
+                                    <input id="preparation" type="text" placeholder="Preparation Method" name="preparation[]" class="preparation validate" minlength="3" maxlength="600"></textarea>
+                                </div>
+                            </div>
+                            <!-- add button -->
+                            <a id="add_step" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
+                            <!-- removebutton -->
+                            <a id="remove_step" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Submit button-->
+            <div class="row col s10 offset-s1">
+                <button class="btn waves-effect waves-light btn-small grey darken-4" type="submit" name="action">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
