@@ -131,6 +131,7 @@
                             
                             <!-- add button -->
                             <a id="add_ingredient" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
+                            <!-- Remove button -->
                             <a id="remove_ingredient" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
                         </div>
                     </div>
@@ -145,11 +146,13 @@
                             
                             <div class="addpreparation preparation new-step">
                                 <div class="input-field whites-4">
-                                    <input id="preparation" type="text" placeholder="Preparation Direction" name="preparation" minlength="3" maxlength="600"></textarea>
+                                    <input id="preparation" type="text" placeholder="Preparation Direction" 
+                                    name="preparation[]"  class= "preparation validate" minlength="3" maxlength="600"></textarea>
                                 </div>
                             </div>
-                            
+                            <!-- add button -->
                             <a id="add_step" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
+                           <!-- removebutton -->
                             <a id="remove_step" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
                         </div>
                     </div>

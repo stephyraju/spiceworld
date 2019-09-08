@@ -123,9 +123,7 @@ nav ul .active {
 .icon-color{
   color:rgb(109, 174, 177);
 }
-li { 
-  list-style: square;
-  }
+ 
  .recipe-view .card {
    background-color: #fcf4ec;
  }

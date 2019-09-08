@@ -41,18 +41,20 @@ def add_recipe():
 def insert_recipe():
     print(request.form)
     print(request.form.getlist('ingredients[]'))
+    print(request.form.getlist('preparation[]'))
     print(request.form.to_dict())
     recipes = mongo.db.recipes
     data = request.form.to_dict()
     data.update({'ingredients':request.form.getlist('ingredients[]')})
+    data.update({'preparation':request.form.getlist('preparation[]')})
     del data['ingredients[]']
+    del data['preparation[]']
     recipes.insert_one(data)
-    return redirect(url_for('get_recipes'))              
-               
+    return redirect(url_for('get_recipes'))  
+
                
 @app.route('/view/recipe_id?=<id>')
 def view(id):
-    
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
     return render_template('view.html',
                         title='View Recipe', 
