@@ -20,12 +20,8 @@ def index():
 #def get_recipes():
  #   return render_template("recipes.html", recipes=mongo.db.recipes.find()) 
     
-@app.route("/get_recipes", methods=['POST', 'GET'])
-def get_recipes():      
-    return render_template('recipes.html',
-                         recipes=mongo.db.recipes.find(),
-                         categories = mongo.db.categories.find())
 
+# -------CREATE---------#
      
 @app.route('/add_recipe')
 def add_recipe():
@@ -51,7 +47,14 @@ def insert_recipe():
     del data['preparation[]']
     recipes.insert_one(data)
     return redirect(url_for('get_recipes'))  
+    
+#-------READ--------#
 
+@app.route("/get_recipes", methods=['POST', 'GET'])
+def get_recipes():      
+    return render_template('recipes.html',
+                         recipes=mongo.db.recipes.find(),
+                         categories = mongo.db.categories.find())               
                
 @app.route('/view/recipe_id?=<id>')
 def view(id):
@@ -59,7 +62,18 @@ def view(id):
     return render_template('view.html',
                         title='View Recipe', 
                         recipe=recipe)
+                        
+#-----------UPDATE-----------#
 
+@app.route('/edit_recipe/<recipe_id>')
+def edit_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
+    return render_template('editrecipe.html', 
+                            recipe=recipe,
+                            categories=mongo.db.categories.find(), 
+                            cuisine=mongo.db.cuisine.find(), 
+                            difficulty=mongo.db.difficulty.find(), 
+                            allergens=mongo.db.allergens.find())
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

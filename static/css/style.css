@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
 
 body {
-  background-color: F0F0F0;
   font-family: 'ProximaNova Regular', sans-serif;
   display: flex;
   flex-direction: column;
@@ -16,6 +15,7 @@ body {
   padding-right: 15px;
   border-radius: 5px;
 }
+
 /* -------- Nav Bar ----------*/
 
 nav {
@@ -136,6 +136,7 @@ h4,h5{
  }
  .ingredients ul li {
     padding: 0px 15px 15px 15px;
+    list-style-type: square;
  }
 /*--------Footer---------*/
 
