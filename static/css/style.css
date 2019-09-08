@@ -48,7 +48,9 @@ nav ul .active {
 .fa-bars{
   color: #ff6e40;
 }
-
+h4,h5{
+  font-family: 'Muli','sans-serif';
+}
 /*--------Title----------*/
 
 .title-container{
@@ -123,9 +125,17 @@ nav ul .active {
 .icon-color{
   color:rgb(109, 174, 177);
 }
- 
+ .recipe-card .card-image{
+   padding-top: 20px;
+ }
  .recipe-view .card {
    background-color: #fcf4ec;
+ }
+ .preparation ol li {
+   padding: 0px 15px 15px 15px;
+ }
+ .ingredients ul li {
+    padding: 0px 15px 15px 15px;
  }
 /*--------Footer---------*/
 
