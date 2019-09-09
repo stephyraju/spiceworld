@@ -99,9 +99,9 @@
 </section>
 <section>
     <div class="row center container">
-        <a href="url_for('edit_recipe', recipe_id=recipe._id)"class="waves-effect waves-light btn light-green">Edit</a>
+        <a href="{{ url_for('edit_recipe',recipe_id=recipe._id) }}"class="waves-effect waves-light btn light-green">Edit</a>
         <a class="waves-effect waves-light btn light-green">Delete</a>
         <a class="waves-effect waves-light btn right red"> <i class="fa fa-thumbs-up"></i></a>
     </div>
 </section>
-{% endblock %}
+{% endblock %}"
