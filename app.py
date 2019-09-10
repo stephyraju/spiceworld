@@ -6,6 +6,7 @@ from bson.objectid import ObjectId
 # declaring app name
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = os.getenv('SECRET')
 app.config["MONGO_DBNAME"] = 'cook_book'
 app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
 
