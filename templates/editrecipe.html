@@ -4,28 +4,28 @@
         <h3>Edit Your Recipe</h3>
     </div>
     <div class="row">
-        <form action="{{ url_for('edit_recipe',recipe_id=recipe._id) }}" method="POST" class="col s12">
+        <form action="{{ url_for('update_recipe',recipe_id=recipe._id) }}" method="POST" class="col s12">
             <!-- Author -->
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Author:</strong></h6>
-                    <input placeholder="Your Name" id="author" name="author" type="text" class="validate" required="">
+                    <input placeholder="Your Name" id="author" name="author" type="text" class="validate" value="{{recipe.author}}" required="">
                 </div>
             </div>
             <!-- recipe name -->
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Recipe Name:</strong></h6>
-                    {% if recipe_name is defined %}
-                    <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.recipe_name}}" required=""> {% else %}
-                    <input placeholder="Recipe Name" id="recipe_name" name="recipe_name" type="text" class="validate" required=""> {% endif %}
+                    <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.recipe_name}}"
+                    minlength="3" maxlength="30" data-length="30" placeholder="Recipe Name" required="" >    
                 </div>
             </div>
             <!-- Description -->
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Description:</strong></h6>
-                    <textarea id="recipe_description" placeholder="Whats your Recipe?" name="description" class="materialize-textarea" required></textarea>
+                    <textarea id="description" placeholder="Whats your Recipe?" name="description" class="materialize-textarea" 
+                    inlength="20" maxlength="500" data-length="500" required>{{ recipe.description }}</textarea>
                 </div>
             </div>
             <!-- Category -->
@@ -70,7 +70,7 @@
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-clock material-icons prefix"></i>
-                            <input id="cooking_time" name="cooking_time" type="number" placeholder="Time in minutes" class="validate" min="1" required="">
+                            <input id="cooking_time" name="cooking_time" type="number" placeholder="Time in minutes" value="{{recipe.cooking_time}}"class="validate" min="1" required="">
                             <label>Cooking Time(min)</label>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-users material-icons prefix"></i>
-                            <input id="serves" name="serves" type="number" class="validate" min="1" required="">
+                            <input id="serves" name="serves" type="number" value="{{recipe.serves}}"class="validate" min="1" required="">
                             <label>Serves</label>
                         </div>
                     </div>
@@ -111,7 +111,11 @@
                             <select id="allergens" name="allergens" class="validate" required>
                            <option value="" disabled selected>Allergens</option>
                             {% for allergen in allergens %}
-                            <option class="allergens" value="{{allergen.allergen}}">{{allergen.allergen}}</option>
+                            {% if allergen.allergen in recipe.allergens %}
+                            <option value="{{allergen.allergen}}" selected>{{allergen.allergen}}</option>
+                            {% else %}
+                              <option value="{{allergen.allergen}}">{{allergen.allergen}}</option>
+                              {% endif %}
                             {% endfor %}
                            </select>
                             <label>Allergens</label>
@@ -125,7 +129,11 @@
                 <div class="col s10 offset-s1">
                     <div class="input-field ">
                         <i class="fas fa-camera material-icons prefix"></i>
-                        <input id="image_url" name="image_url" class="validate" type="url" minlength="15" placeholder="Recipe Image URL" pattern="https?://.+">
+                        {% if recipe.image_url %}
+                        <input id="image_url" name="image_url" class="validate" type="url" minlength="15" value="{{ recipe.image_url }}" placeholder="Recipe Photo URL"> 
+                        {% else %}
+                        <input id="image_url" name="image_url" class="validate" type="url" minlength="15" placeholder="Recipe Image URL" pattern="https?://.+"> 
+                        {% endif %}
                         <label for="image_url">Image Url</label>
                     </div>
                 </div>
@@ -139,7 +147,7 @@
 
                             <div class="addIngredient new-ingredient ingredient">
                                 <div class="input-field whites-4">
-                                    <input id="ingredients" type="text" placeholder="Tomato -500grms" name="ingredients[]" class="ingredients validate" minlength="1" maxlength="100" required>
+                                    <input id="ingredients" type="text" placeholder="200g Butter" name="ingredients[]" class="ingredients validate" minlength="1" maxlength="100" required>
                                 </div>
                             </div>
 
