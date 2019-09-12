@@ -1,7 +1,9 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+import bcrypt
+
 
 # declaring app name
 app = Flask(__name__)
@@ -89,10 +91,31 @@ def update_recipe(recipe_id):
         'cuisine':request.form('cuisine'),
         'allergens':request.form.get('allergens'),
         'image_url' :request.file('image_url'),
-        'ingredients':request.form.getlist("ingredients"),
-        'preparation':request.form.getlist('preparation')
+        'ingredients':request.form.getlist('ingredients[]'),
+        'preparation':request.form.getlist('preparation[]')
         })
-    return redirect(url_for('get_recipes',recipe_id=recipe_id))
+    return redirect(url_for('view',recipe_id=recipe_id))
+
+#-----------Register-----------#
+#https://www.youtube.com/watch?v=vVx1737auSE
+
+@app.route('/register', methods=['GET','POST'])
+def register():
+    if request.method == 'POST':
+        users = mongo.db.users
+        user_exists = users.find_one({'author':request.form['username'].capitalize()})
+
+        if user_exists is None:
+            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
+            users.insert({'author':request.form['username'].capitalize(), 'password':hashpass})
+            session['username'] = request.form['username'].capitalize()
+            return redirect(url_for('get_recipes'))
+
+        flash('Username already exists, please choose a different one.')
+        return render_template('register.html', title="Register")
+
+    return render_template('register.html', title="Register")
+
      
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
