@@ -59,13 +59,14 @@ def get_recipes():
                          recipes=mongo.db.recipes.find(),
                          categories = mongo.db.categories.find())               
                
-@app.route('/view/recipe_id?=<id>')
-def view(id):
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
+
+@app.route('/view_recipe/recipe_id?=<recipe_id>')
+def view_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template('view.html',
                         title='View Recipe', 
-                        recipe=recipe)
-                        
+                        recipe=recipe)  
+  
 #-----------UPDATE-----------#
 
 @app.route('/edit_recipe/<recipe_id>')
