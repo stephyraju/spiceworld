@@ -30,7 +30,7 @@
           <li><a href="{{ url_for('index') }}">Home</a></li>
           <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
           <li><a href="{{ url_for('add_recipe') }}">Add Recipes</a></li>
-          <li><a href="{{url_for('register')}}">Login</a></li>
+          <li><a href="{{url_for('login')}}">Login</a></li>
           
         </ul>
       </div>
@@ -40,10 +40,10 @@
   <ul class="sidenav" id="mobile-sidenav">
     <img class="responsive-img" src="{{ url_for('static', filename='images/sidenav.png') }}" alt="spices-image">
 
-    <li><a class="active" href="#">Home</a></li>
-    <li><a href="#!">Recipes</a></li>
-
-    <li><a href="#">Login</a></li>
+    <li><a class="active" href="{{ url_for('index') }}">Home</a></li>
+    <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
+          <li><a href="{{ url_for('add_recipe') }}">Add Recipes</a></li>
+          <li><a href="{{url_for('login')}}">Login</a></li>
     <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
   </ul>
   
