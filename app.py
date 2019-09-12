@@ -116,7 +116,24 @@ def register():
 
     return render_template('register.html', title="Register")
 
-     
+#-----------Login-----------#
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        users = mongo.db.users
+        user_login = users.find_one({'author':request.form['username'].capitalize()})
+
+        if user_login:
+            if bcrypt.hashpw(request.form['password'].encode('utf-8'), user_login['password']) == user_login['password']:
+                session["username"] = request.form["username"].capitalize()
+                return redirect(url_for('get_recipes'))
+        
+        flash('The login details are not correct')
+        return render_template('login.html',  title="Login")
+
+    return render_template('login.html',  title="Login")
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
