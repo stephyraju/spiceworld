@@ -53,7 +53,7 @@ def insert_recipe():
     
 #-------READ--------#
 
-@app.route("/get_recipes", methods=['POST', 'GET'])
+@app.route("/get_recipes", methods=['GET'])
 def get_recipes():      
     return render_template('recipes.html',
                          recipes=mongo.db.recipes.find(),
@@ -67,9 +67,12 @@ def view_recipe(recipe_id):
                         title='View Recipe', 
                         recipe=recipe)  
   
+  
+                            
+
 #-----------UPDATE-----------#
 
-@app.route('/edit_recipe/<recipe_id>')
+@app.route('/edit_recipe/<recipe_id>',methods=['GET'])
 def edit_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
     return render_template('editrecipe.html', 
@@ -81,8 +84,8 @@ def edit_recipe(recipe_id):
                             
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
-    recipe = mongo.db.recipes
-    recipe = mongo.db.recipes.find({"_id":ObjectId(recipe_id)},
+    recipes = mongo.db.recipes
+    recipes.update({"_id":ObjectId(recipe_id)},
         {
         'recipe_name':request.form.get('recipe_name'),
         'category_name':request.form.get('category_name'),
@@ -95,7 +98,7 @@ def update_recipe(recipe_id):
         'ingredients':request.form.getlist('ingredients[]'),
         'preparation':request.form.getlist('preparation[]')
         })
-    return redirect(url_for('view',recipe_id=recipe_id))
+    return redirect(url_for('view_recipe',recipe_id=recipe_id))
 
 #-----------Register-----------#
 #https://www.youtube.com/watch?v=vVx1737auSE

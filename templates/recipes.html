@@ -1,10 +1,26 @@
 {% extends 'base.html' %} {% block content %}
 
-<section id="filters">
+<section class="container">
+  <div class="row center">
+    <h3>Search</h3>
+  </div>
+  <div class="search">
+    <form method="POST" action="#">
+      <div class=" row">
+        <div class="input-field col offset-s1 s10 offset-m6 m5 l4">
+          <i class="material-icons">search</i>
+          <input id="find-recipe" name="find-recipe" type="search" placeholder="Search" required>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+
 </section>
 <section id="card-display" class="container">
   <div class="row">
-  {% for recipe in recipes %}
+    {% for recipe in recipes %}
     <div class="col s12 m6 l3  recipe-card">
       <div class="card">
         <div class="card-image hoverable">
@@ -12,7 +28,7 @@
         </div>
         <div class="card-content">
           <span class="black-text card-title">{{ recipe.recipe_name }}</span>
-          <span>{{recipe.category_name}} </span> 
+          <span>{{recipe.category_name}} </span>
           <p class="black-text">{{ recipe_name }} </p>
         </div>
         <div class="card-action">
@@ -24,5 +40,5 @@
     {% endfor %}
   </div>
   <section>
-  
+
     {% endblock %}
