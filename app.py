@@ -94,17 +94,16 @@ def update_recipe(recipe_id):
         'author':request.form.get('author'),
         'category_name':request.form.get('category_name'),
         'description': request.form.get('description'),
-        'serves':request.form('serves'),
-        'cooking_time':request.form('cooking_time'),
-        'cuisine':request.form('cuisine'),
-        'difficulty':request.form('difficulty'),
+        'serves':request.form.get('serves'),
+        'cooking_time':request.form.get('cooking_time'),
+        'cuisine':request.form.get('cuisine'),
+        'difficulty':request.form.get('difficulty'),
         'allergens':request.form.get('allergens'),
-        'image_url' :request.file('image_url'),
         'ingredients':request.form.getlist('ingredients[]'),
         'preparation':request.form.getlist('preparation[]')
         })
     return redirect(url_for('view_recipe',recipe_id=recipe_id))
-
+     
 #-----------Register-----------#
 #https://www.youtube.com/watch?v=vVx1737auSE
 
