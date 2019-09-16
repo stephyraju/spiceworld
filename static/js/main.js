@@ -40,5 +40,4 @@ var preparationField = $(".preparation").length;
             preparationField-= 1;
         }
     }); 
-    
 
