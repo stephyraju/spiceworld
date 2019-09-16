@@ -169,6 +169,13 @@ def login():
 
     return render_template('login.html',  title="Login")
 
+#-----------Logout-----------#
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+   session.pop('username', None)
+   return redirect(url_for('index'))
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
