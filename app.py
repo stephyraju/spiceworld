@@ -6,8 +6,6 @@ import bcrypt
 import logging
 
 
-
-
 # declaring app name
 app = Flask(__name__)
 
@@ -65,8 +63,7 @@ def insert_recipe():
 def get_recipes():      
     return render_template('recipes.html',
                          recipes=mongo.db.recipes.find(),
-                         categories = mongo.db.categories.find(),
-                         username=session['username'])           
+                         categories = mongo.db.categories.find())           
                
 
 @app.route('/view_recipe/recipe_id?=<recipe_id>')
@@ -76,10 +73,23 @@ def view_recipe(recipe_id):
                         title='View Recipe', 
                         recipe=recipe,
                         username=session['username'])  
-  
-  
+#-----------Search-----------#
+@app.route('/search', methods=['POST'])
+def search(): 
+    print(request.form)
+    print(request.form.to_dict())
+    word_find = request.form["word_find"]     
+    mongo.db.recipes.create_index([("$**", 'text')])
+    recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
+    return render_template('recipes.html',
+                            title="View recipes", 
+                            recipes=recipes,
+                            username=session['username'], 
+                            categories = mongo.db.categories.find(), 
+                            cuisines=mongo.db.cuisines.find(), 
+                            difficulty=mongo.db.difficulty.find(), 
+                            allergens=mongo.db.allergens.find()) 
                             
-
 #-----------UPDATE-----------#
 
 @app.route('/edit_recipe/<recipe_id>',methods=['GET'])
