@@ -17,16 +17,19 @@
         </select>
           <label>Materialize Select</label>
         </div>
-        <div class="input-field col offset-s1 s10 offset-m6 m5 l4 offset-l4">
-          <i class="material-icons">search</i>
-          <input id="find-recipe" name="find-recipe" type="search" placeholder="Search" required>
-        </div>
       </div>
     </form>
-
   </div>
-
-
+  <div class="row">
+    <form method="POST" action="search">
+      <div class="col s12 offset-s1 s10 offset-m6 m5 offset-l7 l4">
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+         <input class="input_search" id="text_to_find" name="text_to_find" type="search" required>
+        <button class="submit-btn btn-small waves-effect waves-light right" type="submit"name="action">Search</button>
+     
+      </div>
+    </form>
+  </div>
 </section>
 <section id="card-display" class="container">
   <div class="row">
@@ -38,7 +41,7 @@
         </div>
         <div class="card-content">
           <span class="black-text card-title">{{ recipe.recipe_name }}</span>
-          <span>{{recipe.category_name}} </span>
+          <span class ="teal-text">{{recipe.category_name}} </span>
           <p class="black-text">{{ recipe_name }} </p>
         </div>
         <div class="card-action">
