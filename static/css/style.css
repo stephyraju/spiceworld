@@ -112,6 +112,7 @@ h4,h5{
   margin-top: 20px;
   margin-bottom: 20px;
 }
+/*--------Recipes---------*/
 
 .recipe-card .card .card-image img {
   display: block;
@@ -119,15 +120,14 @@ h4,h5{
   width: 100%;
   height: 200px; 
   }
-
+.recipe-card .card-content {
+  height: 140px; 
+  }
 
 /*--------View Recipe---------*/
 .icon-color{
   color:rgb(109, 174, 177);
 }
- .recipe-card .card-image{
-   padding-top: 20px;
- }
  .recipe-view .card {
    background-color: #fcf4ec;
  }
