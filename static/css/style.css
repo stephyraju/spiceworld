@@ -112,6 +112,25 @@ h4,h5{
   margin-top: 20px;
   margin-bottom: 20px;
 }
+/*-----carousel slider----- */
+
+.carousel .carousel-item {
+  width: 300px;
+  height: 300px;
+}
+
+.img-carousel {
+  width: 200px;
+  box-shadow: 2px 2px 12px #3f1e09;
+}
+
+.carousel .recipe-name {
+  visibility: hidden;
+}
+.carousel .active .recipe-name {
+  visibility: visible;
+}
+
 /*--------Recipes---------*/
 
 .recipe-card .card .card-image img {
@@ -163,3 +182,4 @@ h4,h5{
   color: white;
   font-size: 1.7rem;
 }
+
