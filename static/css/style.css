@@ -19,13 +19,13 @@ body {
 /* -------- Nav Bar ----------*/
 
 nav {
-     font-family: 'Courgette';
+     font-family: 'Courgette','sans-serif';
 }
 
 nav .brand-logo {
     color: #ff6e40;
     font-size: 3rem;
-    font-family: 'Courgette', cursive;
+    font-family: 'Courgette', 'cursive','sans-serif';
     -webkit-transition: 0.2s;
     -o-transition: 0.2s;
     transition: 0.2s;
@@ -39,7 +39,7 @@ nav .brand-logo {
 nav ul a {
   color:#2d2d2d;
   font-size: 1.7rem;
-  font-family: 'Courgette';
+  font-family: 'Courgette','sans-serif';
 }
 nav ul a:hover,
 nav ul .active {
@@ -63,7 +63,7 @@ h4,h5{
 .title-container img{
     display: block;
     width: 100%;
-    height: 25vh;
+    height: 35vh;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -74,27 +74,45 @@ h4,h5{
   left: 70%;
   transform: translate(-50%, -50%);
 }
-/*--------Category---------*/
+/*--------Subnav-Category---------*/
 
-.catergory-container{
+.category-container{
   font-size: 1.2rem;
-  color:#2d2d2d;
   margin-top: 20px;
-  background-color:#eeeeee;
-  height:70px;
-  margin-left: 15px;
-  margin-right: 15px;
+  height:150px;
 }
-.catergory-container .row {
-  padding-top: 20px;
+.subnav-img {
+  border-radius: 50%;
+  width:100px;
+  height:100px;
+  padding-top: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
-.catergory-container a {
-  color:#2d2d2d; 
+.category-container .menu-list {
+  display: flex;
+  justify-content: space-between;
 }
-.catergory-container a :hover {
-  color:#ff6e40 !important;
+.category-container nav ul a {
+  color:#2d2d2d;
+  font-size: 1.1rem;
+  font-family: 'Muli','sans-serif';
 }
-
+.menu-list{
+  overflow-y:scroll;
+}
+@media only screen and (min-width: 601px){
+.catergory-container  nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
+    height: 164px;
+    line-height: 25px;
+}
+}
+@media only screen and (min-width:320px){
+.category-container  nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
+    height: 175px;
+    line-height: 25px;
+}
+}
 /*--------Description---------*/
 .cells h4 {
   font-family: 'Muli','sans-serif';
@@ -113,7 +131,9 @@ h4,h5{
   margin-bottom: 20px;
 }
 /*-----carousel slider----- */
-
+.carousel-display h4 {
+  padding-top: 20px;
+}
 .carousel .carousel-item {
   width: 300px;
   height: 300px;
@@ -182,4 +202,3 @@ h4,h5{
   color: white;
   font-size: 1.7rem;
 }
-

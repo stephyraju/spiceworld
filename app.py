@@ -63,8 +63,7 @@ def insert_recipe():
 def get_recipes():      
     return render_template('recipes.html',
                          recipes=mongo.db.recipes.find(),
-                         categories = mongo.db.categories.find())           
-               
+                         categories = mongo.db.categories.find())                          
 
 @app.route('/view_recipe/recipe_id?=<recipe_id>')
 def view_recipe(recipe_id):
@@ -89,7 +88,48 @@ def search():
                             cuisines=mongo.db.cuisines.find(), 
                             difficulty=mongo.db.difficulty.find(), 
                             allergens=mongo.db.allergens.find()) 
+ 
                             
+@app.route('/get_starter', methods=['GET'])
+def get_starter():
+    return render_template('recipes.html', title='Starters', recipes=mongo.db.recipes.find({'category_name': 'Starter'}))                           
+
+@app.route('/get_breakfast', methods=['GET'])
+def get_breakfast():
+    return render_template('recipes.html', title='Desserts', recipes=mongo.db.recipes.find({'category_name': 'Breakfast'})) 
+
+@app.route('/get_main', methods=['GET'])
+def get_main():
+    return render_template('recipes.html', title='Main course', recipes=mongo.db.recipes.find({'category_name': 'Main Course'}))                            
+
+@app.route('/get_dessert', methods=['GET'])
+def get_dessert():
+    return render_template('recipes.html', title='Desserts', recipes=mongo.db.recipes.find({'category_name': 'Dessert'}))   
+    
+@app.route('/get_snacks', methods=['GET'])
+def get_snacks():
+    return render_template('recipes.html', title='Snacks', recipes=mongo.db.recipes.find({'category_name': 'Snacks'})) 
+    
+@app.route('/get_cakes', methods=['GET'])
+def get_cakes():
+    return render_template('recipes.html', title='Cakes', recipes=mongo.db.recipes.find({'category_name': 'Cakes'})) 
+    
+@app.route('/get_bbq', methods=['GET'])
+def get_bbq():
+    return render_template('recipes.html', title='BBQ', recipes=mongo.db.recipes.find({'category_name': 'BBQ'})) 
+
+@app.route('/get_vegan', methods=['GET'])
+def get_vegan():
+    return render_template('recipes.html', title='Vegan', recipes=mongo.db.recipes.find({'category_name': 'Vegan'})) 
+    
+@app.route('/get_instant', methods=['GET'])
+def get_instant():
+    return render_template('recipes.html', title='Instant Pot', recipes=mongo.db.recipes.find({'category_name': 'Instant Pot'})) 
+
+@app.route('/get_drinks', methods=['GET'])
+def get_drinks():
+    return render_template('recipes.html', title='Drinks', recipes=mongo.db.recipes.find({'category_name': 'Drinks'})) 
+        
 #-----------UPDATE-----------#
 
 @app.route('/edit_recipe/<recipe_id>',methods=['GET'])
