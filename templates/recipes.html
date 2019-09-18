@@ -1,32 +1,11 @@
 {% extends 'base.html' %} {% block content %}
-
 <section class="container">
-  <div class="row center">
-    <h3>Search</h3>
-  </div>
-  <div class="search">
-    <form method="POST" action="#">
-      <div class="row">
-        <div class="input-field col offset-s1 s10 l4">
-          <i class="fas fa-sort">Filter</i>
-          <select>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="1">main-course</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-        </select>
-          <label>Materialize Select</label>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="row">
+  <div class="search row">
     <form method="POST" action="search">
-      <div class="col s12 offset-s1 s10 offset-m6 m5 offset-l7 l4">
+      <div class="col s12">
         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-         <input class="input_search" id="word_find" name="word_find" type="search" required>
-        <button class="submit-btn btn-small waves-effect waves-light right" type="submit"name="action">Search</button>
-     
+        <input class="input_search" id="word_find" name="word_find" type="search" required>
+        <button class="submit-btn btn-small waves-effect waves-light right" type="submit" name="action">Search</button>
       </div>
     </form>
   </div>
@@ -41,7 +20,7 @@
         </div>
         <div class="card-content">
           <span class="black-text card-title">{{ recipe.recipe_name }}</span>
-          <span class ="teal-text">{{recipe.category_name}} </span>
+          <span class="teal-text">{{recipe.category_name}} </span>
           <p class="black-text">{{ recipe_name }} </p>
         </div>
         <div class="card-action">
