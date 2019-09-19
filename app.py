@@ -70,8 +70,7 @@ def view_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template('view.html',
                         title='View Recipe', 
-                        recipe=recipe,
-                        username=session['username'])  
+                        recipe=recipe)  
 #-----------Search-----------#
 @app.route('/search', methods=['POST'])
 def search(): 
