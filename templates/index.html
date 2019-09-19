@@ -1,7 +1,7 @@
 {% extends 'base.html'%} {% block content %}
 <!-- Title image -->
 <section class="title-container section-container">
- <img src="{{ url_for('static', filename='images/titleimg.jpg') }}" alt="title image">
+ <img class="responsive-img" src="{{ url_for('static', filename='images/titleimg.jpg') }}" alt="title image">
  <div class="intro-content">
   <h5>Everyday Cooking Recipes</h5>
  </div>
@@ -13,7 +13,7 @@
     <div class="nav-wrapper grey lighten-5 subnav-filters">
       <ul class="menu-list center">
         <li>
-         <a href="{{ url_for('get_starter') }}">
+        <a href="{{ url_for('get_starter') }}">
         <img class="subnav-img" src="{{ url_for('static', filename='images/starter.jpeg') }}" alt="Starter"></a>
         <a href="{{ url_for('get_starter') }}">Starter</a>
         </li>
