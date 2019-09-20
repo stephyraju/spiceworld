@@ -32,8 +32,12 @@
           {% if 'username' in session %}
           <li><a href="{{ url_for('add_recipe') }}">Add Recipes</a></li>
           {% endif %}
-          <li><a href="{{url_for('login')}}">Login</a></li>
+          {% if 'username' in session %}
           <li><a href="{{url_for('logout')}}">Logout</a></li>
+          {% else %}
+           <li><a href="{{url_for('register')}}">Register</a></li>
+          <li><a href="{{url_for('login')}}">Login</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
