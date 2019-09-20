@@ -3,7 +3,8 @@ $(document).ready(function(){
     $('select').formSelect();
     $('.carousel').carousel();
     $('.modal').modal();
-    
+    $('.cancel-form').click(function() {
+        window.history.back();
   });    
  
  var ingredientField = $(".ingredient").length;
