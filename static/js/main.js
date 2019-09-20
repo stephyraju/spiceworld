@@ -5,6 +5,7 @@ $(document).ready(function(){
     $('.modal').modal();
     $('.cancel-form').click(function() {
         window.history.back();
+    $('.tooltipped').tooltip();
   });    
  
  var ingredientField = $(".ingredient").length;
