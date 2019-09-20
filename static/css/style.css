@@ -191,7 +191,7 @@ p {
 }
 
 .recipe-card .card-content {
-  height: 140px;
+  height: 150px;
 }
 
 .card-label {
@@ -207,7 +207,9 @@ p {
   text-transform: uppercase;
   z-index: 1;
 }
-
+.cat-name{
+   display: block;
+}
 /*--------View Recipe---------*/
 
 .icon-color {
