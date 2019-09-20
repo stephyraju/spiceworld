@@ -1,14 +1,149 @@
-         ___        ______     ____ _                 _  ___  
-        / \ \      / / ___|   / ___| | ___  _   _  __| |/ _ \ 
-       / _ \ \ /\ / /\___ \  | |   | |/ _ \| | | |/ _` | (_) |
-      / ___ \ V  V /  ___) | | |___| | (_) | |_| | (_| |\__, |
-     /_/   \_\_/\_/  |____/   \____|_|\___/ \__,_|\__,_|  /_/ 
- ----------------------------------------------------------------- 
+## Spiceworld -A Recipe App
+
+Python & Flask - Data Centric Development - Milestone Project 3
+
+'spiceworld' is a recipe app built on the Flask framework using MongoDB database. 
+The purpose of this project is to "Create a web application that allows users to store and easily access cooking recipes", using the CRUD operations of Create, Read, Update, and Delete for their recipes.
+
+The deployed site can be found at [cookbook.](https://www.google.com)
+
+## UX
+
+This project is part of my Code Institute Full Stack Software Development studies.
+I've decided to make a recipe app to allow users to add  and store their recipes.
+
+#### User Stories
+
+As a user, I want to be able to:
+
+* view the recipes from any device (mobile, tablet, desktop).
+* Easily navigate through the recipes by various main filters.
+* view all recipes as a Guest.
+* Search any specific recipe.
+* Login and add my recipes.[Creatre]
+* Get the instruction to make a dish from this site.[Read]
+* Edit the recipes I've added.[Edit]
+* Delete the recipes I've submitted.[Delete]
+
+#### Design
+
+##### Framework
+
+* **[Materialize 1.0.0](https://materializecss.com/)**
+
+  To get a modern and clean layout, I used Materialize as a framework.
+  
+* **[jQuery 3.4.0](https://code.jquery.com/jquery/)**
+* **[Flask 1.0.2](https://palletsprojects.com/p/flask/)**
+
+##### Database
+
+For the database,I choose MongoDB.This was a great oppertunity to get experience using NoSQL database MongoDB.
 
 
-Hi there! Welcome to AWS Cloud9!
 
-To get started, create some files, play with the terminal,
-or visit https://docs.aws.amazon.com/console/cloud9/ for our documentation.
 
-Happy coding!
+
+##### Color Scheme
+
+##### Typography
+
+##### Icon
+
+Materialize icons has been used for this project.
+
+#### Wireframes
+
+Mock-ups were created early on in this project, using pencil and paper.
+I've used [Balsamiq Wireframes](https://balsamiq.com/) during the Scope Plane part of the design and planning process for this project.
+
+#### Features
+##### Existing Features
+##### Features Left to Implement
+
+#### Technologies Used
+
+##### Languages
+
+*   **[HTML](https://html.spec.whatwg.org/multipage/)** used as the markup language
+  
+*   **[CSS](https://www.w3.org/Style/CSS/)** used as the base for cascading styles.
+
+*   **[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)** used mostly for DOM manipulation
+
+*   **[Python3](https://www.python.org/)** used to run the backend application
+
+##### Libraries
+
+* **[Google Fonts]()** provided the fonts used throughout the project
+
+* **[Font Awesome]()** v5.8.2 to provide the icon set
+
+* **[Materialize]()** v1.0.0 used as the CSS framework for the project
+
+* **[jQuery]()** used as the primary JavaScript functionality.
+
+* **[Flask]()** v1.0.2 is the micro web framework that runs the application
+
+* **[Jinja]()** v2.10.1 is the default templating language for flask and is used to display data from the python application in the frontend html pages
+
+* **[PyMongo]()** 2.3.0 was used to enable the python application to access the Mongo database
+
+##### Tools
+
+* **[AWS Cloud9]()** is the IDE used to put all this together
+
+* **[MongoDB Atlas]()** is used to store my database in the 'cloud'.
+
+* **[Git]()** is used for version control
+
+* **[GitHub]()** provides hosting for software development version control using Git
+
+* **[Balsamiq]()** was used to create the wireframes when initially planning this project
+
+##### Hosting
+
+  **[Heroku]()** is used to host the app
+  
+#### Testing
+
+
+
+
+
+#### Deployment
+
+##### Deployment To Heroku
+
+In order the deploy my project to Heroku I have completed the following steps:
+
+ **AWS Cloud9 IDE**
+ 
+* Created a Procfile with the command echo web: python run.py > Procfile.
+* Created a requirement.txt file so Heroku know what python modules it will need to run my application with the command pip freeze > requirements.txt
+* Created config Vars such as my Secret Key, IP PORT and MONGO_URI within .bashrc so I could still run the project from my own IDE
+* Once up to date, everything was pushed to GitHub master branch.
+
+ **Heroku**
+
+* After loging into heroku I created a new app, using the name spiceword cookbook and set the region to Europe.
+
+* In the settings tab I clicked reveal config vars and entered the required environment variables, which in this case were:
+
+    IP 0.0.0.0
+
+    PORT 5000
+
+    MONGO_URI mongodb+srv://root:<password_removed>@myfirstcluster-fai9p.mongodb.net/cook_book?retryWrites=true&w=majority
+
+    SECRET secret key for flask session
+
+* I made sure the secret key used was different to the one used within my IDE.
+
+* On the deploy tab, in the Deployment method section I chose to deploy from my GitHub repo.
+
+* I did this by clicking the GitHub option, then in the box underneath, and next to my GitHub username, I searched for and selected the drinks-db repo and clicked connect.
+
+* Then, I selected the Enable Automatic Deploys option on the master branch so that all pushes to this branch would be automatically deployed to Heroku.
+
+* After completing the above steps I was able push my code from AWS Cloud9 and successfully deploy my project to Heroku.
