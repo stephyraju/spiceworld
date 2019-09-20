@@ -7,7 +7,10 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-
+main {
+    flex: 1 0 auto;
+  }
+  
 .section-container {
   max-width: 100%;
   margin-left: auto;
@@ -117,9 +120,7 @@ h5 {
 
 @media only screen and (min-width: 601px) {
   .catergory-container nav,
-  nav .nav-wrapper i,
-  nav a.sidenav-trigger,
-  nav a.sidenav-trigger i {
+  nav .nav-wrapper i {
     height: 164px;
     line-height: 25px;
   }
@@ -127,12 +128,33 @@ h5 {
 
 @media only screen and (min-width:320px) {
   .category-container nav,
-  nav .nav-wrapper i,
-  nav a.sidenav-trigger,
-  nav a.sidenav-trigger i {
+  nav .nav-wrapper i{
     height: 175px;
     line-height: 25px;
   }
+}
+/*-----carousel slider----- */
+
+.carousel-display h4 {
+  padding-top: 40px;
+}
+
+.carousel .carousel-item {
+  width: 300px;
+  height: 300px;
+}
+
+.img-carousel {
+  width: 200px;
+  box-shadow: 2px 2px 12px #3f1e09;
+}
+
+.carousel .recipe-name {
+  visibility: hidden;
+}
+
+.carousel .active .recipe-name {
+  visibility: visible;
 }
 
 /*--------Description---------*/
@@ -157,29 +179,6 @@ p {
   margin-bottom: 20px;
 }
 
-/*-----carousel slider----- */
-
-.carousel-display h4 {
-  padding-top: 20px;
-}
-
-.carousel .carousel-item {
-  width: 300px;
-  height: 300px;
-}
-
-.img-carousel {
-  width: 200px;
-  box-shadow: 2px 2px 12px #3f1e09;
-}
-
-.carousel .recipe-name {
-  visibility: hidden;
-}
-
-.carousel .active .recipe-name {
-  visibility: visible;
-}
 
 /*--------Recipes---------*/
 

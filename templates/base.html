@@ -27,14 +27,14 @@
         <a href="#" class="brand-logo">spiceworld <img class="hide-on-med-and-down" src="{{ url_for('static', filename='images/logo.png') }}"></a>
         <a href="#" data-target="mobile-sidenav" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {% if 'username' in session %}
           <li><a href="{{ url_for('index') }}">Home</a></li>
           <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
-          {% if 'username' in session %}
           <li><a href="{{ url_for('add_recipe') }}">Add Recipes</a></li>
-          {% endif %}
-          {% if 'username' in session %}
           <li><a href="{{url_for('logout')}}">Logout</a></li>
           {% else %}
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
            <li><a href="{{url_for('register')}}">Register</a></li>
           <li><a href="{{url_for('login')}}">Login</a></li>
           {% endif %}
@@ -45,12 +45,18 @@
   <!--Sidenav-->
   <ul class="sidenav" id="mobile-sidenav">
     <img class="responsive-img" src="{{ url_for('static', filename='images/sidenav.png') }}" alt="spices-image">
-
-    <li><a class="active" href="{{ url_for('index') }}">Home</a></li>
-    <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
-          <li><a href="{{ url_for('add_recipe') }}">Add Recipes</a></li>
-          <li><a href="{{url_for('login')}}">Login</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+         
+          {% if 'username' in session %}
+          <li><a href="{{ url_for('index') }}"><i class="material-icons">home</i>Home</a></li>
+          <li><a href="{{ url_for('get_recipes') }}"><i class="material-icons">search</i>Recipes</a></li>
+          <li><a href="{{ url_for('add_recipe') }}"><i class="material-icons">add_box</i>Add Recipes</a></li>
+          <li><a href="{{url_for('logout')}}"><i class="material-icons">person_outline</i>Logout</a></li>
+          {% else %}
+          <li><a href="{{ url_for('index') }}"><i class="material-icons">home</i>Home</a></li>
+          <li><a href="{{ url_for('get_recipes') }}"><i class="material-icons">search</i>Recipes</a></li>
+          <li><a href="{{url_for('register')}}"><i class="material-icons">person_add</i>Register</a></li>
+          <li><a href="{{url_for('login')}}"><i class="material-icons">account_box</i>Login</a></li>
+          {% endif %}
   </ul>
   
   <main>
