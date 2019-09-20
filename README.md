@@ -34,11 +34,16 @@ As a user, I want to be able to:
   To get a modern and clean layout, I used Materialize as a framework.
   
 * **[jQuery 3.4.0](https://code.jquery.com/jquery/)**
-* **[Flask 1.0.2](https://palletsprojects.com/p/flask/)**
+
+  Used to manipulate the DOM, for example buttons, and showing / hiding elements
+
+* **[Flask 1.0.2](https://palletsprojects.com/p/flask/)** 
+
+  Flask is the micro web framework that runs the application
 
 ##### Database
 
-For the database,I choose MongoDB.This was a great oppertunity to get experience using NoSQL database MongoDB.
+For the database,I choose MongoDB and this was a great oppertunity to get experience using NoSQL database MongoDB.
 
 
 
@@ -120,13 +125,16 @@ In order the deploy my project to Heroku I have completed the following steps:
  **AWS Cloud9 IDE**
  
 * Created a Procfile with the command echo web: python run.py > Procfile.
-* Created a requirement.txt file so Heroku know what python modules it will need to run my application with the command pip freeze > requirements.txt
+* Created a requirement.txt file so Heroku know what python modules it will need to run my application with the command sudo pip freeze --local > requirements.txt
+* Then git add and git commit the new prerequisites from the requirements.txt file and Procfile, then 'git push' the undertaking to GitHub.
 * Created config Vars such as my Secret Key, IP PORT and MONGO_URI within .bashrc so I could still run the project from my own IDE
-* Once up to date, everything was pushed to GitHub master branch.
+ 
 
  **Heroku**
 
 * After loging into heroku I created a new app, using the name spiceword cookbook and set the region to Europe.
+
+* Select application
 
 * In the settings tab I clicked reveal config vars and entered the required environment variables, which in this case were:
 
@@ -138,12 +146,33 @@ In order the deploy my project to Heroku I have completed the following steps:
 
     SECRET secret key for flask session
 
-* I made sure the secret key used was different to the one used within my IDE.
+#### Credits
 
-* On the deploy tab, in the Deployment method section I chose to deploy from my GitHub repo.
+##### Content
 
-* I did this by clicking the GitHub option, then in the box underneath, and next to my GitHub username, I searched for and selected the drinks-db repo and clicked connect.
+  The recipes for the cookbook were sourced from [bbcgoodfood.com](https://www.bbcgoodfood.com/).
+  
+  The text for some of the recipe categories was taken from Wikipedia.
 
-* Then, I selected the Enable Automatic Deploys option on the master branch so that all pushes to this branch would be automatically deployed to Heroku.
+##### Media
 
-* After completing the above steps I was able push my code from AWS Cloud9 and successfully deploy my project to Heroku.
+  The images for the recipes have been sourced from their respective recipes at [bbcgoodfood.com](https://www.bbcgoodfood.com/).
+  
+  The images for the logo image,Category images on the home page were taken from google free images.
+  
+####  Acknowledgements
+
+  **Tutorials**
+  
+  https://www.tutorialspoint.com
+
+  https://stackoverflow.com
+
+  https://www.youtube.com/watch?v=vVx1737auSE - To understand how to create the login/register functions.
+  
+  https://www.quackit.com/mongodb/tutorial/mongodb_sort_query_results.cfm
+  
+
+Special thanks to Guido Cecilio Garcia, my Code Institute mentor, for his guidance and advice whilst working on this project.
+
+ 
