@@ -1,64 +1,63 @@
 {% extends 'base.html'%} {% block content %}
 <!-- Title image -->
 <section class="title-container section-container">
- <img class="responsive-img" src="{{ url_for('static', filename='images/titleimg.jpg') }}" alt="title image">
- <div class="intro-content">
-  <h5>Everyday Cooking Recipes</h5>
- </div>
+    <img class="responsive-img" src="{{ url_for('static', filename='images/titleimg.jpg') }}" alt="title image">
+    <div class="intro-content">
+        <h5>Everyday Cooking Recipes</h5>
+    </div>
 </section>
 
 <!-- Subnav-Category -->
 <section class="category-container section-container">
-<nav>
-    <div class="nav-wrapper grey lighten-5 subnav-filters">
-      <ul class="menu-list center">
-        <li>
-        <a href="{{ url_for('get_starter') }}">
+    <nav>
+        <div class="nav-wrapper grey lighten-5 subnav-filters">
+            <ul class="menu-list center">
+                <li>
+                    <a href="{{ url_for('get_starter') }}">
         <img class="subnav-img" src="{{ url_for('static', filename='images/starter.jpeg') }}" alt="Starter"></a>
-        <a href="{{ url_for('get_starter') }}">Starter</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/bf.jpeg') }}" alt="Breakfast">
-        <a href="{{ url_for('get_breakfast') }}">Breakfast</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/main.jpeg') }}" alt="Main Course">
-        <a href="{{ url_for('get_main') }}">Main Course</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/dessert.jpeg') }}" alt="Dessert">
-        <a href="{{ url_for('get_dessert') }}">Dessert</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/snacks.jpeg') }}" alt="Snacks">
-        <a href="{{ url_for('get_snacks') }}">Snacks</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/cakes.jpeg') }}" alt="Cakes">
-        <a href="{{ url_for('get_cakes') }}">Cakes</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/bbq.jpeg') }}" alt="BBQ">
-        <a href="{{ url_for('get_bbq') }}">BBQ</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/vegan.jpeg') }}" alt="VeganRecipes">
-        <a href="{{ url_for('get_vegan') }}">Vegan</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/instant.jpeg') }}" alt="Instant Pot Recipes">
-        <a href="{{ url_for('get_instant') }}">Instant Pot<br> Recipes</a>
-        </li>
-        <li>
-        <img class="subnav-img" src="{{ url_for('static', filename='images/drinks.jpeg') }}" alt="Drinks">
-        <a href="{{ url_for('get_drinks') }}">Drinks</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+                    <a href="{{ url_for('get_starter') }}">Starter</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/bf.jpeg') }}" alt="Breakfast">
+                    <a href="{{ url_for('get_breakfast') }}">Breakfast</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/main.jpeg') }}" alt="Main Course">
+                    <a href="{{ url_for('get_main') }}">Main Course</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/dessert.jpeg') }}" alt="Dessert">
+                    <a href="{{ url_for('get_dessert') }}">Dessert</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/snacks.jpeg') }}" alt="Snacks">
+                    <a href="{{ url_for('get_snacks') }}">Snacks</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/cakes.jpeg') }}" alt="Cakes">
+                    <a href="{{ url_for('get_cakes') }}">Cakes</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/bbq.jpeg') }}" alt="BBQ">
+                    <a href="{{ url_for('get_bbq') }}">BBQ</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/vegan.jpeg') }}" alt="VeganRecipes">
+                    <a href="{{ url_for('get_vegan') }}">Vegan</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/instant.jpeg') }}" alt="Instant Pot Recipes">
+                    <a href="{{ url_for('get_instant') }}">Instant Pot<br> Recipes</a>
+                </li>
+                <li>
+                    <img class="subnav-img" src="{{ url_for('static', filename='images/drinks.jpeg') }}" alt="Drinks">
+                    <a href="{{ url_for('get_drinks') }}">Drinks</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<!--
-
+    <!--
    <nav>
     <div class="nav-wrapper transparent subnav-filters">
       <ul class="center hide-on-med-and-down">
@@ -102,28 +101,27 @@
                 {% endfor %}
             </div>
         </div>
-       
     </section>
-    
+
 <!-- Description -->
 <section class="section-container div-description">
- <div class="row cells center">
-  <div class="col s12">
-   <h4> How Does It Work ?</h3>
-  </div>
-  <div class="col s12 m4 content">
-   <h5>1.Create</h5>
-   <p>You can add your special recipes and you are the only one can edit or delete your own recipe.</p>
-  </div>
-  <div class="col s12 m4 content">
-   <h5>2.Discover</h5>
-   <p>Search YOUR collection of recipes in ways you'd never have dreamed was possible - ingredients, recipe types, cusine, etc. </p>
-  </div>
-  <div class="col s12 m4 content">
-   <h5>3.Organize</h5>
-   <p>Organize your meal for the day-breakfast,snacks,desserts,etc. </p>
-  </div>
- </div>
+    <div class="row cells center">
+        <div class="col s12">
+            <h4> How Does It Work ?</h3>
+        </div>
+        <div class="col s12 m4 content">
+            <h5>1.Create</h5>
+            <p>You can add your special recipes and you are the only one can edit or delete your own recipe.</p>
+        </div>
+        <div class="col s12 m4 content">
+            <h5>2.Discover</h5>
+            <p>Search YOUR collection of recipes in ways you'd never have dreamed was possible - ingredients, recipe types, cusine, etc. </p>
+        </div>
+        <div class="col s12 m4 content">
+            <h5>3.Organize</h5>
+            <p>Organize your meal for the day-breakfast,snacks,desserts,etc. </p>
+        </div>
+    </div>
 </section>
 
 {% endblock %}

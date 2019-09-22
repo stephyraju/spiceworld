@@ -1,13 +1,17 @@
-$(document).ready(function(){
+$(document).ready(function() {
     $('.sidenav').sidenav();
     $('select').formSelect();
     $('.carousel').carousel();
     $('.modal').modal();
+    $('.tooltipped').tooltip();
+ 
+ 
     $('.cancel-form').click(function() {
         window.history.back();
-    $('.tooltipped').tooltip();
-  });    
+    });
  
+    });
+  
  var ingredientField = $(".ingredient").length;
     $("#add_ingredient").on("click", function () {
         $("select").formSelect("destroy");
@@ -25,7 +29,6 @@ $(document).ready(function(){
         }
     });
  
- 
 var preparationField = $(".preparation").length;
     /* add new cloned item */
     $("#add_step").on("click", function () {
@@ -41,5 +44,4 @@ var preparationField = $(".preparation").length;
             /* ensure original direction line never gets deleted */
             preparationField-= 1;
         }
-    }); 
-
+    });

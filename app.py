@@ -22,7 +22,6 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    
     return render_template("index.html", recipes=mongo.db.recipes.find())
      
 #@app.route('/get_recipes',methods=['POST','GET'])
@@ -218,7 +217,35 @@ def login():
         return render_template('login.html',  title="Login")
 
     return render_template('login.html',  title="Login")
+    
+#-----------Account-----------#
 
+@app.route("/account/<account_name>, methods=['GET']")
+def account(account_name):
+    logging.info("Account Name is: " + str(account_name))
+    users = mongo.db.users
+    
+    logging.info("Recipes: " + str(mongo.db.recipes.find({"author": account_name})))
+    
+    recipes_submitted_by_user = mongo.db.recipes.find(
+            {"author": account_name})
+    logging.info("Recipes submitted by user: " + str(recipes_submitted_by_user))
+    
+    total_recipes_by_user = recipes_submitted_by_user.count() 
+    logging.info("Total recipes by user: " + str(total_recipes_by_user))
+    if account_name != session.get('username'):
+        logging.info("User is not allowed to access page")
+        flash("You can only access your own account page.")
+        return redirect(url_for('index'))
+    else:
+        logging.info("User is authorized to access page")
+        users = mongo.db.users.find_one({"username": account_name})
+        recipe_submitted_by_user = mongo.db.recipes.find(
+            {"username": account_name})
+    return render_template('account.html',  
+                            users_recipes=recipes_submitted_by_user,
+                            total_recipes_by_user = recipes_submitted_by_user.count() )
+                            
 #-----------Logout-----------#
 @app.route('/logout')
 def logout():
