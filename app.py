@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, request, url_for, session, flash
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, DESCENDING
 from bson.objectid import ObjectId
 import bcrypt
 import logging
@@ -22,12 +22,14 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html", recipes=mongo.db.recipes.find())
+    
+    recipes = list(mongo.db.recipes.find().sort("views",DESCENDING))
+    return render_template("index.html", recipes = recipes )
      
 #@app.route('/get_recipes',methods=['POST','GET'])
 #def get_recipes():
  #   return render_template("recipes.html", recipes=mongo.db.recipes.find()) 
-    
+
 
 # -------CREATE---------#
      
@@ -66,11 +68,11 @@ def get_recipes():
 
 @app.route('/view_recipe/recipe_id?=<recipe_id>')
 def view_recipe(recipe_id):
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template('view.html',
-                        title='View Recipe',
-                        username=session['username'], 
-                        recipe=recipe)  
+    
+    mongo.db.recipes.find_one_and_update({"_id": ObjectId(recipe_id)}, {"$inc": {"views": 1}})
+    return render_template('view.html', 
+                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}))
+                        
 #-----------Search-----------#
 @app.route('/search', methods=['POST'])
 def search(): 
@@ -244,14 +246,55 @@ def account(account_name):
             {"username": account_name})
     return render_template('account.html',  
                             users_recipes=recipes_submitted_by_user,
-                            total_recipes_by_user = recipes_submitted_by_user.count() )
-                            
+                            total_recipes_by_user = recipes_submitted_by_user.count())
+
+#-----------Likes-----------#
+
+@app.route('/like_recipe/<recipe_id>')
+def like_recipe(recipe_id):
+    '''Controls behavior of user-like increment and decrements operator.
+    Feature is dependant upon user interaction in the user-interface.'''
+    users = mongo.db.users
+    
+    already_liked= users.find_one({"$and":[{"author":session['username']},{'likes':recipe_id}]})
+
+    if already_liked is None:
+        mongo.db.recipes.update_one({"_id":ObjectId(recipe_id)}, {'$inc': {'likes': 1}})
+        users.update_one({"author":session['username']},{"$push":{"likes":recipe_id}})
+    else:
+        flash("You have already liked this recipe!")
+
+    return render_template('view.html', 
+                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}), username = session['username'])
+
+#-----------Dislikes-----------#
+
+
+@app.route('/dislike_recipe/<recipe_id>')
+def dislike_recipe(recipe_id):
+    '''Controls behavior of user-dislike increment and decrements operator.
+    Feature is dependant upon user interaction in the user-interface.'''
+    users = mongo.db.users
+    
+    already_disliked= users.find_one({"$and":[{"author":session['username']},{'dislikes':recipe_id}]})
+
+    if already_disliked is None:
+        mongo.db.recipes.update_one({"_id":ObjectId(recipe_id)}, {'$inc': {'dislikes': 1}})
+        users.update_one({"author":session['username']},{"$push":{"dislikes":recipe_id}})
+    else:
+        flash("You have already disliked this recipe!")
+
+  
+    return render_template('view.html', 
+                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}), username = session['username'])     
+    
 #-----------Logout-----------#
 @app.route('/logout')
 def logout():
    # remove the username from the session if it is there
    session.pop('username', None)
    return redirect(url_for('index'))
+   
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
