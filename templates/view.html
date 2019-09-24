@@ -11,7 +11,10 @@
                 <a href="{{ url_for('dislike_recipe', recipe_id=recipe._id) }}" class="like-dis">
                             {{ recipe.dislikes }}
                             <i class="material-icons teal-text stat-icon">thumb_down</i>
-                        </a>
+                   </a>
+                   {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <p class="error_message orange-text">{{ message }}</p>
+        {% endfor %} {% endif %} {% endwith %}
             </div>
             <div class="col s12 l8 center-align">
                 <div class="recipe-header">
