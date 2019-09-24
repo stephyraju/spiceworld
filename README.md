@@ -8,8 +8,7 @@ The purpose of this project is to "Create a web application that allows users to
 The deployed site can be found at [cookbook.](https://www.google.com)
 
 ## UX
-
-This project is part of my Code Institute Full Stack Software Development studies.
+This is the milestone project that I have created for the “Data Centric Development” module, which is part of “Full Stack Web Development Course” offered by Code Institute.
 I've decided to make a recipe app to allow users to add  and store their recipes.
 
 #### User Stories
@@ -17,10 +16,14 @@ I've decided to make a recipe app to allow users to add  and store their recipes
 As a user, I want to be able to:
 
 * view the recipes from any device (mobile, tablet, desktop).
-* Easily navigate through the recipes by various main filters.
+* see recipes from other users to get new ideas.
+* easily navigate through the recipes by various main filters.
 * view all recipes as a Guest.
-* Search any specific recipe.
+* vote like/dislike for recipes added by other users
+* search any specific recipe.
+* search recipes by different category.
 * Login and add my recipes.[Creatre]
+* Easily see all of the recipes I have submitted.
 * Get the instruction to make a dish from this site.[Read]
 * Edit the recipes I've added.[Edit]
 * Delete the recipes I've submitted.[Delete]
@@ -45,7 +48,59 @@ As a user, I want to be able to:
 
 For the database,I choose MongoDB and this was a great oppertunity to get experience using NoSQL database MongoDB.
 
+The database is made up of the following collections
 
+**categories**
+       
+       
+       id: <ObjectId()>
+
+       category_name: <string>
+       
+**cuisines**
+
+       id: <ObjectId()>
+
+       cusine: <string>
+       
+**allergens**
+      
+        id: <ObjectId()>
+
+       allergens: <string>
+
+**difficulty**
+      
+        id: <ObjectId()>
+
+       difficulty: <string>
+
+**recipes**
+
+      id: <ObjectId>
+      recipe_name: <string>
+      category_name: <string>
+      cooking_time: <string>
+      preparation: <array>
+      description:<string>
+      ingredients: <string>
+      serves: <string>
+      difficulty: <string>
+      allergens:<string>
+      cuisine:<string>
+      author: <string>
+      image_url: <string>
+      likes: <int32>
+      dislikes: <int32>
+      views: <int32>
+
+**users**
+
+      id: <ObjectId()>
+      
+      author: <string>
+      
+      password: <string>
 
 
 

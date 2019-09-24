@@ -242,7 +242,7 @@ def account(account_name):
     else:
         logging.info("User is authorized to access page")
         users = mongo.db.users.find_one({"username": account_name})
-        recipe_submitted_by_user = mongo.db.recipes.find(
+        recipes_submitted_by_user = mongo.db.recipes.find(
             {"username": account_name})
     return render_template('account.html',  
                             users_recipes=recipes_submitted_by_user,
