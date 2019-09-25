@@ -187,7 +187,7 @@ In order the deploy my project to Heroku I have completed the following steps:
 
  **Heroku**
 
-* After loging into heroku I created a new app, using the name spiceword cookbook and set the region to Europe.
+* After loging into heroku I created a new app, using the name spiceword-cookbook and set the region to Europe.
 
 * Select application
 
@@ -200,6 +200,16 @@ In order the deploy my project to Heroku I have completed the following steps:
     MONGO_URI mongodb+srv://root:<password_removed>@myfirstcluster-fai9p.mongodb.net/cook_book?retryWrites=true&w=majority
 
     SECRET secret key for flask session
+    
+* From the heroku dashboard of your newly created application, click on "Deploy" > "Deployment method" and select GitHub.
+
+* Confirm the linking of the heroku app to the correct GitHub repository.
+
+* In the heroku dashboard, click "Deploy".
+
+* In the "Manual Deployment" section of this page, made sure the master branch is selected and then click "Deploy Branch".
+
+* The site is now successfully deployed.
 
 #### Credits
 
