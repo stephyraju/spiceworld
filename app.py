@@ -139,7 +139,7 @@ def edit_recipe(recipe_id):
     return render_template('editrecipe.html', 
                             recipe=recipe,
                             categories=mongo.db.categories.find(), 
-                            cuisine=mongo.db.cuisine.find(), 
+                            cuisines=mongo.db.cuisines.find(), 
                             difficulty=mongo.db.difficulty.find(), 
                             allergens=mongo.db.allergens.find())
                             
@@ -289,6 +289,7 @@ def dislike_recipe(recipe_id):
                             recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}), username = session['username'])     
     
 #-----------Logout-----------#
+
 @app.route('/logout')
 def logout():
    # remove the username from the session if it is there

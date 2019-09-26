@@ -18,19 +18,14 @@
       <div class="card">
         <div class="card-image hoverable">
           <a class="waves-effect waves-light" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"> 
-        <img src="{{recipe.image_url}}" class="responsive-img" alt="{{recipe_name}}"></a>
-       <a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}" class="card-label">
-       {% if recipe.cuisine == "" %}
-        {{ recipe.category_name }}
-       {% else %}
-      {{ recipe.cuisine }}
-       {% endif %}
+        <img src="{{ recipe.image_url }}" class="responsive-img" alt="{{ recipe_name }}"></a>
+       <a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}" class="card-label"> {{ recipe.cuisine }}
        </a>
         </div>
         <div class="card-content">
         <a class="waves-effect waves-light" href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">
           <span class="black-text card-title">{{ recipe.recipe_name }}</span></a>
-          <span class="teal-text cat-name">{{recipe.category_name}} </span>
+          <span class="teal-text cat-name">{{ recipe.category_name }} </span>
         </div>
       </div>
     </div>

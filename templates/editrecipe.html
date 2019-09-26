@@ -50,20 +50,21 @@
                     <!-- Cuisine -->
                     <div class="col s6 l4">
                         <div class="input-field">
-                            <i class="fas fa-globe-asia material-icon prefix"></i>
+                            <i class="fas fa-globe-asia material-icons prefix"></i>
                             <select id="cuisine" name="cuisine" class="validate">
                            <option value="" disabled selected>Cuisine</option>
-                                    {% for cuisine in cuisines %}
-                                    {% if cuisine.cuisine == recipe.cuisine %}
-                                        <option value="{{cuisine.cuisine}}" selected>{{cuisine.cuisine}}</option>
-                                    {% else %}
-                                        <option value="{{cuisine.cuisine}}">{{cuisine.cuisine}}</option>
-                                    {% endif %}
-                                {% endfor %}
+                            {% for cuisine in cuisines %}
+                            {% if cuisine.cuisine == recipe.cuisine %}
+                           <option value="{{cuisine.cuisine}}" selected >{{cuisine.cuisine}}</option>
+                           {% else %}
+                           <option value="{{cuisine.cuisine}}">{{cuisine.cuisine}}</option>
+                           {% endif %}
+                           {% endfor %}
                            </select>
                             <label>Cuisine</label>
                         </div>
                     </div>
+                
                     <!-- Cooking Time -->
                     <div class="col s6 l4">
                         <div class="input-field">
@@ -109,12 +110,12 @@
                             <select id="allergens" name="allergens" class="validate" multiple>
                            <option value="" disabled selected>Allergens</option>
                             {% for allergen in allergens %}
-                           {% if allergen.allergen in recipe.allergens %}
+                        {% if allergen.allergen in recipe.allergens %}
                             <option value="{{allergen.allergen}}" selected>{{allergen.allergen}}</option>
-                            {% else %}
-                              <option value="{{allergen.allergen}}">{{allergen.allergen}}</option>
-                              {% endif %}
-                            {% endfor %}
+                        {% else %}
+                            <option value="{{allergen.allergen}}">{{allergen.allergen}}</option>
+                        {% endif %}
+                        {% endfor %}
                            </select>
                             <label>Allergens</label>
                         </div>

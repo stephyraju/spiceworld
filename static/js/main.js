@@ -4,7 +4,7 @@ $(document).ready(function() {
     $('.carousel').carousel();
     $('.modal').modal();
     $('.tooltipped').tooltip();
- 
+    
  
     $('.cancel-form').click(function() {
         window.history.back();
