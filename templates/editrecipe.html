@@ -106,10 +106,10 @@
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-exclamation-triangle material-icon prefix"></i>
-                            <select id="allergens" name="allergens" class="validate">
+                            <select id="allergens" name="allergens" class="validate" multiple>
                            <option value="" disabled selected>Allergens</option>
                             {% for allergen in allergens %}
-                            {% if allergen.allergen in recipe.allergens %}
+                           {% if allergen.allergen in recipe.allergens %}
                             <option value="{{allergen.allergen}}" selected>{{allergen.allergen}}</option>
                             {% else %}
                               <option value="{{allergen.allergen}}">{{allergen.allergen}}</option>
