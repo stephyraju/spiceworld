@@ -125,7 +125,7 @@ def get_vegan():
     
 @app.route('/get_instant', methods=['GET'])
 def get_instant():
-    return render_template('recipes.html', title='Instant Pot', recipes=mongo.db.recipes.find({'category_name': 'Instant Pot'})) 
+    return render_template('recipes.html', title='Instant Pot', recipes=mongo.db.recipes.find({'category_name': 'Instant Recipe'})) 
 
 @app.route('/get_drinks', methods=['GET'])
 def get_drinks():
