@@ -14,24 +14,27 @@
 
         <!--Summary-->
         {% if total_recipes_by_user > 0 %}
-        <h6>Showing your {{total_recipes_by_user}} recipes</h6>
+        <h6>Showing your {{ total_recipes_by_user }} recipes</h6>
         {% else %}
         <h6>No recipes Submitted Yet.</h6>
-        <a href="{{ url_for('add_recipe') }}" class="btn black">Add One Now</a> {% endif %}
+        <a href="{{ url_for('add_recipe') }}" class="btn black">Add One Now</a>
+        {% endif %}
     </div>
 </section>
 <section id="card-display" class="container">
     <div class="row">
         <div class="card-image">
-            {% for recipe in users_recipes %}
+            {% for recipe in user_recipes %}
             <div class="col s12 m6 l3  recipe-card">
                 <div class="card">
                     <div class="card-image hoverable">
                         <a class="waves-effect waves-light" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"> 
         <img src="{{recipe.image_url}}" class="responsive-img" alt="{{recipe_nmae}}"></a>
                         <a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}" class="card-label">
-       {% if recipe.cuisine != "None" %}
-       {{ recipe.cuisine}}</a> {% else %} {{recipe.category_name}} {% endif %} {% if session['username'] == recipe.author %}
+      
+       {{ recipe.cuisine }}</a> 
+       
+       {% if session['username'] == recipe.author %}
                         <a href="{{ url_for('edit_recipe', recipe_id = recipe._id) }}" class="btn-floating halfway-fab waves-effect waves-light orange darken-2 btn-small">
             <i class="fas fa-pencil-alt"></i></a> {% endif %}
                     </div>
@@ -46,7 +49,5 @@
             {% endfor %}
         </div>
 </section>
-
-
     {% endblock %}
  
