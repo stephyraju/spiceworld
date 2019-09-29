@@ -4,17 +4,27 @@
         <div class="row card recipe-card">
             <div class="col s12 l4 center-align card-image">
                 <img height="400" width="375" src="{{recipe.image_url}}" alt="recipe image" class="responsive-img materialboxed">
+             {% if session['username'] %}
                 <a href="{{ url_for('like_recipe', recipe_id=recipe._id) }}" class="like-dis">
                             {{ recipe.likes }}
                             <i class="material-icons teal-text stat-icon">thumb_up</i>
-                        </a>
+                        </a>  
                 <a href="{{ url_for('dislike_recipe', recipe_id=recipe._id) }}" class="like-dis">
                             {{ recipe.dislikes }}
                             <i class="material-icons teal-text stat-icon">thumb_down</i>
-                   </a> {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+                   </a> 
+                   {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
                 <p class="error_message orange-text">{{ message }}</p>
                 {% endfor %} {% endif %} {% endwith %}
+                {% else %}
+                <a class="tooltipped like-dis" data-position="bottom" data-tooltip="You have to login to do that">{{ recipe.likes }}
+                            <i class="material-icons grey-text stat-icon">thumb_up</i>
+                        </a>
+                <a class="tooltipped like-dis" data-position="bottom" data-tooltip="You have to login to do that">{{ recipe.dislikes }}
+                            <i class="material-icons grey-text stat-icon">thumb_down</i></a>
+                  {% endif %}          
             </div>
+            
             <div class="col s12 l8 center-align">
                 <div class="recipe-header">
                     <h4>{{recipe.recipe_name}}</h4>

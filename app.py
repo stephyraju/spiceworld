@@ -251,18 +251,19 @@ def account(account_name):
 def like_recipe(recipe_id):
     '''Controls behavior of user-like increment and decrements operator.
     Feature is dependant upon user interaction in the user-interface.'''
+    
     users = mongo.db.users
     
-    already_liked= users.find_one({"$and":[{"author":session['username']},{'likes':recipe_id}]})
-
+    already_liked=users.find_one({"$and":[{"author":session['username']},{'likes':recipe_id}]})
+    
     if already_liked is None:
-        mongo.db.recipes.update_one({"_id":ObjectId(recipe_id)}, {'$inc': {'likes': 1}})
-        users.update_one({"author":session['username']},{"$push":{"likes":recipe_id}})
+            mongo.db.recipes.update_one({"_id":ObjectId(recipe_id)}, {'$inc': {'likes': 1}})
+            users.update_one({"author":session['username']},{"$push":{"likes":recipe_id}})
     else:
-        flash("You have already liked this recipe!")
+      flash("You have already liked this recipe!")
 
     return render_template('view.html', 
-                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}), username = session['username'])
+                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}))
 
 #-----------Dislikes-----------#
 
