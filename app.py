@@ -1,6 +1,7 @@
 import os
+import math
 from flask import Flask, render_template, redirect, request, url_for, session, flash
-from flask_pymongo import PyMongo, DESCENDING
+from flask_pymongo import PyMongo, pymongo, DESCENDING
 from bson.objectid import ObjectId
 import bcrypt
 import logging
@@ -18,6 +19,80 @@ logging.basicConfig(level=logging.INFO)
 
 
 mongo = PyMongo(app)
+
+###---pagination and sorting----###
+PAGE_SIZE = 8
+KEY_PAGE_SIZE = 'page_size'
+KEY_PAGE_NUMBER = 'page_number'
+KEY_TOTAL = 'total'
+KEY_PAGE_COUNT = 'page_count'
+KEY_ENTITIES = 'items'
+KEY_NEXT = 'next_uri'
+KEY_PREV = 'prev_uri'
+KEY_WORD_FIND = 'word_find'
+KEY_ORDER_BY = 'order_by'
+KEY_ORDER = 'order'
+
+def get_paginated_list(entity, **params):
+    page_size = int(params.get(KEY_PAGE_SIZE, PAGE_SIZE))
+    page_number = int(params.get(KEY_PAGE_NUMBER, 1))
+    order_by = params.get(KEY_ORDER_BY, '_id')
+    order = params.get(KEY_ORDER, 'asc')
+    order = pymongo.ASCENDING if order == 'asc' else pymongo.DESCENDING
+    if page_number < 1:
+        page_number = 1
+    offset = (page_number - 1) * page_size
+    items = []
+    word_find = ''
+    if KEY_WORD_FIND in params:
+        word_find = params.get(KEY_WORD_FIND)
+        total_items = 0
+        if len(word_find.split()) > 0:
+            entity.create_index([("$**", 'text')])
+            result = entity.find({'$text': {'$search': word_find}})
+            total_items = result.count()
+            items = result.sort(order_by, order).skip(offset).limit(page_size)
+        else:
+            total_items = entity.count()
+            items = entity.find().sort(
+                order_by, order
+            ).skip(offset).limit(page_size)
+    else:
+        total_items = entity.count()
+        items = entity.find().sort(order_by, order).skip(
+            offset).limit(page_size)
+    if page_size > total_items:
+        page_size = total_items
+    if page_number < 1:
+        page_number = 1
+    if page_size:
+        page_count = math.ceil(total_items / page_size)
+    else:
+        page_count = 0
+    if page_number > page_count:
+        page_number = page_count
+        
+    next_uri = {
+        KEY_PAGE_SIZE: page_size,
+        KEY_PAGE_NUMBER: page_number + 1
+    } if page_number < page_count else None
+    prev_uri ={
+        KEY_PAGE_SIZE: page_size,
+        KEY_PAGE_NUMBER: page_number - 1
+    } if page_number > 1 else None
+
+    return {
+        KEY_TOTAL: total_items,
+        KEY_PAGE_SIZE: page_size,
+        KEY_PAGE_COUNT: page_count,
+        KEY_PAGE_NUMBER: page_number,
+        KEY_NEXT: next_uri,
+        KEY_PREV: prev_uri,
+        KEY_WORD_FIND: word_find,
+        KEY_ORDER_BY: order_by,
+        KEY_ORDER: order,
+        KEY_ENTITIES: items   
+    }
 
 @app.route('/')
 @app.route('/index')
@@ -61,10 +136,14 @@ def insert_recipe():
 #-------READ--------#
 
 @app.route("/get_recipes", methods=['GET'])
-def get_recipes():      
+def get_recipes():
+    
+    result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
+    print("Printing Rersult: " + str(result))
+    print(result)
     return render_template('recipes.html',
-                         recipes=mongo.db.recipes.find(),
-                         categories = mongo.db.categories.find())                          
+                             recipes=mongo.db.recipes.find(),
+                             result=result)                          
 
 @app.route('/view_recipe/recipe_id?=<recipe_id>')
 def view_recipe(recipe_id):
@@ -81,15 +160,33 @@ def search():
     word_find = request.form["word_find"]     
     mongo.db.recipes.create_index([("$**", 'text')])
     recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
+    result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
+    print(result)
     return render_template('recipes.html',
                             title="View recipes", 
                             recipes=recipes,
-                            username=session['username'], 
+                            result=result,
                             categories = mongo.db.categories.find(), 
                             cuisines=mongo.db.cuisines.find(), 
                             difficulty=mongo.db.difficulty.find(), 
                             allergens=mongo.db.allergens.find()) 
  
+   
+# @app.route('/search_box/', methods=["POST"])
+# def search_box():
+#     search_term = request.form['word_find']
+#     if search_term:
+#         return redirect(url_for('search_results', word_find=search_term))
+#     else:
+#         return render_template("recipes.html", recipes=mongo.db.recipes.find())
+
+# # Search results route
+# @app.route('/search_results', methods=["POST"])
+# def search_results():
+#     return redirect(url_for('get_recipes', 
+#                             recipes=mongo.db.recipes.find(),
+#                             word_find=request.form['word_find']))   
+   
                             
 @app.route('/get_starter', methods=['GET'])
 def get_starter():
@@ -293,7 +390,6 @@ def logout():
    # remove the username from the session if it is there
    session.pop('username', None)
    return redirect(url_for('index'))
-   
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
