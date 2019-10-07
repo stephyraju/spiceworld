@@ -218,6 +218,10 @@ p {
 }
 /*--------View Recipe---------*/
 
+.recipe-card .recipe-img{
+  padding-top:15px;
+}
+
 .icon-color {
   color: rgb(109, 174, 177);
 }
@@ -226,14 +230,36 @@ p {
   background-color: #fcf4ec;
 }
 
-.preparation ol li {
-  padding: 0px 15px 15px 15px;
-}
+/*.preparation ol li {*/
+/*  padding: 0px 15px 15px 15px;*/
+/*}*/
 
 .ingredients ul li {
-  padding: 0px 15px 15px 15px;
-  list-style-type: square;
+  padding: 0px 15px 15px 5px;
 }
+.square{
+  padding:5px;
+  color:rgb(109, 174, 177);
+}
+#preparation-list {
+    list-style: none;
+    counter-reset: preparation-counter;
+    padding: 0;
+}
+
+#preparation-list li {
+    counter-increment: preparation-counter;
+    padding: 1em 0;
+}
+#preparation-list>li::before {
+    content: "0"counter(preparation-counter);
+    color: rgb(109, 174, 177);
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-right: 0.25em;
+    line-height: 1;
+}
+
 .like-dis {
   display: inline-flex;
   align-items: center;
