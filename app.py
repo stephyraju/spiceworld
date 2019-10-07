@@ -158,7 +158,7 @@ def search():
     print(request.form)
     print(request.form.to_dict())
     word_find = request.form["word_find"]     
-    mongo.db.recipes.create_index([("$**", 'text')])
+    # mongo.db.recipes.create_index([("$**", 'text')])
     recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
     result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
     print(result)

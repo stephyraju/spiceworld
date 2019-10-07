@@ -92,46 +92,51 @@ h5 {
   font-size: 1.2rem;
   margin-top: 20px;
   height: 150px;
+  overflow-x: hidden;
+  width:100%;
 }
-
-.subnav-img {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  padding-top: 7px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 .category-container .menu-list {
   display: flex;
   justify-content: space-between;
 }
-
+.scroll{
+   overflow-x: scroll;
+}
 .category-container nav ul a {
   color: #2d2d2d;
   font-size: 1.1rem;
   font-family: 'Muli', 'sans-serif';
 }
 
-.menu-list {
-  overflow-y: scroll;
-}
-
-@media only screen and (min-width: 601px) {
-  .catergory-container nav,
-  nav .nav-wrapper i {
-    height: 164px;
-    line-height: 25px;
-  }
-}
-
 @media only screen and (min-width:320px) {
   .category-container nav,
   nav .nav-wrapper i{
-    height: 175px;
+    height: 150px;
     line-height: 25px;
   }
+  .subnav-img {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+}
+@media only screen and (min-width: 601px) {
+  .catergory-container nav,
+  nav .nav-wrapper i {
+    height: 170px;
+    line-height: 25px;
+  }
+  .subnav-img {
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  padding-top: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
 }
 /*-----carousel slider----- */
 
