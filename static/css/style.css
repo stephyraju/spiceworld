@@ -91,16 +91,16 @@ h5 {
 .category-container {
   font-size: 1.2rem;
   margin-top: 20px;
-  height: 150px;
-  overflow-x: hidden;
+  height: 170px;
+  overflow: hidden;
   width:100%;
 }
 .category-container .menu-list {
   display: flex;
   justify-content: space-between;
 }
-.scroll{
-   overflow-x: scroll;
+.scroll-tab{
+  overflow: auto;
 }
 .category-container nav ul a {
   color: #2d2d2d;
