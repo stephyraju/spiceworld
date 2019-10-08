@@ -120,10 +120,10 @@ def add_recipe():
  
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-    print(request.form)
-    print(request.form.getlist('ingredients[]'))
-    print(request.form.getlist('preparation[]'))
-    print(request.form.to_dict())
+    logging.info("Inserting Recipes")
+    logging.info("Ingredients: {}".format(request.form.getlist('ingredients[]')))
+    logging.info("Preparation: {}".format(request.form.getlist('preparation[]')))
+    logging.info(request.form.to_dict())
     recipes = mongo.db.recipes
     data = request.form.to_dict()
     data.update({'ingredients':request.form.getlist('ingredients[]')})
@@ -138,9 +138,10 @@ def insert_recipe():
 @app.route("/get_recipes", methods=['GET'])
 def get_recipes():
     
+    logging.info("Getting Recipes")
     result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
-    print("Printing Rersult: " + str(result))
-    print(result)
+    logging.info("Rersult: {}".format(result))
+
     return render_template('recipes.html',
                              recipes=mongo.db.recipes.find(),
                              result=result)                          
@@ -148,21 +149,27 @@ def get_recipes():
 @app.route('/view_recipe/recipe_id?=<recipe_id>')
 def view_recipe(recipe_id):
     
+    logging.info("Viewing Recipes")
     mongo.db.recipes.find_one_and_update({"_id": ObjectId(recipe_id)}, {"$inc": {"views": 1}})
     return render_template('view.html', 
-                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}))
+                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}),
+                            categories = mongo.db.categories.find(), 
+                            cuisines=mongo.db.cuisines.find(), 
+                            difficulty=mongo.db.difficulty.find(), 
+                            allergens=mongo.db.allergens.find())
                         
 #-----------Search-----------#
 
 @app.route('/search', methods=['POST'])
 def search(): 
-    print(request.form)
-    print(request.form.to_dict())
+    logging.info("Searching")
+    logging.info(request.form)
+    logging.info(request.form.to_dict())
     word_find = request.form["word_find"]     
     # mongo.db.recipes.create_index([("$**", 'text')])
     recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
     result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
-    print(result)
+    logging.info(result)
     return render_template('recipes.html',
                             title="View recipes", 
                             recipes=recipes,
@@ -243,9 +250,10 @@ def edit_recipe(recipe_id):
                             
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
-    print(mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)}))
-    print(request.form)
-    print(request.form.to_dict())
+    logging.info("Updating Recipe")
+    logging.info(mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)}))
+    logging.info(request.form)
+    logging.info(request.form.to_dict())
     recipes = mongo.db.recipes
     recipes.update({"_id":ObjectId(recipe_id)},
         {
@@ -267,6 +275,7 @@ def update_recipe(recipe_id):
 #-----------DELETE-----------#
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
+    logging.info("Deleting Recipe with Id: {}".format(recipe_id))
     mongo.db.recipes.remove({"_id":ObjectId(recipe_id)})
     return redirect(url_for('get_recipes'))
 
@@ -324,18 +333,18 @@ def login():
 def account(account_name):
     logging.info("Account Name is: '{}'".format(account_name))
     if account_name != session.get('username'):
-        logging.info("User is not allowed to access page")
+        logging.info("User {} is not allowed to access page".format(session.get('username')))
         flash("You can only access your own account page.")
         return redirect(url_for('index'))
         
-    logging.info("User is authorized to access page")
+    logging.info("User {} is authorized to access page".format(session.get('username')))
     #users = mongo.db.users
     #users = mongo.db.users.find_one({"username": account_name})
     recipes_submitted_by_user = mongo.db.recipes.find(
         {"author": account_name})              
-    logging.info("Recipes submitted by user: " + str(recipes_submitted_by_user))
+    logging.info("Recipes submitted by user: {}".format(str(recipes_submitted_by_user)))
     total_recipes_by_user = recipes_submitted_by_user.count() 
-    logging.info("Total recipes by user: " + str(total_recipes_by_user))
+    logging.info("Total recipes by user: {}".format(str(total_recipes_by_user)))
     logging.info(recipes_submitted_by_user)
     
     return render_template('account.html', 
@@ -395,4 +404,4 @@ def logout():
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=False)
+            debug=True)
