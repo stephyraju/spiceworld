@@ -252,7 +252,7 @@ p {
     padding: 1em 0;
 }
 #preparation-list>li::before {
-    content: "0"counter(preparation-counter);
+    content:counter(preparation-counter);
     color: rgb(109, 174, 177);
     font-weight: bold;
     font-size: 1.5em;

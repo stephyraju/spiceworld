@@ -153,6 +153,7 @@ def view_recipe(recipe_id):
                             recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}))
                         
 #-----------Search-----------#
+
 @app.route('/search', methods=['POST'])
 def search(): 
     print(request.form)
@@ -394,4 +395,4 @@ def logout():
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)
