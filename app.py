@@ -33,7 +33,7 @@ KEY_WORD_FIND = 'word_find'
 KEY_ORDER_BY = 'order_by'
 KEY_ORDER = 'order'
 
-def get_paginated_list(entity, **params):
+def get_paginated_list(entity, query={}, **params):
     page_size = int(params.get(KEY_PAGE_SIZE, PAGE_SIZE))
     page_number = int(params.get(KEY_PAGE_NUMBER, 1))
     order_by = params.get(KEY_ORDER_BY, '_id')
@@ -59,7 +59,7 @@ def get_paginated_list(entity, **params):
             ).skip(offset).limit(page_size)
     else:
         total_items = entity.count()
-        items = entity.find().sort(order_by, order).skip(
+        items = entity.find(query).sort(order_by, order).skip(
             offset).limit(page_size)
     if page_size > total_items:
         page_size = total_items
@@ -139,12 +139,14 @@ def insert_recipe():
 def get_recipes():
     
     logging.info("Getting Recipes")
-    result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
-    logging.info("Rersult: {}".format(result))
+    # recipes = list(mongo.db.recipes.find().sort("views",DESCENDING))
+    logging.info(request.args.to_dict())
+    recipes = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
+    logging.info("Rersult: {}".format(recipes))
 
     return render_template('recipes.html',
-                             recipes=mongo.db.recipes.find(),
-                             result=result)                          
+                             recipes=recipes,
+                             result=recipes)                          
 
 @app.route('/view_recipe/recipe_id?=<recipe_id>')
 def view_recipe(recipe_id):
@@ -198,7 +200,8 @@ def search():
                             
 @app.route('/get_starter', methods=['GET'])
 def get_starter():
-    return render_template('recipes.html', title='Starters', recipes=mongo.db.recipes.find({'category_name': 'Starter'}))                           
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Starter'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Starters', recipes=recipes, result=recipes)                           
 
 @app.route('/get_breakfast', methods=['GET'])
 def get_breakfast():
@@ -241,6 +244,8 @@ def get_drinks():
 @app.route('/edit_recipe/<recipe_id>',methods=['GET'])
 def edit_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
+    print(mongo.db.allergens.find())
+    print(recipe)
     return render_template('editrecipe.html', 
                             recipe=recipe,
                             categories=mongo.db.categories.find(), 
