@@ -205,39 +205,48 @@ def get_starter():
 
 @app.route('/get_breakfast', methods=['GET'])
 def get_breakfast():
-    return render_template('recipes.html', title='Desserts', recipes=mongo.db.recipes.find({'category_name': 'Breakfast'})) 
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Breakfast'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Desserts', recipes=recipes, result=recipes) 
 
 @app.route('/get_main', methods=['GET'])
 def get_main():
-    return render_template('recipes.html', title='Main course', recipes=mongo.db.recipes.find({'category_name': 'Main Course'}))                            
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Main Course'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Main course', recipes=recipes, result=recipes)                            
 
 @app.route('/get_dessert', methods=['GET'])
 def get_dessert():
-    return render_template('recipes.html', title='Desserts', recipes=mongo.db.recipes.find({'category_name': 'Dessert'}))   
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Dessert'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Desserts', recipes=recipes, result=recipes)   
     
 @app.route('/get_snacks', methods=['GET'])
 def get_snacks():
-    return render_template('recipes.html', title='Snacks', recipes=mongo.db.recipes.find({'category_name': 'Snacks'})) 
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Snacks'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Snacks', recipes=recipes, result=recipes) 
     
 @app.route('/get_cakes', methods=['GET'])
 def get_cakes():
-    return render_template('recipes.html', title='Cakes', recipes=mongo.db.recipes.find({'category_name': 'Cakes'})) 
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Cakes'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Cakes', recipes=recipes, result=recipes) 
     
 @app.route('/get_bbq', methods=['GET'])
 def get_bbq():
-    return render_template('recipes.html', title='BBQ', recipes=mongo.db.recipes.find({'category_name': 'BBQ'})) 
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'BBQ'}, **request.args.to_dict())
+    return render_template('recipes.html', title='BBQ', recipes=recipes, result=recipes) 
 
 @app.route('/get_vegan', methods=['GET'])
 def get_vegan():
-    return render_template('recipes.html', title='Vegan', recipes=mongo.db.recipes.find({'category_name': 'Vegan'})) 
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Vegan'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Vegan', recipes=recipes, result=recipes ) 
     
 @app.route('/get_instant', methods=['GET'])
 def get_instant():
-    return render_template('recipes.html', title='Instant Pot', recipes=mongo.db.recipes.find({'category_name': 'Instant Recipe'})) 
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Instant Recipe'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Instant Pot',  recipes=recipes, result=recipes) 
 
 @app.route('/get_drinks', methods=['GET'])
 def get_drinks():
-    return render_template('recipes.html', title='Drinks', recipes=mongo.db.recipes.find({'category_name': 'Drinks'})) 
+    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Drinks'}, **request.args.to_dict())
+    return render_template('recipes.html', title='Drinks', recipes=recipes, result=recipes) 
         
 #-----------UPDATE-----------#
 
