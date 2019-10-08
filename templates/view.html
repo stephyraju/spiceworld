@@ -68,11 +68,11 @@
                     <div class="col s11 offset-s1 recipe-description">
                         <p><span class="">{{ recipe.description }}</span></p>
                     </div>
-                   
+                   {% if recipe.allergens %}
                     <div class="col s11 offset-s1">
                         <p><i class="fas fa-exclamation-circle red-text"></i> Contains: <span class="">{{ recipe.allergens }}</span></p>
                     </div>
-                   
+                   {% endif %}
                 </div>
             </div>
         </div>
