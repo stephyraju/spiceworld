@@ -101,11 +101,6 @@ def index():
     recipes = list(mongo.db.recipes.find().sort("views",DESCENDING))
     return render_template("index.html", recipes = recipes )
      
-#@app.route('/get_recipes',methods=['POST','GET'])
-#def get_recipes():
- #   return render_template("recipes.html", recipes=mongo.db.recipes.find()) 
-
-
 # -------CREATE---------#
      
 @app.route('/add_recipe')
@@ -142,7 +137,7 @@ def get_recipes():
     # recipes = list(mongo.db.recipes.find().sort("views",DESCENDING))
     logging.info(request.args.to_dict())
     recipes = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
-    logging.info("Rersult: {}".format(recipes))
+    logging.info("Result: {}".format(recipes))
 
     return render_template('recipes.html',
                              recipes=recipes,
@@ -164,40 +159,41 @@ def view_recipe(recipe_id):
 
 @app.route('/search', methods=['POST'])
 def search(): 
-    logging.info("Searching")
-    logging.info(request.form)
-    logging.info(request.form.to_dict())
+    print(request.form)
+    print(request.form.to_dict())
     word_find = request.form["word_find"]     
-    # mongo.db.recipes.create_index([("$**", 'text')])
+    mongo.db.recipes.create_index([("$**", 'text')])
     recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
     result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
-    logging.info(result)
-    return render_template('recipes.html',
+    print(result)
+    return render_template('search.html',
                             title="View recipes", 
                             recipes=recipes,
                             result=result,
                             categories = mongo.db.categories.find(), 
                             cuisines=mongo.db.cuisines.find(), 
                             difficulty=mongo.db.difficulty.find(), 
-                            allergens=mongo.db.allergens.find()) 
- 
-   
-# @app.route('/search_box/', methods=["POST"])
-# def search_box():
-#     search_term = request.form['word_find']
-#     if search_term:
-#         return redirect(url_for('search_results', word_find=search_term))
-#     else:
-#         return render_template("recipes.html", recipes=mongo.db.recipes.find())
-
-# # Search results route
-# @app.route('/search_results', methods=["POST"])
-# def search_results():
-#     return redirect(url_for('get_recipes', 
-#                             recipes=mongo.db.recipes.find(),
-#                             word_find=request.form['word_find']))   
-   
+                            allergens=mongo.db.allergens.find())
                             
+# @app.route('/search', methods=['POST'])
+# def search(): 
+#     logging.info("Searching")
+#     logging.info(request.form)
+#     logging.info(request.form.to_dict())
+#     word_find = request.form["word_find"]     
+#     mongo.db.recipes.create_index([("$**", 'text')])
+#     recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
+#     # results = get_paginated_list(mongo.db.recipes, query={'$text':{'$search':'word_find'}}, **request.args.to_dict())
+#     logging.info(recipes)
+#     return render_template('search.html',
+#                             title="View recipes", 
+#                             recipes=recipes,
+#                             # result=recipes,
+#                             categories = mongo.db.categories.find(), 
+#                             cuisines=mongo.db.cuisines.find(), 
+#                             difficulty=mongo.db.difficulty.find(), 
+#                             allergens=mongo.db.allergens.find()) 
+ 
 @app.route('/get_starter', methods=['GET'])
 def get_starter():
     recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Starter'}, **request.args.to_dict())
