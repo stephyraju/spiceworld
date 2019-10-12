@@ -106,16 +106,14 @@
                     <div class="col s6 l4">
                         <div class="input-field">
                             <i class="fas fa-exclamation-triangle material-icon prefix"></i>
-                            <select id="allergens" name="allergens" multiple>
+                            <select id="allergens" name="allergens" class="validate" multiple>
                                 <option value="" disabled selected>Allergens</option> 
-                                {% if recipe.allergen %}
-                                    {% set recipe_allergens = recipe.allergens.split(',') %}
-                                {% endif %}
-                                {% for allergen in allergens %}
-                                    {% if recipe_allergens and allergen in recipe_allergens %}
-                                    <option value="{{ allergen.allergen }}" selected>{{ allergen.allergen }}</option>
+                                
+                                {% for allergens in allergens %}
+                                    {% if allergens.allergens in recipe.allergens %}
+                                    <option value="{{ allergens.allergens }}" selected>{{ allergens.allergens }}</option>
                                     {% else %}
-                                    <option value="{{ allergen.allergen }}">{{ allergen.allergen }}</option>
+                                    <option value="{{ allergens.allergens }}">{{ allergens.allergens }}</option>
                                     {% endif %}
                                 {% endfor %}
                             </select>

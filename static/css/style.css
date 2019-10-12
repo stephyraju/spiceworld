@@ -176,7 +176,7 @@ h5 {
   font-family: 'Courgette', sans-serif;
 }
 
-p {
+.cells p {
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -270,7 +270,22 @@ p {
   padding-left: .5px;
   padding-top:10px;
 }
-
+.oneline p, .allergen {
+  display: inline-block;
+  }
+#list-inline {
+  display: inline;
+  list-style: none;
+}
+#list-inline li {
+  display: inline;
+}
+#list-inline li:after {
+  content: ", ";
+}
+#list-inline li:last-child:after {
+    content: "";
+}
 
 /*--------Footer---------*/
 
@@ -299,9 +314,4 @@ p {
   margin: 10px;
   color: white;
   font-size: 1.7rem;
-}
-.pagination {
-    text-align: center;
-    margin-top: 20px;
-    float: right;
 }

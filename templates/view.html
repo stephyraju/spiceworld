@@ -29,7 +29,7 @@
 
             <div class="col s12 l8 left-align">
                 <div class="recipe-header center-align">
-                    <h4>{{recipe.recipe_name}}</h4>
+                    <h4 style="text-transform:capitalize;">{{recipe.recipe_name}}</h4>
                 </div>
                 <div class="row">
                     <div class="col s10 offset-s2 m5 offset-m1 author">
@@ -69,8 +69,15 @@
                         <p><span class="">{{ recipe.description }}</span></p>
                     </div>
                    {% if recipe.allergens %}
-                    <div class="col s11 offset-s1">
-                        <p><i class="fas fa-exclamation-circle red-text"></i> Contains: <span class="">{{ recipe.allergens }}</span></p>
+                    <div class="col s11 offset-s1 oneline">
+                        <p><i class="fas fa-exclamation-circle red-text"></i> Contains:</p>
+                        <ul id="list-inline" class="allergen">
+                            {% for allergens in recipe.allergens %}
+                            <li>
+                                {{ allergens }}
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                    {% endif %}
                 </div>

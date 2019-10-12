@@ -194,6 +194,7 @@ def search():
 #                             difficulty=mongo.db.difficulty.find(), 
 #                             allergens=mongo.db.allergens.find()) 
  
+
 @app.route('/get_starter', methods=['GET'])
 def get_starter():
     recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Starter'}, **request.args.to_dict())
@@ -248,11 +249,14 @@ def get_drinks():
 
 @app.route('/edit_recipe/<recipe_id>',methods=['GET'])
 def edit_recipe(recipe_id):
+    
     recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
+    list_allergens = '\n'.join(recipe['allergens'])
     print(mongo.db.allergens.find())
     print(recipe)
     return render_template('editrecipe.html', 
                             recipe=recipe,
+                            list_allergens=list_allergens,
                             categories=mongo.db.categories.find(), 
                             cuisines=mongo.db.cuisines.find(), 
                             difficulty=mongo.db.difficulty.find(), 
@@ -275,7 +279,7 @@ def update_recipe(recipe_id):
         'cooking_time':request.form.get('cooking_time'),
         'cuisine':request.form.get('cuisine'),
         'difficulty':request.form.get('difficulty'),
-        'allergens':request.form.get('allergens'), 
+        'allergens':request.form.getlist('allergens'), 
         'image_url' :request.form.get('image_url'),
         'ingredients':request.form.getlist('ingredients[]'),
         'preparation':request.form.getlist('preparation[]')
