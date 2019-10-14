@@ -1,10 +1,12 @@
 
+<p align="center">
+  <img alt="spiceworld" src="https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/logoimg.png">
+</p>
 
-![alt spiceworld](https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/logoimg.png)
-
-![alt spiceworld width="800" style= "max-width:100%;"](https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/mockups.png)
+![alt spiceworld](https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/mockups.png)
 
 ## Spiceworld -A Recipe App
+
 Python & Flask - Data Centric Development - Milestone Project 3
 
 'spiceworld' is a recipe app built on the Flask framework using MongoDB database. 
@@ -13,10 +15,11 @@ The purpose of this project is to "Create a web application that allows users to
 The deployed site can be found at [spiceword-cookbook.](https://spiceworld-cookbook.herokuapp.com/)
 
 ## UX
-This is the milestone project that I have created for the “Data Centric Development” module, which is part of “Full Stack Web Development Course” offered by Code Institute.
-I've decided to make a recipe app to allow users to add  and store their recipes.
 
-#### User Stories
+This is the milestone project that I have created for the “Data Centric Development” module, which is part of “Full Stack Web Development Course” offered by Code Institute.
+I've decided to make a recipe app to allow users to add and store their recipes.
+
+### User Stories
 
 As a user, I want to be able to:
 
@@ -24,7 +27,7 @@ As a user, I want to be able to:
 * see recipes from other users to get new ideas.
 * easily navigate through the recipes by various main filters.
 * view all recipes as a Guest.
-* vote like/dislike for recipes added by other users
+* vote like/dislike for recipes added by other users.
 * search any specific recipe.
 * search recipes by different category.
 * Login and add my recipes.[Creatre]
@@ -33,7 +36,7 @@ As a user, I want to be able to:
 * Edit the recipes I've added.[Edit]
 * Delete the recipes I've submitted.[Delete]
 
-#### Design
+### Design
 
 ##### Framework
 
@@ -53,7 +56,7 @@ As a user, I want to be able to:
 
 For the database,I choose MongoDB and this was a great oppertunity to get experience using NoSQL database MongoDB.
 
-See the database schema [here](https://github.com/stephyraju/spiceworld/tree/master/documentation/schema)
+See the database schema [here](https://github.com/stephyraju/spiceworld/blob/master/documentation/schema/schema.png)
 
 The database is made up of the following collections
 
@@ -113,26 +116,144 @@ The database is made up of the following collections
 
 ##### Color Scheme
 
-For the color scheme,I've used light orange shad
+For the color scheme, I've used gray and black in the navbar and most pages. I chose green and red for some buttons and headings to highlight.
+Overall, I tried to keep a simple classic look. [Materialize colors](https://materializecss.com/color.html) was a good choice for this project.
 
 ##### Typography
 
+The following fonts were used:
+
+* **Courgette** was used for the navigation elements.
+* **Muli** was used for headings.
+* **ProximaNova Regular** was used for the general text.
+
 ##### Icon
 
-Materialize icons has been used for this project.
+[Materialize icons](https://materializecss.com/icons.html) has been used for this project.
 
-#### Wireframes
+### Wireframes
 
 Mock-ups were created early on in this project.
+
 I've used [Balsamiq Wireframes](https://balsamiq.com/) during the Scope Plane part of the design and planning process for this project.
 
 All of my wireframes for this project can be found [here](https://github.com/stephyraju/spiceworld/tree/master/documentation/wireframe)
 
-#### Features
+### Features
+
 ##### Existing Features
+
+* **Navigation bar**
+   
+    The navigation bar features the spiceworld logo in the top left corner.
+        
+    * For visitors to the site who are not logged in, list items links are available for them to use.
+    
+      a.Home
+
+      b.Recipes
+      
+      c.Register
+      
+      d.Login
+      
+   * For users who are logged in, the list items are as follows:
+     
+      a.Home
+      
+      b.Recipes
+      
+      c.Add Recipes
+     
+      d.My Account
+      
+      e.Logout
+
+   * The navbar is collapsed into a burger icon on small and medium screens.The options remain the same, but they are instead accessed using a side navigation element which can be accessed through 'burger' icon at the top left. 
+   
+* **Footer**
+
+   The footer has copyright information and social media links.
+
+* **Carousels**
+
+   The materialize carousal shows all the recipes available in the app by moving sideways. The recipes in the carousel will be sorted by the number of views and likes, with the recipe with most viewed at the top of the carousel.User can go to recipe view page by clicking on the carousal image. 
+
+* **Description**
+
+   A brief description is available to explain how this app works.
+
+* **Register User**
+
+   Users can use the site as a guest, but some features are not available unless logged in.I have built-in authentication and authorization to check certain criteria is met before an account is validated. All passwords are hashed for security purposes!
+  
+   When a user registers,they are automatically logged in and redirected to the home page.
+
+* **Log In to Account**
+  
+   The login page has an input form like register form where the users will enter their username and password.
+    
+   Flash message If the username is not registered or if the password is incorrect an error message will appear.
+
+   New users can click on the link "Register here" to get redirected to the register page.
+
+
+* **Log Out of Account**
+ 
+   Users can easily log out of their account with the click of a button.
+
+* **View All Recipes**
+
+   On the recipes page, all recipes are  displayed, with a standard 8-items per page using pagination.
+   
+* **Search recipe**
+
+  If a user would like to search for something specific with the name, they have a search button on the all recipe page.
+
+* **Add a Recipe**
+
+  [**C**RUD] **C**reate or 'add' a new recipe.
+  
+  Logged in users can add their recipes. For selective fields,user can select the options from drop down. All the fields of the form is well explained with the 'placeholder' to make it easy for the user.
+
+* **View Recipe**
+
+  [C**R**UD] **R**ead or 'review' recipes, either from the home page, or the user recipes page. 
+  
+  The logged in user can like or dislike the recipe one time.
+  If the user viewing is the user who submitted, they will have additional options edit and delete. 
+  Delete button allow the user to completely remove the recipe from the database.
+
+* **Update Recipe**
+
+  [CR**U**D] **U**pdate or 'edit' their own user recipes on this page.
+  
+  The edit recipe form is identical in layout to the add recipe form, and very similar in functionality.
+  User can either save or cancel the changes by clicking the appropriate buttons.
+  
+* **Delete Recipe**
+
+  [CRU**D**] **D**elete or 'remove' a user's own recipes.
+  
+  If the user clicks the delete button, a popup modal will appear asking for confirmation. If the user still choose to delete, the recipe will be permanently deleted.
+  
+* **My Account Page**
+ 
+   Each user has their own account page, there they can view all the recipes they have added and can go for edit recipe from there aswell.
+
+* **Flashed Messages**
+ 
+   The app uses the flask flash method to communicate important events to the user and make it userfriendly.
+
+
 ##### Features Left to Implement
 
-#### Technologies Used
+* Search: Search button with more filters.
+* Favourites: Adding favourate recipe to user account page would be more convienent for the user.
+* Admin account: To make managing the site easier, an admin panel will need to be added.
+* Pagination: 
+
+### Technologies Used
 
 ##### Languages
 
@@ -146,43 +267,114 @@ All of my wireframes for this project can be found [here](https://github.com/ste
 
 ##### Libraries
 
-* **[Google Fonts]()** provided the fonts used throughout the project
+* **[Google Fonts](https://fonts.google.com/)** provided the fonts used throughout the project
 
-* **[Font Awesome]()** v5.8.2 to provide the icon set
+* **[Font Awesome](https://fontawesome.com/)** v5.8.2 to provide the icon set
 
-* **[Materialize]()** v1.0.0 used as the CSS framework for the project
+* **[Materialize](https://materializecss.com/)** v1.0.0 used as the CSS framework for the project
 
-* **[jQuery]()** used as the primary JavaScript functionality.
+* **[jQuery](https://jquery.com/)** used as the primary JavaScript functionality.
 
-* **[Flask]()** v1.0.2 is the micro web framework that runs the application
+* **[Flask](https://flask.palletsprojects.com/en/1.1.x/)** v1.0.2 is the micro web framework that runs the application
 
-* **[Jinja]()** v2.10.1 is the default templating language for flask and is used to display data from the python application in the frontend html pages
+* **[Jinja](https://jinja.palletsprojects.com/en/2.10.x/)** v2.10.1 is the default templating language for flask and is used to display data from the python application in the frontend html pages
 
-* **[PyMongo]()** 2.3.0 was used to enable the python application to access the Mongo database
+* **[PyMongo](https://flask-pymongo.readthedocs.io/en/latest/)** 2.3.0 was used to enable the python application to access the Mongo database
 
 ##### Tools
 
-* **[AWS Cloud9]()** is the IDE used to put all this together
+* **[AWS Cloud9](https://aws.amazon.com/console/)** is the IDE used to put all this together
 
-* **[MongoDB Atlas]()** is used to store my database in the 'cloud'.
+* **[MongoDB Atlas](https://www.mongodb.com/cloud/atlas)** is used to store my database in the 'cloud'.
 
-* **[Git]()** is used for version control
+* **[Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03)** is used for version control
 
-* **[GitHub]()** provides hosting for software development version control using Git
+* **[GitHub](https://github.com/)** provides hosting for software development version control using Git
 
-* **[Balsamiq]()** was used to create the wireframes when initially planning this project
+* **[Balsamiq](https://balsamiq.com/)** was used to create the wireframes when initially planning this project
+
+* **[Am I Responsive](http://ami.responsivedesign.is/)** to create the images in this readme file.
 
 ##### Hosting
 
   **[Heroku]()** is used to host the app
   
-#### Testing
+### Testing
+
+Most of the testing was manual testing during the development of the site with additional testing completed at the end, before this write up.
+
+Friends and family have also tested by creating accounts and using the site on their own devices. They have tested how the page displays, registered their own accounts, added their recipes, edited and deleted.
+
+To test the site yourself, you can
+
+Browse as a guest, but with limited functionality.
+
+Create your own user. Do not use a password you use elsewhere as the passwords are not secure.
+
+Use an existing user to see how the app handles user recipes 
+
+You can do this with:
+Username: ooooo
+Password: uuuuu
+
+If testing with user 'tttt', please don't deleting any recipes. To test this aspect of the site, you can create and delete submissions with users you create yourself.
+
+#### Validation Services
+
+The following validation services were used to check the validity of the website code.
+
+
+* [W3C Markup Validation](https://validator.w3.org/) was used to validate **HTML**.
+
+  Unfortunately the W3C Validator for HTML does not understand the Jinja templating syntax, so it therefore shows a lot of errors with regards to {{ variables }}, {% for %} {% endfor %}, etc. Aside from the Jinja warnings and errors, all of the remaining code is perfectly validating. Also due to the Jinja templating, certain elements cannot be 'beautified' across multiple lines, and must remain on a single line.
+  
+* [W3C CSS validation](https://jigsaw.w3.org/css-validator/) was used to validate **CSS**.
+
+* [JSHint](https://jshint.com/) was used to validate JavaScript.
+   
+   The JS file was run through jshint.com and outside of numerous instances of $ being undefined due to using jQuery, there were no errors.
+
+#### Responsiveness 
+
+Chrome DevTools and physical devices were used throughout development for a number of purposes, one of which was to test the responsiveness and rendering across a range of sizes and devices. As issues were found they were either fixed at the time or noted and returned to later.
+
+The site has been tested successfully on 
+  
+   * Apple Macbook Air - Safari browser
+   * Apple iPhone 6,7 &8S - Safari Browser
+   * iPad Mini - Safari Browser
+   * 
+
+
+#### Features Testing
+ 
+ * **Creating an Account**
+ 
+ I've created my own account, and 15 other accounts to confirm authentication and validation for creatiing account and all worked as expected.
+
+* **Add | View | Edit | Delete a Recipe**
+ 
+I've created 20 test recipes in order to preparare for the pagination using different accounts I created for testing.
+The data validation in the add recipe form is solid and only accepts input in the correct format.
+
+I've edited several recipe's  recipe description, adding ingredients or changing preparation methods, to test the functionality of updating a recipe to the database. 
+The data validation is the same as Add Recipe and works as it should.
+
+Tested edit and delete button were available for the owner of the recipes, and disabled for others.
+
+I deleted some recipes to test the delete functionality.When the delete button is pressed, a pop-up modal asks to confirm deletion. If a user selects cancel, they are taken back and I've confirmed the recipe isn't deleted.
+
+I've confirmed the recipes are deleted by searching and also in database directly.
+
+#### Pagination
 
 
 
 
 
-#### Deployment
+
+
+### Deployment
 
 ##### Deployment To Heroku
 
