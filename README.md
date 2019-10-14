@@ -5,7 +5,7 @@ Python & Flask - Data Centric Development - Milestone Project 3
 'spiceworld' is a recipe app built on the Flask framework using MongoDB database. 
 The purpose of this project is to "Create a web application that allows users to store and easily access cooking recipes", using the CRUD operations of Create, Read, Update, and Delete for their recipes.
 
-The deployed site can be found at [cookbook.](https://www.google.com)
+The deployed site can be found at [spiceword-cookbook.](https://spiceworld-cookbook.herokuapp.com/)
 
 ## UX
 This is the milestone project that I have created for the “Data Centric Development” module, which is part of “Full Stack Web Development Course” offered by Code Institute.
@@ -86,7 +86,7 @@ The database is made up of the following collections
       ingredients: <string>
       serves: <string>
       difficulty: <string>
-      allergens:<string>
+      allergens:<array>
       cuisine:<string>
       author: <string>
       image_url: <string>
@@ -114,9 +114,9 @@ Materialize icons has been used for this project.
 
 #### Wireframes
 
-Mock-ups were created early on in this project, using pencil and paper.
+Mock-ups were created early on in this project.
 I've used [Balsamiq Wireframes](https://balsamiq.com/) during the Scope Plane part of the design and planning process for this project.
-
+All of my wireframes for this project can be found here
 #### Features
 ##### Existing Features
 ##### Features Left to Implement
