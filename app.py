@@ -333,7 +333,7 @@ def login():
         if user_login:
             if bcrypt.hashpw(request.form['password'].encode('utf-8'), user_login['password']) == user_login['password']:
                 # session["username"] = request.form["username"].lower()
-                return redirect(url_for('get_recipes'))
+                return redirect(url_for('index'))
         
         flash('The login details are not correct')
         session.pop('username', None)
