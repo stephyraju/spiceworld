@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Author:</strong></h6>
-                    <input placeholder="Your Name" id="author" name="author" type="text" class="validate" required="">
+                    <input placeholder="Your Name (lowercase)" id="author" name="author" type="text" class="validate" required="">
                 </div>
             </div>
             <!-- recipe name -->
@@ -23,20 +23,20 @@
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Description:</strong></h6>
-                    <textarea id="recipe_description" placeholder="Whats your Recipe?" name="description" class="materialize-textarea" required></textarea>
+                    <textarea id="recipe_description" placeholder="Description of your Recipe" name="description" class="materialize-textarea" required></textarea>
                 </div>
             </div>
             <!-- Category -->
             <div class="row">
                 <div class="col m10 offset-m1">
                     <!-- Category -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-utensils material-icons prefix"></i>
                             <select id="category" name="category_name" class="validate" required>
                            <option value="" disabled selected>Category</option>
                             {% for cat in categories %}
-                           <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                           <option value="{{cat.category_name}}">{{ cat.category_name }}</option>
                            {% endfor %}
                            </select>
                             <label>Category</label>
@@ -44,20 +44,20 @@
                     </div>
 
                     <!-- Cuisine -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-globe-asia material-icon prefix"></i>
                             <select id="cuisine" name="cuisine" class="validate" required>
                            <option value="" disabled selected>Cuisine</option>
                            {% for cuisine in cuisines %}
-                                    <option value="{{cuisine.cuisine}}">{{cuisine.cuisine}}</option>
+                                    <option value="{{cuisine.cuisine}}">{{ cuisine.cuisine }}</option>
                                 {% endfor %}
                            </select>
                             <label>Cuisine</label>
                         </div>
                     </div>
                     <!-- Cooking Time -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-clock material-icons prefix"></i>
                             <input id="cooking_time" name="cooking_time" type="number" placeholder="Time in minutes" class="validate" min="1" required="">
@@ -69,34 +69,34 @@
             <div class="row">
                 <div class="col m10 offset-m1">
                     <!-- Difficulty -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-signal material-icons prefix"></i>
                             <select id="difficulty" name="difficulty" class="validate">
                            <option value="" disabled selected>Difficulty</option>
                                 {% for level in difficulty%}
-                                    <option value="{{level.difficulty}}">{{level.difficulty}}</option>
+                                    <option value="{{level.difficulty}}">{{ level.difficulty }}</option>
                                 {% endfor %}
                            </select>
                             <label>Difficulty</label>
                         </div>
                     </div>
                     <!-- Serves -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-users material-icons prefix"></i>
-                            <input id="serves" name="serves" type="number" class="validate" min="1" required="">
+                            <input id="serves" name="serves" type="number" placeholder="Serves-Number" class="validate" min="1" required="">
                             <label>Serves</label>
                         </div>
                     </div>
                     <!-- Allergens -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-exclamation-triangle material-icon prefix"></i>
                             <select id="allergens" name="allergens" class="validate" multiple>
                            <option value="" disabled selected>Possible Allergens</option>
-                            {% for allergen in allergens %}
-                            <option class="allergens" value="{{allergen.allergen}}">{{allergen.allergen}}</option>
+                            {% for allergens in allergens %}
+                            <option class="allergens" value="{{ allergens.allergens }}">{{ allergens.allergens }}</option>
                             {% endfor %}
                            </select>
                             <label>Allergens</label>
@@ -125,7 +125,7 @@
 
                             <div class="addIngredient new-ingredient ingredient">
                                 <div class="input-field whites-4">
-                                    <input id="ingredients" type="text" placeholder="Tomato -500grms"
+                                    <input id="ingredients" type="text" placeholder="1 tomato, chopped"
                                     name="ingredients[]" class="ingredients validate" minlength="1" maxlength="100" required>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                             <!-- add button -->
                             <a id="add_ingredient" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
                             <!-- Remove button -->
-                            <a id="remove_ingredient" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                            <a id="remove_ingredient" class="btn waves-effect waves-light red lighten-2"><i class="fas fa-minus"></i></a>
                         </div>
                     </div>
                 </div>
@@ -147,14 +147,14 @@
                             
                             <div class="addpreparation preparation new-step">
                                 <div class="input-field whites-4">
-                                    <input id="preparation" type="text" placeholder="Preparation Method" 
+                                    <input id="preparation" type="text" placeholder="List preparation method one per line" 
                                     name="preparation[]"  class= "preparation validate" minlength="3" maxlength="600"></textarea>
                                 </div>
                             </div>
                             <!-- add button -->
                             <a id="add_step" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
-                           <!-- removebutton -->
-                            <a id="remove_step" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                           <!-- remove button -->
+                            <a id="remove_step" class="btn waves-effect waves-light red lighten-2"><i class="fas fa-minus"></i></a>
                         </div>
                     </div>
                 </div>
