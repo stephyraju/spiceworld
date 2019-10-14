@@ -48,6 +48,8 @@ As a user, I want to be able to:
 
 For the database,I choose MongoDB and this was a great oppertunity to get experience using NoSQL database MongoDB.
 
+See the database schema [here](https://github.com/stephyraju/spiceworld/tree/master/documentation/schema)
+
 The database is made up of the following collections
 
 **categories**
@@ -106,6 +108,8 @@ The database is made up of the following collections
 
 ##### Color Scheme
 
+For the color scheme,I've used light orange shad
+
 ##### Typography
 
 ##### Icon
@@ -116,7 +120,9 @@ Materialize icons has been used for this project.
 
 Mock-ups were created early on in this project.
 I've used [Balsamiq Wireframes](https://balsamiq.com/) during the Scope Plane part of the design and planning process for this project.
-All of my wireframes for this project can be found here
+
+All of my wireframes for this project can be found [here](https://github.com/stephyraju/spiceworld/tree/master/documentation/wireframe)
+
 #### Features
 ##### Existing Features
 ##### Features Left to Implement
