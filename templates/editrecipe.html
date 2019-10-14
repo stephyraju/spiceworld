@@ -9,37 +9,37 @@
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Author:</strong></h6>
-                    <input placeholder="Your Name" id="author" name="author" type="text" class="validate" value="{{recipe.author}}" required="">
+                    <input placeholder="Your Name" id="author" name="author" type="text" class="validate" value="{{ recipe.author }}" required="">
                 </div>
             </div>
             <!-- recipe name -->
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Recipe Name:</strong></h6>
-                    <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.recipe_name}}" minlength="3" maxlength="30" data-length="30" placeholder="Recipe Name" required="">
+                    <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{ recipe.recipe_name }}" minlength="3" maxlength="30" data-length="30" placeholder="Recipe Name" required="">
                 </div>
             </div>
             <!-- Description -->
             <div class="row">
                 <div class="input-field col s10 offset-s1">
                     <h6><strong>Description:</strong></h6>
-                    <textarea id="description" placeholder="Whats your Recipe?" name="description" class="materialize-textarea" inlength="20" maxlength="500" data-length="500" required>{{ recipe.description }}</textarea>
+                    <textarea id="description" placeholder="Description of your Recipe" name="description" class="materialize-textarea" inlength="20" maxlength="500" data-length="500" required>{{ recipe.description }}</textarea>
                 </div>
             </div>
             <!-- Category -->
             <div class="row">
                 <div class="col m10 offset-m1">
                     <!-- Category -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-utensils material-icons prefix"></i>
                             <select id="category" name="category_name" class="validate">
                            <option value="" disabled selected>Category</option>
                             {% for cat in categories %}
                             {% if cat.category_name == recipe.category_name%}
-                           <option value="{{cat.category_name}}" selected >{{cat.category_name}}</option>
+                           <option value="{{ cat.category_name }}" selected >{{ cat.category_name }}</option>
                            {% else %}
-                           <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                           <option value="{{ cat.category_name }}">{{ cat.category_name }}</option>
                            {% endif %}
                            {% endfor %}
                            </select>
@@ -47,16 +47,16 @@
                         </div>
                     </div>
                     <!-- Cuisine -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-globe-asia material-icons prefix"></i>
                             <select id="cuisine" name="cuisine" class="validate">
                            <option value="" disabled selected>Cuisine</option>
                             {% for cuisine in cuisines %}
                             {% if cuisine.cuisine == recipe.cuisine %}
-                           <option value="{{cuisine.cuisine}}" selected >{{cuisine.cuisine}}</option>
+                           <option value="{{ cuisine.cuisine }}" selected >{{ cuisine.cuisine }}</option>
                            {% else %}
-                           <option value="{{cuisine.cuisine}}">{{cuisine.cuisine}}</option>
+                           <option value="{{ cuisine.cuisine }}">{{ cuisine.cuisine }}</option>
                            {% endif %}
                            {% endfor %}
                            </select>
@@ -65,10 +65,10 @@
                     </div>
                 
                     <!-- Cooking Time -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-clock material-icons prefix"></i>
-                            <input id="cooking_time" name="cooking_time" type="number" placeholder="Time in minutes" value="{{recipe.cooking_time}}" class="validate" min="1">
+                            <input id="cooking_time" name="cooking_time" type="number" placeholder="Time in minutes" value="{{ recipe.cooking_time }}" class="validate" min="1">
                             <label>Cooking Time(min)</label>
                         </div>
                     </div>
@@ -78,16 +78,16 @@
             <div class="row">
                 <div class="col m10 offset-m1">
                     <!-- Difficulty -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-signal material-icons prefix"></i>
                             <select id="difficulty" name="difficulty" class="validate">
                            <option value="" disabled selected>Difficulty</option>
                                 {% for level in difficulty %}
                                     {% if level.difficulty == recipe.difficulty %}
-                                        <option value="{{level.difficulty}}" selected>{{level.difficulty}}</option>
+                                        <option value="{{ level.difficulty }}" selected>{{ level.difficulty }}</option>
                                     {% else %}
-                                        <option value="{{level.difficulty}}">{{level.difficulty}}</option>
+                                        <option value="{{ level.difficulty }}">{{ level.difficulty }}</option>
                                     {% endif %}
                                 {% endfor %}
                            </select>
@@ -95,15 +95,15 @@
                         </div>
                     </div>
                     <!-- Serves -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-users material-icons prefix"></i>
-                            <input id="serves" name="serves" type="number" value="{{recipe.serves}}" class="validate" min="1">
+                            <input id="serves" name="serves" type="number" placeholder="Serves" value="{{ recipe.serves }}" class="validate" min="1">
                             <label>Serves</label>
                         </div>
                     </div>
                     <!-- Allergens -->
-                    <div class="col s6 l4">
+                    <div class="col s10 offset-s1 m6 l4">
                         <div class="input-field">
                             <i class="fas fa-exclamation-triangle material-icon prefix"></i>
                             <select id="allergens" name="allergens" class="validate" multiple>
@@ -143,7 +143,7 @@
                             <div class="addIngredient new-ingredient ingredient">
                                 <div class="input-field whites-4">
                                     {% for ingredient in recipe.ingredients %}
-                                    <textarea id="ingredients" placeholder="200g Butter" name="ingredients[]" class="materialize-textarea ingredients validate" minlength="5" maxlength="200" required>{{ ingredient }}</textarea>
+                                    <textarea id="ingredients" placeholder="200g Butter" name="ingredients[]" class="materialize-textarea ingredients validate" minlength="3" maxlength="200" required>{{ ingredient }}</textarea>
                                     <!--   <input id="ingredients" type="text" placeholder="200g Butter" name="ingredients[]" class="ingredients validate" minlength="1" maxlength="100" required>{{ recipe.ingredients }}
                                -->
                                     {% endfor %}
@@ -153,7 +153,7 @@
                             <!-- add button -->
                             <a id="add_ingredient" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
                             <!-- Remove button -->
-                            <a id="remove_ingredient" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                            <a id="remove_ingredient" class="btn waves-effect waves-light red lighten-2"><i class="fas fa-minus"></i></a>
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                             <div class="addpreparation preparation new-step">
                                 <div class="input-field whites-4">
                                     {% for preparation in recipe.preparation %}
-                                    <textarea id="preparation" name="preparation[]" class="preparation validate materialize-textarea" minlength="5" maxlength="500" required>{{ preparation}}</textarea>
+                                    <textarea id="preparation" name="preparation[]" class="preparation validate materialize-textarea" minlength="5" maxlength="500" required>{{ preparation }}</textarea>
                                     {% endfor %}
                                    
                                 </div>
@@ -175,7 +175,7 @@
                             <!-- add button -->
                             <a id="add_step" class="btn waves-effect waves-light light-green"><i class="material-icons">add</i></a>
                             <!-- removebutton -->
-                            <a id="remove_step" class="btn waves-effect waves-light light-green"><i class="fas fa-minus"></i></a>
+                            <a id="remove_step" class="btn waves-effect waves-light red lighten-2"><i class="fas fa-minus"></i></a>
                         </div>
                     </div>
                 </div>
