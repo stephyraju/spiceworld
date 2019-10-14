@@ -1,5 +1,8 @@
 ## Spiceworld -A Recipe App
 
+
+![alt spiceworld width="800" style= "max-width:100%;"](https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/mockups.png)
+
 Python & Flask - Data Centric Development - Milestone Project 3
 
 'spiceworld' is a recipe app built on the Flask framework using MongoDB database. 
