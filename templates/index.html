@@ -93,9 +93,9 @@
                             <a href="{{url_for('view_recipe', recipe_id=recipe._id)}}">
                                 {% if recipe.image_url %}
                                 <img class="responsive-img"
-                                    src="{{recipe.image_url}}">
+                                    src="{{ recipe.image_url }}">
                                 {% else %}
-                                <img class="img-carousel" src="{{url_for('static', filename='img/default.jpg')}}">
+                                <img class="img-carousel" src="{{ url_for('static', filename='images/defaultimg.png') }}">
                                 {% endif %}
                             </a>
                         </div>
