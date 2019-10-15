@@ -28,7 +28,12 @@
                 <div class="card">
                     <div class="card-image hoverable">
                         <a class="waves-effect waves-light" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"> 
-        <img src="{{recipe.image_url}}" class="responsive-img" alt="{{recipe_nmae}}"></a>
+                        {% if recipe.image_url %}
+                            <img src="{{ recipe.image_url }}" class="responsive-img" alt="{{ recipe_name }}">
+                         {% else %}
+                            <img src="{{ url_for('static', filename='images/defaultimg.png') }}" alt="{{ recipe_name }}">
+                         {% endif %}     
+                          </a>
                         <a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}" class="card-label">
       
        {{ recipe.cuisine }}</a> 
