@@ -123,10 +123,9 @@ def insert_recipe():
     data = request.form.to_dict()
     data.update({'ingredients':request.form.getlist('ingredients[]')})
     data.update({'preparation':request.form.getlist('preparation[]')})
-    data.update({'allergens':request.form.getlist('allergens[]')})
+    data.update({'allergens':request.form.getlist('allergens')})
     del data['ingredients[]']
     del data['preparation[]']
-    del data['allergens[]']
     recipes.insert_one(data)
     return redirect(url_for('get_recipes'))  
     
