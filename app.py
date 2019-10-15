@@ -251,12 +251,10 @@ def get_drinks():
 def edit_recipe(recipe_id):
     
     recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
-    list_allergens = '\n'.join(recipe['allergens'])
     print(mongo.db.allergens.find())
     print(recipe)
     return render_template('editrecipe.html', 
                             recipe=recipe,
-                            list_allergens=list_allergens,
                             categories=mongo.db.categories.find(), 
                             cuisines=mongo.db.cuisines.find(), 
                             difficulty=mongo.db.difficulty.find(), 
