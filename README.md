@@ -243,7 +243,7 @@ All of my wireframes for this project can be found [here](https://github.com/ste
 
 * **Flashed Messages**
  
-   The app uses the flask flash method to communicate important events to the user and make it userfriendly.
+   The app uses the flask flash method to communicate important events to the user and make it user friendly.
 
 
 ##### Features Left to Implement
