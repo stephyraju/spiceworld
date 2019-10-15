@@ -251,10 +251,12 @@ def get_drinks():
 def edit_recipe(recipe_id):
     
     recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
+    list_allergens = '\n'.join(recipe['allergens'])
     print(mongo.db.allergens.find())
     print(recipe)
     return render_template('editrecipe.html', 
                             recipe=recipe,
+                            list_allergens=list_allergens,
                             categories=mongo.db.categories.find(), 
                             cuisines=mongo.db.cuisines.find(), 
                             difficulty=mongo.db.difficulty.find(), 
@@ -310,7 +312,7 @@ def register():
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             users.insert({'author':request.form['username'].lower(), 'password':hashpass})
             session['username'] = request.form['username'].lower()
-            return redirect(url_for('get_recipes'))
+            return redirect(url_for('index'))
 
         flash('Username already exists, please choose a different one.')
         logging.info('User already exist. Skipping new user')
