@@ -68,13 +68,13 @@
                     <div class="col s11 offset-s1 recipe-description">
                         <p><span class="">{{ recipe.description }}</span></p>
                     </div>
-                   {% if recipe.allergens is defined and recipe.allergens|length >0 %}
+                   {% if recipe.allergens %}
                     <div class="col s11 offset-s1 oneline">
                         <p><i class="fas fa-exclamation-circle red-text"></i> Contains:</p>
                         <ul id="list-inline" class="allergen">
-                            {% for allergens in recipe.allergens %}
+                            {% for allergen in recipe.allergens %}
                             <li>
-                                {{ allergens }}
+                                {{ allergen }}
                             </li>
                             {% endfor %}
                         </ul>

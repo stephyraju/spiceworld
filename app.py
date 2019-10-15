@@ -123,8 +123,10 @@ def insert_recipe():
     data = request.form.to_dict()
     data.update({'ingredients':request.form.getlist('ingredients[]')})
     data.update({'preparation':request.form.getlist('preparation[]')})
+    data.update({'allergens':request.form.getlist('allergens[]')})
     del data['ingredients[]']
     del data['preparation[]']
+    del data['allergens[]']
     recipes.insert_one(data)
     return redirect(url_for('get_recipes'))  
     
@@ -251,12 +253,11 @@ def get_drinks():
 def edit_recipe(recipe_id):
     
     recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
-    list_allergens = '\n'.join(recipe['allergens'])
+    
     print(mongo.db.allergens.find())
     print(recipe)
     return render_template('editrecipe.html', 
                             recipe=recipe,
-                            list_allergens=list_allergens,
                             categories=mongo.db.categories.find(), 
                             cuisines=mongo.db.cuisines.find(), 
                             difficulty=mongo.db.difficulty.find(), 
