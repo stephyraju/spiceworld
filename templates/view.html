@@ -20,10 +20,10 @@
                 <p class="error_message orange-text">{{ message }}</p>
                 {% endfor %} {% endif %} {% endwith %} 
                 {% else %}
-                <a class="tooltipped like-dis" data-position="bottom" data-tooltip="You have to login to do that">{{ recipe.likes }}
+                <a class="tooltipped like-dis" data-position="bottom" data-tooltip="You have to login to like">{{ recipe.likes }}
                             <i class="material-icons grey-text stat-icon">thumb_up</i>
                         </a>
-                <a class="tooltipped like-dis" data-position="bottom" data-tooltip="You have to login to do that">{{ recipe.dislikes }}
+                <a class="tooltipped like-dis" data-position="bottom" data-tooltip="You have to login to dislike">{{ recipe.dislikes }}
                             <i class="material-icons grey-text stat-icon">thumb_down</i></a> {% endif %}
             </div>
 

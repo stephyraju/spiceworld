@@ -121,13 +121,17 @@ def insert_recipe():
     logging.info(request.form.to_dict())
     recipes = mongo.db.recipes
     data = request.form.to_dict()
+    data['recipe_name'] = data['recipe_name']
     data.update({'ingredients':request.form.getlist('ingredients[]')})
     data.update({'preparation':request.form.getlist('preparation[]')})
     data.update({'allergens':request.form.getlist('allergens')})
     del data['ingredients[]']
-    del data['preparation[]']
+    del data['preparation[]'] 
     recipes.insert_one(data)
-    return redirect(url_for('get_recipes'))  
+    new_recipe_id=recipes.find_one({"recipe_name": data['recipe_name']})[
+            '_id']
+    return redirect(url_for('view_recipe', recipe_id=new_recipe_id))
+    # return redirect(url_for('get_recipes'))  
     
 #-------READ--------#
 
