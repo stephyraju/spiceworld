@@ -12,12 +12,12 @@
         {% else %}
             <li class="waves-effect">
         {% endif %}
-            <a href="{{ url }}?page_number={{ page }}&page_size={{ result['page_size'] }}&word_find={{ result['word_find'] }}&order_by={{ result['order_by'] }}&order={{ result['order'] }}">{{ page }}</a></li>
+            <a href="{{ url_for('get_recipes') }}?page_number={{ page }}&page_size={{ result['page_size'] }}&word_find={{ result['word_find'] }}&order_by={{ result['order_by'] }}&order={{ result['order'] }}">{{ page }}</a></li>
     {% endfor %} 
     {% if result['next_uri'] is none %}
         <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
         {% else %}
-        <li class="waves-effect"><a href="{{ url }}?page_number={{result['next_uri']['page_number']}}&page_size={{ result['next_uri']['page_size'] }}&word_find={{ result['word_find'] }}&order_by={{result['order_by']}}&order={{result['order']}}">
+        <li class="waves-effect"><a href="{{ url_for('get_recipes') }}?page_number={{result['next_uri']['page_number']}}&page_size={{ result['next_uri']['page_size'] }}&word_find={{ result['word_find'] }}&order_by={{result['order_by']}}&order={{result['order']}}">
         <i class="material-icons">chevron_right</i></a></li>
         {% endif %}
 </ul>

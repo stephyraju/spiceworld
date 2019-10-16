@@ -160,13 +160,11 @@ def view_recipe(recipe_id):
 
 @app.route('/search', methods=['POST'])
 def search(): 
-    print(request.form)
-    print(request.form.to_dict())
+    
     word_find = request.form["word_find"]     
     mongo.db.recipes.create_index([("$**", 'text')])
     recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
     result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
-    print(result)
     return render_template('search.html',
                             title="View recipes", 
                             recipes=recipes,
@@ -251,10 +249,8 @@ def get_drinks():
 @app.route('/edit_recipe/<recipe_id>',methods=['GET'])
 def edit_recipe(recipe_id):
     
-    recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
     
-    print(mongo.db.allergens.find())
-    print(recipe)
+    recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
     return render_template('editrecipe.html', 
                             recipe=recipe,
                             categories=mongo.db.categories.find(), 
