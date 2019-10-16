@@ -53,6 +53,7 @@
           <li><a href="{{ url_for('index') }}"><i class="material-icons">home</i>Home</a></li>
           <li><a href="{{ url_for('get_recipes') }}"><i class="material-icons">search</i>Recipes</a></li>
           <li><a href="{{ url_for('add_recipe') }}"><i class="material-icons">add_box</i>Add Recipes</a></li>
+          <li><a href="{{ url_for('account', account_name = session.username) }}"><i class="material-icons">person</i>My Account</a></li>
           <li><a href="{{url_for('logout')}}"><i class="material-icons">person_outline</i>Logout</a></li>
           {% else %}
           <li><a href="{{ url_for('index') }}"><i class="material-icons">home</i>Home</a></li>
