@@ -1,6 +1,7 @@
 import os
 import math
-from flask import Flask, render_template, redirect, request, url_for, session, flash
+from flask import (
+    Flask, render_template, redirect, request, url_for, session, flash)
 from flask_pymongo import PyMongo, pymongo, DESCENDING
 from bson.objectid import ObjectId
 import bcrypt
@@ -20,7 +21,7 @@ logging.basicConfig(level=logging.INFO)
 
 mongo = PyMongo(app)
 
-###---pagination and sorting----###
+# Pagination and sorting
 PAGE_SIZE = 8
 KEY_PAGE_SIZE = 'page_size'
 KEY_PAGE_NUMBER = 'page_number'
@@ -32,6 +33,7 @@ KEY_PREV = 'prev_uri'
 KEY_WORD_FIND = 'word_find'
 KEY_ORDER_BY = 'order_by'
 KEY_ORDER = 'order'
+
 
 def get_paginated_list(entity, query={}, **params):
     page_size = int(params.get(KEY_PAGE_SIZE, PAGE_SIZE))
@@ -71,12 +73,11 @@ def get_paginated_list(entity, query={}, **params):
         page_count = 0
     if page_number > page_count:
         page_number = page_count
-        
     next_uri = {
         KEY_PAGE_SIZE: page_size,
         KEY_PAGE_NUMBER: page_number + 1
     } if page_number < page_count else None
-    prev_uri ={
+    prev_uri = {
         KEY_PAGE_SIZE: page_size,
         KEY_PAGE_NUMBER: page_number - 1
     } if page_number > 1 else None
@@ -91,53 +92,58 @@ def get_paginated_list(entity, query={}, **params):
         KEY_WORD_FIND: word_find,
         KEY_ORDER_BY: order_by,
         KEY_ORDER: order,
-        KEY_ENTITIES: items   
-    }
+        KEY_ENTITIES: items
+        }
+
 
 @app.route('/')
 @app.route('/index')
 def index():
-    
-    recipes = list(mongo.db.recipes.find().sort("views",DESCENDING))
-    return render_template("index.html", recipes = recipes )
-     
+
+    recipes = list(mongo.db.recipes.find().sort("views", DESCENDING))
+    return render_template("index.html", recipes=recipes)
+
 # -------CREATE---------#
-     
+
+
 @app.route('/add_recipe')
 def add_recipe():
-     return render_template("addrecipe.html",  
-               recipes=mongo.db.recipes.find(),
-               categories = mongo.db.categories.find(), 
-               cuisines=mongo.db.cuisines.find(), 
-               difficulty=mongo.db.difficulty.find(), 
-               allergens=mongo.db.allergens.find())
-               
- 
+    return render_template("addrecipe.html",
+                           recipes=mongo.db.recipes.find(),
+                           categories=mongo.db.categories.find(),
+                           cuisines=mongo.db.cuisines.find(),
+                           difficulty=mongo.db.difficulty.find(),
+                           allergens=mongo.db.allergens.find())
+
+
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     logging.info("Inserting Recipes")
-    logging.info("Ingredients: {}".format(request.form.getlist('ingredients[]')))
-    logging.info("Preparation: {}".format(request.form.getlist('preparation[]')))
+    logging.info("Ingredients: {}"
+                 .format(request.form.getlist('ingredients[]')))
+    logging.info("Preparation: {}"
+                 .format(request.form.getlist('preparation[]')))
     logging.info(request.form.to_dict())
     recipes = mongo.db.recipes
     data = request.form.to_dict()
     data['recipe_name'] = data['recipe_name']
-    data.update({'ingredients':request.form.getlist('ingredients[]')})
-    data.update({'preparation':request.form.getlist('preparation[]')})
-    data.update({'allergens':request.form.getlist('allergens')})
+    data.update({'ingredients': request.form.getlist('ingredients[]')})
+    data.update({'preparation': request.form.getlist('preparation[]')})
+    data.update({'allergens': request.form.getlist('allergens')})
     del data['ingredients[]']
-    del data['preparation[]'] 
+    del data['preparation[]']
     recipes.insert_one(data)
-    new_recipe_id=recipes.find_one({"recipe_name": data['recipe_name']})[
+    new_recipe_id = recipes.find_one({"recipe_name": data['recipe_name']})[
             '_id']
     return redirect(url_for('view_recipe', recipe_id=new_recipe_id))
-    # return redirect(url_for('get_recipes'))  
-    
-#-------READ--------#
+    # return redirect(url_for('get_recipes'))
+
+# READ
+
 
 @app.route("/get_recipes", methods=['GET'])
 def get_recipes():
-    
+
     logging.info("Getting Recipes")
     # recipes = list(mongo.db.recipes.find().sort("views",DESCENDING))
     logging.info(request.args.to_dict())
@@ -145,39 +151,43 @@ def get_recipes():
     logging.info("Result: {}".format(recipes))
 
     return render_template('recipes.html',
-                             recipes=recipes,
-                             result=recipes)                          
+                           recipes=recipes,
+                           result=recipes)
+
 
 @app.route('/view_recipe/recipe_id?=<recipe_id>')
 def view_recipe(recipe_id):
-    
+
     logging.info("Viewing Recipes")
-    mongo.db.recipes.find_one_and_update({"_id": ObjectId(recipe_id)}, {"$inc": {"views": 1}})
-    return render_template('view.html', 
-                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}),
-                            categories = mongo.db.categories.find(), 
-                            cuisines=mongo.db.cuisines.find(), 
-                            difficulty=mongo.db.difficulty.find(), 
-                            allergens=mongo.db.allergens.find())
-                        
-#-----------Search-----------#
+    mongo.db.recipes.find_one_and_update(
+        {"_id": ObjectId(recipe_id)}, {"$inc": {"views": 1}})
+    return render_template('view.html',
+                           recipe=mongo.db.recipes.find_one(
+                                  {"_id": ObjectId(recipe_id)}),
+                           categories=mongo.db.categories.find(),
+                           cuisines=mongo.db.cuisines.find(),
+                           difficulty=mongo.db.difficulty.find(),
+                           allergens=mongo.db.allergens.find())
+
+# Search
+
 
 @app.route('/search', methods=['POST'])
-def search(): 
-    
-    word_find = request.form["word_find"]     
+def search():
+
+    word_find = request.form["word_find"]
     mongo.db.recipes.create_index([("$**", 'text')])
-    recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
+    recipes = mongo.db.recipes.find({"$text": {"$search": word_find}})
     result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
     return render_template('search.html',
-                            title="View recipes", 
-                            recipes=recipes,
-                            result=result,
-                            categories = mongo.db.categories.find(), 
-                            cuisines=mongo.db.cuisines.find(), 
-                            difficulty=mongo.db.difficulty.find(), 
-                            allergens=mongo.db.allergens.find())
-                            
+                           title="View recipes",
+                           recipes=recipes,
+                           result=result,
+                           categories=mongo.db.categories.find(),
+                           cuisines=mongo.db.cuisines.find(),
+                           difficulty=mongo.db.difficulty.find(),
+                           allergens=mongo.db.allergens.find())
+
 # @app.route('/search', methods=['POST'])
 # def search(): 
 #     logging.info("Searching")
@@ -196,72 +206,132 @@ def search():
 #                             cuisines=mongo.db.cuisines.find(), 
 #                             difficulty=mongo.db.difficulty.find(), 
 #                             allergens=mongo.db.allergens.find()) 
- 
+
 
 @app.route('/get_starter', methods=['GET'])
 def get_starter():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Starter'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Starters', recipes=recipes, result=recipes)                           
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Starter'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Starters',
+                           recipes=recipes,
+                           result=recipes)
+
 
 @app.route('/get_breakfast', methods=['GET'])
 def get_breakfast():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Breakfast'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Desserts', recipes=recipes, result=recipes) 
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Breakfast'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Desserts',
+                           recipes=recipes,
+                           result=recipes)
+
 
 @app.route('/get_main', methods=['GET'])
 def get_main():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Main Course'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Main course', recipes=recipes, result=recipes)                            
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Main Course'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Main course',
+                           recipes=recipes,
+                           result=recipes)
+
 
 @app.route('/get_dessert', methods=['GET'])
 def get_dessert():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Dessert'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Desserts', recipes=recipes, result=recipes)   
-    
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Dessert'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Desserts',
+                           recipes=recipes,
+                           result=recipes)
+
+
 @app.route('/get_snacks', methods=['GET'])
 def get_snacks():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Snacks'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Snacks', recipes=recipes, result=recipes) 
-    
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Snacks'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Snacks',
+                           recipes=recipes,
+                           result=recipes)
+
+
 @app.route('/get_cakes', methods=['GET'])
 def get_cakes():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Cakes'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Cakes', recipes=recipes, result=recipes) 
-    
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Cakes'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Cakes',
+                           recipes=recipes,
+                           result=recipes)
+
+
 @app.route('/get_bbq', methods=['GET'])
 def get_bbq():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'BBQ'}, **request.args.to_dict())
-    return render_template('recipes.html', title='BBQ', recipes=recipes, result=recipes) 
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'BBQ'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='BBQ',
+                           recipes=recipes,
+                           result=recipes)
+
 
 @app.route('/get_vegan', methods=['GET'])
 def get_vegan():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Vegan'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Vegan', recipes=recipes, result=recipes ) 
-    
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Vegan'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Vegan',
+                           recipes=recipes,
+                           result=recipes)
+
+
 @app.route('/get_instant', methods=['GET'])
 def get_instant():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Instant Recipe'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Instant Pot',  recipes=recipes, result=recipes) 
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Instant Recipe'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Instant Pot',
+                           recipes=recipes,
+                           result=recipes)
+
 
 @app.route('/get_drinks', methods=['GET'])
 def get_drinks():
-    recipes = get_paginated_list(mongo.db.recipes, query={'category_name': 'Drinks'}, **request.args.to_dict())
-    return render_template('recipes.html', title='Drinks', recipes=recipes, result=recipes) 
-        
-#-----------UPDATE-----------#
+    recipes = get_paginated_list(mongo.db.recipes,
+                                 query={'category_name': 'Drinks'},
+                                 **request.args.to_dict())
+    return render_template('recipes.html',
+                           title='Drinks',
+                           recipes=recipes,
+                           result=recipes)
 
-@app.route('/edit_recipe/<recipe_id>',methods=['GET'])
+# UPDATE
+
+
+@app.route('/edit_recipe/<recipe_id>', methods=['GET'])
 def edit_recipe(recipe_id):
-    
-    
-    recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
-    return render_template('editrecipe.html', 
-                            recipe=recipe,
-                            categories=mongo.db.categories.find(), 
-                            cuisines=mongo.db.cuisines.find(), 
-                            difficulty=mongo.db.difficulty.find(), 
-                            allergens=mongo.db.allergens.find())
-                            
+
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template('editrecipe.html',
+                           recipe=recipe,
+                           categories=mongo.db.categories.find(),
+                           cuisines=mongo.db.cuisines.find(),
+                           difficulty=mongo.db.difficulty.find(),
+                           allergens=mongo.db.allergens.find())
+
+
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
     logging.info("Updating Recipe")
@@ -269,34 +339,37 @@ def update_recipe(recipe_id):
     logging.info(request.form)
     logging.info(request.form.to_dict())
     recipes = mongo.db.recipes
-    recipes.update({"_id":ObjectId(recipe_id)},
-        {
-        'recipe_name':request.form.get('recipe_name'),
-        'author':request.form.get('author'),
-        'category_name':request.form.get('category_name'),
-        'description': request.form.get('description'),
-        'serves':request.form.get('serves'),
-        'cooking_time':request.form.get('cooking_time'),
-        'cuisine':request.form.get('cuisine'),
-        'difficulty':request.form.get('difficulty'),
-        'allergens':request.form.getlist('allergens'), 
-        'image_url' :request.form.get('image_url'),
-        'ingredients':request.form.getlist('ingredients[]'),
-        'preparation':request.form.getlist('preparation[]')
-        })
-    return redirect(url_for('view_recipe',recipe_id=recipe_id))
-  
-#-----------DELETE-----------#
+    recipes.update({"_id": ObjectId(recipe_id)},
+                   {
+                    'recipe_name': request.form.get('recipe_name'),
+                    'author': request.form.get('author'),
+                    'category_name': request.form.get('category_name'),
+                    'description': request.form.get('description'),
+                    'serves': request.form.get('serves'),
+                    'cooking_time': request.form.get('cooking_time'),
+                    'cuisine': request.form.get('cuisine'),
+                    'difficulty': request.form.get('difficulty'),
+                    'allergens': request.form.getlist('allergens'),
+                    'image_url': request.form.get('image_url'),
+                    'ingredients': request.form.getlist('ingredients[]'),
+                    'preparation': request.form.getlist('preparation[]')
+                    })
+    return redirect(url_for('view_recipe', recipe_id=recipe_id))
+
+# DELETE
+
+
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     logging.info("Deleting Recipe with Id: {}".format(recipe_id))
-    mongo.db.recipes.remove({"_id":ObjectId(recipe_id)})
+    mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     return redirect(url_for('get_recipes'))
 
-#-----------Register-----------#
-#https://www.youtube.com/watch?v=vVx1737auSE
+# Register
+# https://www.youtube.com/watch?v=vVx1737auSE
 
-@app.route('/register', methods=['GET','POST'])
+
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     logging.info('Inside Registering.....')
     if request.method == 'POST':
@@ -304,13 +377,16 @@ def register():
         session['username'] = request.form['username'].lower()
         logging.info('Mongo User: ' + str(mongo.db.users))
         users = mongo.db.users
-        user_exists = users.find_one({'author':request.form['username'].lower()})
+        user_exists = users.find_one(
+                      {'author': request.form['username'].lower()})
         logging.info('User exists: ' + str(user_exists))
-        
+
         if user_exists is None:
             logging.info('User Does not exist. Creating new user')
-            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
-            users.insert({'author':request.form['username'].lower(), 'password':hashpass})
+            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'),
+                                     bcrypt.gensalt())
+            users.insert({'author': request.form['username'].lower(),
+                         'password': hashpass})
             session['username'] = request.form['username'].lower()
             return redirect(url_for('index'))
 
@@ -321,72 +397,84 @@ def register():
 
     return render_template('register.html', title="Register")
 
-#-----------Login-----------#
+# Login
 
-@app.route('/login',methods=['GET','POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session["username"] = request.form["username"].lower()
         users = mongo.db.users
-        user_login = users.find_one({'author':request.form['username'].lower()})
+        user_login = users.find_one(
+                    {'author': request.form['username'].lower()})
 
         if user_login:
-            if bcrypt.hashpw(request.form['password'].encode('utf-8'), user_login['password']) == user_login['password']:
+            if bcrypt.hashpw(request.form['password'].encode('utf-8'),
+               user_login['password']) == user_login['password']:
                 # session["username"] = request.form["username"].lower()
                 return redirect(url_for('index'))
-        
+
         flash('The login details are not correct')
         session.pop('username', None)
         return render_template('login.html',  title="Login")
 
     return render_template('login.html',  title="Login")
-    
-#-----------Account-----------#
+
+# Account
+
 
 @app.route("/account/<account_name>, methods=['GET']")
 def account(account_name):
     logging.info("Account Name is: '{}'".format(account_name))
     if account_name != session.get('username'):
-        logging.info("User {} is not allowed to access page".format(session.get('username')))
+        logging.info("User {} is not allowed to access page".format
+                     (session.get('username')))
         flash("You can only access your own account page.")
         return redirect(url_for('index'))
-        
-    logging.info("User {} is authorized to access page".format(session.get('username')))
-    #users = mongo.db.users
-    #users = mongo.db.users.find_one({"username": account_name})
+
+    logging.info("User {} is authorized to access page".format
+                 (session.get('username')))
+    # users = mongo.db.users
+    # users = mongo.db.users.find_one({"username": account_name})
     recipes_submitted_by_user = mongo.db.recipes.find(
-        {"author": account_name})              
-    logging.info("Recipes submitted by user: {}".format(str(recipes_submitted_by_user)))
-    total_recipes_by_user = recipes_submitted_by_user.count() 
-    logging.info("Total recipes by user: {}".format(str(total_recipes_by_user)))
+                               {"author": account_name})
+    logging.info("Recipes submitted by user: {}".format
+                 (str(recipes_submitted_by_user)))
+    total_recipes_by_user = recipes_submitted_by_user.count()
+    logging.info("Total recipes by user: {}".format
+                 (str(total_recipes_by_user)))
     logging.info(recipes_submitted_by_user)
-    
-    return render_template('account.html', 
-                            user_recipes=recipes_submitted_by_user,
-                            total_recipes_by_user=total_recipes_by_user)
-      
-                
-#-----------Likes-----------#
+
+    return render_template('account.html',
+                           user_recipes=recipes_submitted_by_user,
+                           total_recipes_by_user=total_recipes_by_user)
+
+
+# Likes
 
 @app.route('/like_recipe/<recipe_id>')
 def like_recipe(recipe_id):
     '''Controls behavior of user-like increment and decrements operator.
     Feature is dependant upon user interaction in the user-interface.'''
-    
+
     users = mongo.db.users
-    
-    already_liked=users.find_one({"$and":[{"author":session['username']},{'likes':recipe_id}]})
-    
+
+    already_liked = users.find_one({"$and": [{"author": session['username']},
+                                   {'likes': recipe_id}]})
+
     if already_liked is None:
-            mongo.db.recipes.update_one({"_id":ObjectId(recipe_id)}, {'$inc': {'likes': 1}})
-            users.update_one({"author":session['username']},{"$push":{"likes":recipe_id}})
+            mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                        {'$inc': {'likes': 1}})
+            users.update_one({"author": session['username']},
+                             {"$push": {"likes": recipe_id}})
     else:
-      flash("You have already liked this recipe!")
+        flash("You have already liked this recipe!")
 
-    return render_template('view.html', 
-                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}))
+    return render_template('view.html',
+                           recipe=mongo.db.recipes.find_one
+                           ({"_id": ObjectId(recipe_id)}))
 
-#-----------Dislikes-----------#
+# Dislikes
 
 
 @app.route('/dislike_recipe/<recipe_id>')
@@ -394,26 +482,32 @@ def dislike_recipe(recipe_id):
     '''Controls behavior of user-dislike increment and decrements operator.
     Feature is dependant upon user interaction in the user-interface.'''
     users = mongo.db.users
-    
-    already_disliked= users.find_one({"$and":[{"author":session['username']},{'dislikes':recipe_id}]})
+
+    already_disliked = users.find_one({"$and":
+                                      [{"author": session['username']},
+                                       {'dislikes': recipe_id}]})
 
     if already_disliked is None:
-        mongo.db.recipes.update_one({"_id":ObjectId(recipe_id)}, {'$inc': {'dislikes': 1}})
-        users.update_one({"author":session['username']},{"$push":{"dislikes":recipe_id}})
+        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)},
+                                    {'$inc': {'dislikes': 1}})
+        users.update_one({"author": session['username']},
+                         {"$push": {"dislikes": recipe_id}})
     else:
         flash("You have already disliked this recipe!")
 
-  
-    return render_template('view.html', 
-                            recipe = mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)}), username = session['username'])     
-    
-#-----------Logout-----------#
+    return render_template('view.html',
+                           recipe=mongo.db.recipes.find_one
+                           ({"_id": ObjectId(recipe_id)}),
+                           username=session['username'])
+
+# Logout
+
 
 @app.route('/logout')
 def logout():
-   # remove the username from the session if it is there
-   session.pop('username', None)
-   return redirect(url_for('index'))
+    # remove the username from the session if it is there
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
