@@ -26,7 +26,7 @@
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper grey lighten-3">
-        <a href="#" class="brand-logo">spiceworld <img class="hide-on-med-and-down" src="{{ url_for('static', filename='images/logo.png') }}"></a>
+        <a href="{{ url_for('index') }}" class="brand-logo">spiceworld <img class="hide-on-med-and-down" src="{{ url_for('static', filename='images/logo.png') }}"></a>
         <a href="#" data-target="mobile-sidenav" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
         {% if 'username' in session %}
