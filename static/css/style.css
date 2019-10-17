@@ -20,6 +20,12 @@ main {
   border-radius: 5px;
 }
 
+h3,
+h4,
+h5 {
+  font-family: 'Muli', 'sans-serif';
+}
+
 /* -------- Nav Bar ----------*/
 
 nav {
@@ -54,12 +60,6 @@ nav ul .active {
 
 .fa-bars {
   color: #ff6e40;
-}
-
-h3,
-h4,
-h5 {
-  font-family: 'Muli', 'sans-serif';
 }
 
 /*--------Title----------*/
@@ -168,6 +168,7 @@ h5 {
   padding-top: 8%;
 }
 /*--------Description---------*/
+
 .cells {
   padding-top:30px;
 }
