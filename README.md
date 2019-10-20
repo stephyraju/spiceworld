@@ -1,11 +1,9 @@
 
-<p align="center">
-  <img alt="spiceworld" src="https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/logoimg.png">
-</p>
+![alt spiceworld](https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/logoimg.png)
 
 ![alt spiceworld](https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/mockups.png)
 
-## Spiceworld -A Recipe App
+#### Spiceworld -A Recipe App
 
 Python & Flask - Data Centric Development - Milestone Project 3
 
@@ -13,6 +11,41 @@ Python & Flask - Data Centric Development - Milestone Project 3
 The purpose of this project is to "Create a web application that allows users to store and easily access cooking recipes", using the CRUD operations of Create, Read, Update, and Delete for their recipes.
 
 The deployed site can be found at [spiceword-cookbook.](https://spiceworld-cookbook.herokuapp.com/)
+
+---
+## Table of Contents
+
+1. **[UX](#UX)**
+
+   * **[User Story](#user-Story)**
+   * **[Design](#design)**
+     * **[Framework](#framework)**
+     * **[Database](#database)**
+     * **[Color Scheme](#color-scheme)**
+     * **[Typography](#typography)**
+     * **[Icons](#icons)**
+   * **[Wireframes](#wireframes)**
+
+2. **[Features](#Features)**
+   * **[Existing Features](#Existing-Features)**
+   * **[Features Left to Implement](#Features-left-to-implement)**
+
+3. **[Technologies Used](#Technologies-Used)**
+
+   * **[Languages](#Languages)**
+   * **[Libraries](#Libraries)**
+   * **[Tools](#Tools)**
+   * **[Hosting](#Hosting)**
+4. **[Testing](#Testing)**
+
+5. **[Deployment](#Deployment)**
+
+6. **[Credits](#Credits)**
+    * Content
+    * Media
+    * Acknowledgements
+    * Disclaimer
+
 
 ## UX
 
@@ -443,4 +476,5 @@ In order the deploy my project to Heroku I have completed the following steps:
 
 Special thanks to Guido Cecilio Garcia, my Code Institute mentor, for his guidance and advice whilst working on this project.
 
- 
+####  Disclaimer
+The content of this website is educational purposes only.
