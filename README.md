@@ -1,29 +1,31 @@
 
-![alt spiceworld](https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/logoimg.png)
+<p align="left">
+  <img alt="spiceworld" src="https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/logoimg.png">
+</p>
 
 ![alt spiceworld](https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/mockups.png)
 
-#### Spiceworld -A Recipe App
+### Spiceworld - A Recipe App
 
 Python & Flask - Data Centric Development - Milestone Project 3
 
 'spiceworld' is a recipe app built on the Flask framework using MongoDB database. 
 The purpose of this project is to "Create a web application that allows users to store and easily access cooking recipes", using the CRUD operations of Create, Read, Update, and Delete for their recipes.
 
-The deployed site can be found at [spiceword-cookbook.](https://spiceworld-cookbook.herokuapp.com/)
+The deployed site can be found at [spiceword.](https://spiceworld-cookbook.herokuapp.com/)
 
 ---
 ## Table of Contents
 
 1. **[UX](#UX)**
 
-   * **[User Story](#user-Story)**
+   * **[User Story](#user-story)**
    * **[Design](#design)**
      * **[Framework](#framework)**
      * **[Database](#database)**
      * **[Color Scheme](#color-scheme)**
      * **[Typography](#typography)**
-     * **[Icons](#icons)**
+     * **[Icon](#icon)**
    * **[Wireframes](#wireframes)**
 
 2. **[Features](#Features)**
@@ -41,16 +43,18 @@ The deployed site can be found at [spiceword-cookbook.](https://spiceworld-cookb
 5. **[Deployment](#Deployment)**
 
 6. **[Credits](#Credits)**
-    * Content
-    * Media
-    * Acknowledgements
-    * Disclaimer
+    * **[Content](#content)**
+    * **[Media](#media)**
+    * **[Acknowledgements](#acknoledgements)**
+    * **[Disclaimer](disclaimer)**
 
 
 ## UX
 
 This is the milestone project that I have created for the “Data Centric Development” module, which is part of “Full Stack Web Development Course” offered by Code Institute.
-I've decided to make a recipe app to allow users to add and store their recipes.
+
+I love cooking and trying new recipes. I usually collect recipes from youtube and other public sites and change it for my taste. This was a perfect oppertunity to build cookbook application where I can save all my favorite recipes at one source and share to my friends who ask me for recipes.
+It also allows others to to add and store their recipes securely.
 
 ### User Stories
 
@@ -71,7 +75,7 @@ As a user, I want to be able to:
 
 ### Design
 
-##### Framework
+#### Framework
 
 * **[Materialize 1.0.0](https://materializecss.com/)**
 
@@ -85,7 +89,7 @@ As a user, I want to be able to:
 
   Flask is the micro web framework that runs the application
 
-##### Database
+#### Database
 
 For the database,I choose MongoDB and this was a great oppertunity to get experience using NoSQL database MongoDB.
 
@@ -147,20 +151,22 @@ The database is made up of the following collections
 
 
 
-##### Color Scheme
+#### Color Scheme
 
 For the color scheme, I've used gray and black in the navbar and most pages. I chose green and red for some buttons and headings to highlight.
 Overall, I tried to keep a simple classic look. [Materialize colors](https://materializecss.com/color.html) was a good choice for this project.
 
-##### Typography
+#### Typography
 
 The following fonts were used:
 
 * **Courgette** was used for the navigation elements.
+
 * **Muli** was used for headings.
+
 * **ProximaNova Regular** was used for the general text.
 
-##### Icon
+#### Icon
 
 [Materialize icons](https://materializecss.com/icons.html) has been used for this project.
 
@@ -284,11 +290,11 @@ All of my wireframes for this project can be found [here](https://github.com/ste
 * Search: Search button with more filters.
 * Favourites: Adding favourate recipe to user account page would be more convienent for the user.
 * Admin account: To make managing the site easier, an admin panel will need to be added.
-* Pagination: 
+* Pagination: I need to add pagination to my accounts as when I add more recipes and rectify the minor issues with the pagination in search results. 
 
 ### Technologies Used
 
-##### Languages
+#### Languages
 
 *   **[HTML](https://html.spec.whatwg.org/multipage/)** used as the markup language
   
@@ -298,7 +304,7 @@ All of my wireframes for this project can be found [here](https://github.com/ste
 
 *   **[Python3](https://www.python.org/)** used to run the backend application
 
-##### Libraries
+#### Libraries
 
 * **[Google Fonts](https://fonts.google.com/)** provided the fonts used throughout the project
 
@@ -314,7 +320,7 @@ All of my wireframes for this project can be found [here](https://github.com/ste
 
 * **[PyMongo](https://flask-pymongo.readthedocs.io/en/latest/)** 2.3.0 was used to enable the python application to access the Mongo database
 
-##### Tools
+#### Tools
 
 * **[AWS Cloud9](https://aws.amazon.com/console/)** is the IDE used to put all this together
 
@@ -367,6 +373,10 @@ The following validation services were used to check the validity of the website
    
    The JS file was run through jshint.com and outside of numerous instances of $ being undefined due to using jQuery, there were no errors.
 
+*  [PEP8 Online](http://pep8online.com/) was used to validate Python.
+        
+   app.py file is completely PEP8 compliant! 
+
 #### Responsiveness 
 
 Chrome DevTools and physical devices were used throughout development for a number of purposes, one of which was to test the responsiveness and rendering across a range of sizes and devices. As issues were found they were either fixed at the time or noted and returned to later.
@@ -376,7 +386,8 @@ The site has been tested successfully on
    * Apple Macbook Air - Safari browser
    * Apple iPhone 6,7 &8S - Safari Browser
    * iPad Mini - Safari Browser
-   * 
+   * Desktop - Chrome v.74
+   * Desktop - Firefox v.67
 
 
 #### Features Testing
@@ -384,6 +395,16 @@ The site has been tested successfully on
  * **Creating an Account**
  
  I've created my own account, and 15 other accounts to confirm authentication and validation for creatiing account and all worked as expected.
+
+* Log In To An Existing Account
+ 
+  The accounts created as part of the previous test were used to test the log in functionality and I was able to log in with each of them.
+
+* Log Out
+
+  All accounts could also be successfully logged out. Print statements were used in the python console to confirm the username variable had been removed from the session.
+
+
 
 * **Add | View | Edit | Delete a Recipe**
  
@@ -399,13 +420,12 @@ I deleted some recipes to test the delete functionality.When the delete button i
 
 I've confirmed the recipes are deleted by searching and also in database directly.
 
+
 #### Pagination
-
-
-
-
-
-
+ 
+ Pagination is working showing the number of pages accordingly in all the recipes page.
+ In search and category selection from the home page it is displaying 2 pages eventhough its 1 page.
+ I will rectify this issues in future.
 
 ### Deployment
 
@@ -447,7 +467,42 @@ In order the deploy my project to Heroku I have completed the following steps:
 
 * The site is now successfully deployed.
 
-#### Credits
+#### Local Deployment
+
+Should you wish the run a local copy of this application of your local machine, you will need to follow the instructions listed below:
+
+Tools you may need:
+
+Python 3 installed on your machine [https://www.python.org/downloads/](https://www.python.org/downloads/)
+
+PIP installed on your machine [https://pip.pypa.io/en/stable/installing/](https://pip.pypa.io/en/stable/installing/)
+
+Git installed on your machine: [https://gist.github.com/derhuerst/1b15ff4652a867391f03](https://gist.github.com/derhuerst/1b15ff4652a867391f03)
+
+A text editor such as [https://code.visualstudio.com/](https://code.visualstudio.com/) Visual Studio Code
+
+An account at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas) MongoDB Atlas or MongoDB running locally on your machine
+
+**To deploy locally on your own machine, follow these steps:**
+
+* Save a copy of the repo on your local machine or use git clone https://github.com/stephyraju/spiceworld.git and cd into the correct folder using the terminal.
+
+* Create a virtual environment, using python -m venv venv where the 2nd venv is the environment name.
+
+* Activate the virtual environment with venv\Scripts\activate
+
+* Install any required modules with pip install -r requirements.txt
+
+* Within the file app.py change the line app.config['SECRET_KEY'] = os.getenv('SECRET') to app.config['SECRET_KEY'] = os.getenv('SECRET', '<your_key>) where <your_key> is a secret key of your choosing.
+
+* Also change app.config["MONGO_URI"] = os.getenv('MONGO_URI') to app.config["MONGO_URI"] = os.getenv('MONGO_URI', <your mongo_uri string>) where <your mongo_uri string> is the string that points to your own MongoDB.
+
+* Your database should be named cook_book with collections set up as outlined in the database design section of this document. To help, you can also refer to these included JSON examples
+
+* From the terminal you can then run the app with python app.py and view in a browser at http://127.0.0.1:5000/
+
+
+### Credits
 
 ##### Content
 
@@ -477,4 +532,5 @@ In order the deploy my project to Heroku I have completed the following steps:
 Special thanks to Guido Cecilio Garcia, my Code Institute mentor, for his guidance and advice whilst working on this project.
 
 ####  Disclaimer
+
 The content of this website is educational purposes only.
