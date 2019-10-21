@@ -1,5 +1,5 @@
 
-<p align="left">
+<p align="center">
   <img alt="spiceworld" src="https://github.com/stephyraju/spiceworld/raw/master/documentation/wireframe/logoimg.png">
 </p>
 
@@ -19,7 +19,7 @@ The deployed site can be found at [spiceword.](https://spiceworld-cookbook.herok
 
 1. **[UX](#UX)**
 
-   * **[User Story](#user-story)**
+   * **[User Stories](#user-stories)**
    * **[Design](#design)**
      * **[Framework](#framework)**
      * **[Database](#database)**
@@ -91,7 +91,7 @@ As a user, I want to be able to:
 
 #### Database
 
-For the database,I choose MongoDB and this was a great oppertunity to get experience using NoSQL database MongoDB.
+For the database, I choose MongoDB and this was a great oppertunity to get experience using NoSQL database MongoDB.
 
 See the database schema [here](https://github.com/stephyraju/spiceworld/blob/master/documentation/schema/schema.png)
 
@@ -114,7 +114,7 @@ The database is made up of the following collections
       
         id: <ObjectId()>
 
-       allergens: <string>
+       allergens: <array>
 
 **difficulty**
       
@@ -180,7 +180,7 @@ All of my wireframes for this project can be found [here](https://github.com/ste
 
 ### Features
 
-##### Existing Features
+#### Existing Features
 
 * **Navigation bar**
    
@@ -208,7 +208,7 @@ All of my wireframes for this project can be found [here](https://github.com/ste
       
       e.Logout
 
-   * The navbar is collapsed into a burger icon on small and medium screens.The options remain the same, but they are instead accessed using a side navigation element which can be accessed through 'burger' icon at the top left. 
+   * The navbar is collapsed into a burger icon on small and medium screens. The options remain the same, but they are instead accessed using a side navigation element which can be accessed through 'burger' icon at the top left. 
    
 * **Footer**
 
@@ -285,7 +285,7 @@ All of my wireframes for this project can be found [here](https://github.com/ste
    The app uses the flask flash method to communicate important events to the user and make it user friendly.
 
 
-##### Features Left to Implement
+#### Features Left to Implement
 
 * Search: Search button with more filters.
 * Favourites: Adding favourate recipe to user account page would be more convienent for the user.
@@ -353,6 +353,7 @@ Create your own user. Do not use a password you use elsewhere as the passwords a
 Use an existing user to see how the app handles user recipes 
 
 You can do this with:
+
 Username: ooooo
 Password: uuuuu
 
@@ -420,16 +421,17 @@ I deleted some recipes to test the delete functionality.When the delete button i
 
 I've confirmed the recipes are deleted by searching and also in database directly.
 
-
-#### Pagination
+#### Known Issues
+##### Pagination with Search
  
  Pagination is working showing the number of pages accordingly in all the recipes page.
+ 
  In search and category selection from the home page it is displaying 2 pages eventhough its 1 page.
- I will rectify this issues in future.
+
 
 ### Deployment
 
-##### Deployment To Heroku
+#### Deployment To Heroku
 
 In order the deploy my project to Heroku I have completed the following steps:
 
@@ -504,13 +506,13 @@ An account at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/clou
 
 ### Credits
 
-##### Content
+#### Content
 
   The recipes for the cookbook were sourced from [bbcgoodfood.com](https://www.bbcgoodfood.com/).
   
   The text for some of the recipe categories was taken from Wikipedia.
 
-##### Media
+#### Media
 
   The images for the recipes have been sourced from their respective recipes at [bbcgoodfood.com](https://www.bbcgoodfood.com/).
   
@@ -531,6 +533,6 @@ An account at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/clou
 
 Special thanks to Guido Cecilio Garcia, my Code Institute mentor, for his guidance and advice whilst working on this project.
 
-####  Disclaimer
+#####  Disclaimer
 
 The content of this website is educational purposes only.
