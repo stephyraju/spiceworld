@@ -162,11 +162,15 @@ nav ul .active {
 .carousel .active .recipe-name {
   visibility: visible;
 }
+/*--------Register-Login---------*/
 
+@media screen and (max-width: 992px) {
 .register-form {
   position:relative;
-  padding-top: 8%;
+  padding-top: 10%;
 }
+}
+
 /*--------Description---------*/
 
 .cells {
@@ -191,7 +195,6 @@ nav ul .active {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
 
 /*--------Recipes---------*/
 
@@ -235,10 +238,6 @@ nav ul .active {
 .recipe-view .card {
   background-color: #fcf4ec;
 }
-
-/*.preparation ol li {*/
-/*  padding: 0px 15px 15px 15px;*/
-/*}*/
 
 .ingredients ul li {
   padding: 0px 15px 15px 5px;
