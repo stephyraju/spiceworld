@@ -1,3 +1,4 @@
+# Importing modules
 import os
 import math
 from flask import (
@@ -8,9 +9,10 @@ import bcrypt
 import logging
 
 
-# declaring app name
+# Declaring app name
 app = Flask(__name__)
 
+# Config settings and environmental variables
 app.config['SECRET_KEY'] = os.getenv('SECRET')
 app.config["MONGO_DBNAME"] = 'cook_book'
 app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
@@ -140,7 +142,7 @@ def insert_recipe():
 
 # READ
 
-
+# Page to view all recipes
 @app.route("/get_recipes", methods=['GET'])
 def get_recipes():
 
@@ -188,24 +190,8 @@ def search():
                            difficulty=mongo.db.difficulty.find(),
                            allergens=mongo.db.allergens.find())
 
-# @app.route('/search', methods=['POST'])
-# def search(): 
-#     logging.info("Searching")
-#     logging.info(request.form)
-#     logging.info(request.form.to_dict())
-#     word_find = request.form["word_find"]     
-#     mongo.db.recipes.create_index([("$**", 'text')])
-#     recipes = mongo.db.recipes.find({"$text":{"$search": word_find}})
-#     # results = get_paginated_list(mongo.db.recipes, query={'$text':{'$search':'word_find'}}, **request.args.to_dict())
-#     logging.info(recipes)
-#     return render_template('search.html',
-#                             title="View recipes", 
-#                             recipes=recipes,
-#                             # result=recipes,
-#                             categories = mongo.db.categories.find(), 
-#                             cuisines=mongo.db.cuisines.find(), 
-#                             difficulty=mongo.db.difficulty.find(), 
-#                             allergens=mongo.db.allergens.find()) 
+
+# Filters for categories in home page
 
 
 @app.route('/get_starter', methods=['GET'])
@@ -366,7 +352,6 @@ def delete_recipe(recipe_id):
     return redirect(url_for('get_recipes'))
 
 # Register
-# https://www.youtube.com/watch?v=vVx1737auSE
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -434,8 +419,6 @@ def account(account_name):
 
     logging.info("User {} is authorized to access page".format
                  (session.get('username')))
-    # users = mongo.db.users
-    # users = mongo.db.users.find_one({"username": account_name})
     recipes_submitted_by_user = mongo.db.recipes.find(
                                {"author": account_name})
     logging.info("Recipes submitted by user: {}".format
@@ -454,8 +437,10 @@ def account(account_name):
 
 @app.route('/like_recipe/<recipe_id>')
 def like_recipe(recipe_id):
+    
     '''Controls behavior of user-like increment and decrements operator.
-    Feature is dependant upon user interaction in the user-interface.'''
+    Feature is dependant upon user interaction in the user-interface.
+    User is only allowed to like once for each recipe'''
 
     users = mongo.db.users
 
@@ -480,7 +465,8 @@ def like_recipe(recipe_id):
 @app.route('/dislike_recipe/<recipe_id>')
 def dislike_recipe(recipe_id):
     '''Controls behavior of user-dislike increment and decrements operator.
-    Feature is dependant upon user interaction in the user-interface.'''
+    Feature is dependant upon user interaction in the user-interface.
+    User is only allowed to dislike once for each recipe'''
     users = mongo.db.users
 
     already_disliked = users.find_one({"$and":
