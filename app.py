@@ -50,21 +50,20 @@ def get_paginated_list(entity, query={}, **params):
     word_find = ''
     if KEY_WORD_FIND in params:
         word_find = params.get(KEY_WORD_FIND)
-        total_items = 0
         if len(word_find.split()) > 0:
             entity.create_index([("$**", 'text')])
+            print("searching")
             result = entity.find({'$text': {'$search': word_find}})
-            total_items = result.count()
             items = result.sort(order_by, order).skip(offset).limit(page_size)
+            print(items)
         else:
-            total_items = entity.count()
             items = entity.find().sort(
                 order_by, order
             ).skip(offset).limit(page_size)
     else:
-        total_items = entity.count()
         items = entity.find(query).sort(order_by, order).skip(
             offset).limit(page_size)
+    total_items = items.count()    
     if page_size > total_items:
         page_size = total_items
     if page_number < 1:
@@ -101,7 +100,6 @@ def get_paginated_list(entity, query={}, **params):
 @app.route('/')
 @app.route('/index')
 def index():
-
     recipes = list(mongo.db.recipes.find().sort("views", DESCENDING))
     return render_template("index.html", recipes=recipes)
 
@@ -138,14 +136,13 @@ def insert_recipe():
     new_recipe_id = recipes.find_one({"recipe_name": data['recipe_name']})[
             '_id']
     return redirect(url_for('view_recipe', recipe_id=new_recipe_id))
-    # return redirect(url_for('get_recipes'))
+    
 
 # READ
 
 # Page to view all recipes
 @app.route("/get_recipes", methods=['GET'])
 def get_recipes():
-
     logging.info("Getting Recipes")
     # recipes = list(mongo.db.recipes.find().sort("views",DESCENDING))
     logging.info(request.args.to_dict())
@@ -159,7 +156,6 @@ def get_recipes():
 
 @app.route('/view_recipe/recipe_id?=<recipe_id>')
 def view_recipe(recipe_id):
-
     logging.info("Viewing Recipes")
     mongo.db.recipes.find_one_and_update(
         {"_id": ObjectId(recipe_id)}, {"$inc": {"views": 1}})
@@ -176,14 +172,10 @@ def view_recipe(recipe_id):
 
 @app.route('/search', methods=['POST'])
 def search():
-
-    word_find = request.form["word_find"]
-    mongo.db.recipes.create_index([("$**", 'text')])
-    recipes = mongo.db.recipes.find({"$text": {"$search": word_find}})
-    result = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
-    return render_template('search.html',
+    result = get_paginated_list(mongo.db.recipes, **request.form.to_dict())
+    return render_template('recipes.html',
                            title="View recipes",
-                           recipes=recipes,
+                           recipes=result,
                            result=result,
                            categories=mongo.db.categories.find(),
                            cuisines=mongo.db.cuisines.find(),
