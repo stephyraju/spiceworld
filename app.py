@@ -96,6 +96,8 @@ def get_paginated_list(entity, query={}, **params):
         KEY_ENTITIES: items
         }
 
+# HOME
+
 
 @app.route('/')
 @app.route('/index')
@@ -103,7 +105,7 @@ def index():
     recipes = list(mongo.db.recipes.find().sort("views", DESCENDING))
     return render_template("index.html", recipes=recipes)
 
-# -------CREATE---------#
+# CREATE
 
 
 @app.route('/add_recipe')
@@ -490,4 +492,4 @@ def logout():
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)
