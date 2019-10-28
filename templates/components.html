@@ -1,4 +1,5 @@
 {%- macro pagination(url, result) -%}
+
 <ul class="pagination">
     {% if result['prev_uri'] is none %}
     <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
@@ -21,4 +22,5 @@
         <i class="material-icons">chevron_right</i></a></li>
         {% endif %}
 </ul>
+
 {%- endmacro -%}

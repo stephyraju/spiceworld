@@ -1,11 +1,12 @@
 {% extends 'base.html' %} {% block content %}
 {% import 'components.html' as components %}
+
 <section class="container">
   <div class="search row">
     <form method="POST" action="{{ url_for('search') }}" value: "search">
       <div class="col s12">
         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-        <input class="input_search" id="word_find" name="word_find" type="search" value="{{result['word_find']}}"required>
+        <input class="input_search" id="word_find" name="word_find" type="search" value="{{result['word_find']}}" required>
         <button class="submit-btn btn-small waves-effect waves-light right teal" type="submit" name="action">Search</button>
       </div>
     </form>
