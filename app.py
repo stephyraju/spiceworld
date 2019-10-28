@@ -52,10 +52,8 @@ def get_paginated_list(entity, query={}, **params):
         word_find = params.get(KEY_WORD_FIND)
         if len(word_find.split()) > 0:
             entity.create_index([("$**", 'text')])
-            print("searching")
             result = entity.find({'$text': {'$search': word_find}})
             items = result.sort(order_by, order).skip(offset).limit(page_size)
-            print(items)
         else:
             items = entity.find().sort(
                 order_by, order
@@ -63,7 +61,7 @@ def get_paginated_list(entity, query={}, **params):
     else:
         items = entity.find(query).sort(order_by, order).skip(
             offset).limit(page_size)
-    total_items = items.count()    
+    total_items = items.count()
     if page_size > total_items:
         page_size = total_items
     if page_number < 1:
@@ -121,11 +119,6 @@ def add_recipe():
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     logging.info("Inserting Recipes")
-    logging.info("Ingredients: {}"
-                 .format(request.form.getlist('ingredients[]')))
-    logging.info("Preparation: {}"
-                 .format(request.form.getlist('preparation[]')))
-    logging.info(request.form.to_dict())
     recipes = mongo.db.recipes
     data = request.form.to_dict()
     data['recipe_name'] = data['recipe_name']
@@ -138,7 +131,7 @@ def insert_recipe():
     new_recipe_id = recipes.find_one({"recipe_name": data['recipe_name']})[
             '_id']
     return redirect(url_for('view_recipe', recipe_id=new_recipe_id))
-    
+
 
 # READ
 
@@ -146,11 +139,7 @@ def insert_recipe():
 @app.route("/get_recipes", methods=['GET'])
 def get_recipes():
     logging.info("Getting Recipes")
-    # recipes = list(mongo.db.recipes.find().sort("views",DESCENDING))
-    logging.info(request.args.to_dict())
     recipes = get_paginated_list(mongo.db.recipes, **request.args.to_dict())
-    logging.info("Result: {}".format(recipes))
-
     return render_template('recipes.html',
                            recipes=recipes,
                            result=recipes)
@@ -174,6 +163,7 @@ def view_recipe(recipe_id):
 
 @app.route('/search', methods=['POST'])
 def search():
+    logging.info("Searching Recipes")
     result = get_paginated_list(mongo.db.recipes, **request.form.to_dict())
     return render_template('recipes.html',
                            title="View recipes",
@@ -315,9 +305,6 @@ def edit_recipe(recipe_id):
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
     logging.info("Updating Recipe")
-    logging.info(mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)}))
-    logging.info(request.form)
-    logging.info(request.form.to_dict())
     recipes = mongo.db.recipes
     recipes.update({"_id": ObjectId(recipe_id)},
                    {
@@ -350,15 +337,12 @@ def delete_recipe(recipe_id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    logging.info('Inside Registering.....')
+    logging.info('Registering User')
     if request.method == 'POST':
-        logging.info('User name: ' + str(request.form['username'].lower()))
         session['username'] = request.form['username'].lower()
-        logging.info('Mongo User: ' + str(mongo.db.users))
         users = mongo.db.users
         user_exists = users.find_one(
                       {'author': request.form['username'].lower()})
-        logging.info('User exists: ' + str(user_exists))
 
         if user_exists is None:
             logging.info('User Does not exist. Creating new user')
@@ -415,13 +399,7 @@ def account(account_name):
                  (session.get('username')))
     recipes_submitted_by_user = mongo.db.recipes.find(
                                {"author": account_name})
-    logging.info("Recipes submitted by user: {}".format
-                 (str(recipes_submitted_by_user)))
     total_recipes_by_user = recipes_submitted_by_user.count()
-    logging.info("Total recipes by user: {}".format
-                 (str(total_recipes_by_user)))
-    logging.info(recipes_submitted_by_user)
-
     return render_template('account.html',
                            user_recipes=recipes_submitted_by_user,
                            total_recipes_by_user=total_recipes_by_user)
@@ -429,9 +407,10 @@ def account(account_name):
 
 # Likes
 
+
 @app.route('/like_recipe/<recipe_id>')
 def like_recipe(recipe_id):
-    
+
     '''Controls behavior of user-like increment and decrements operator.
     Feature is dependant upon user interaction in the user-interface.
     User is only allowed to like once for each recipe'''
