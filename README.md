@@ -188,25 +188,25 @@ All of my wireframes for this project can be found [here](https://github.com/ste
         
     * For visitors to the site who are not logged in, list items links are available for them to use.
     
-      a.Home
+      a. Home
 
-      b.Recipes
+      b. Recipes
       
-      c.Register
+      c. Register
       
-      d.Login
+      d. Login
       
    * For users who are logged in, the list items are as follows:
      
-      a.Home
+      a. Home
       
-      b.Recipes
+      b. Recipes
       
-      c.Add Recipes
+      c. Add Recipes
      
-      d.My Account
+      d. My Account
       
-      e.Logout
+      e. Logout
 
    * The navbar is collapsed into a burger icon on small and medium screens. The options remain the same, but they are instead accessed using a side navigation element which can be accessed through 'burger' icon at the top left. 
    
@@ -354,10 +354,10 @@ Use an existing user to see how the app handles user recipes
 
 You can do this with:
 
-Username: ooooo
-Password: uuuuu
+Username: sarah
+Password: password
 
-If testing with user 'tttt', please don't deleting any recipes. To test this aspect of the site, you can create and delete submissions with users you create yourself.
+If testing with user 'sarah', please don't deleting any recipes. To test this aspect of the site, you can create and delete submissions with users you create yourself.
 
 #### Validation Services
 
