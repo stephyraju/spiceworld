@@ -28,21 +28,21 @@ The deployed site can be found at [spiceword.](https://spiceworld-cookbook.herok
      * **[Icon](#icon)**
    * **[Wireframes](#wireframes)**
 
-2. **[Features](#Features)**
-   * **[Existing Features](#Existing-Features)**
-   * **[Features Left to Implement](#Features-left-to-implement)**
+2. **[Features](#features)**
+   * **[Existing Features](#existing-features)**
+   * **[Features Left to Implement](#features-left-to-implement)**
 
-3. **[Technologies Used](#Technologies-Used)**
+3. **[Technologies Used](#technologies-Used)**
 
-   * **[Languages](#Languages)**
-   * **[Libraries](#Libraries)**
-   * **[Tools](#Tools)**
-   * **[Hosting](#Hosting)**
-4. **[Testing](#Testing)**
+   * **[Languages](#languages)**
+   * **[Libraries](#libraries)**
+   * **[Tools](#tools)**
+   * **[Hosting](#hosting)**
+4. **[Testing](#testing)**
 
-5. **[Deployment](#Deployment)**
+5. **[Deployment](#deployment)**
 
-6. **[Credits](#Credits)**
+6. **[Credits](#credits)**
     * **[Content](#content)**
     * **[Media](#media)**
     * **[Acknowledgements](#acknoledgements)**
@@ -421,14 +421,6 @@ I deleted some recipes to test the delete functionality.When the delete button i
 
 I've confirmed the recipes are deleted by searching and also in database directly.
 
-#### Known Issues
-##### Pagination with Search
- 
- Pagination is working showing the number of pages accordingly in all the recipes page.
- 
- In search and category selection from the home page it is displaying 2 pages eventhough its 1 page.
-
-
 ### Deployment
 
 #### Deployment To Heroku
@@ -531,7 +523,7 @@ An account at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/clou
   https://www.quackit.com/mongodb/tutorial/mongodb_sort_query_results.cfm
   
 
-Special thanks to Guido Cecilio Garcia, my Code Institute mentor, for his guidance and advice whilst working on this project.
+Special thanks to Guido Cecilio Garcia, my Code Institute mentor, for his guidance and advice whilst working on this project and also helping me to sort pagination issues.
 
 #####  Disclaimer
 
