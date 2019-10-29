@@ -421,6 +421,11 @@ I deleted some recipes to test the delete functionality.When the delete button i
 
 I've confirmed the recipes are deleted by searching and also in database directly.
 
+**Known Issues**
+
+Pagination - Pagination was not working for search result. For setting the pagination for search result and the recipes, my mentor Guido guided me and together we solved the pagination issues.
+
+
 ### Deployment
 
 #### Deployment To Heroku
@@ -522,7 +527,7 @@ An account at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/clou
   
   https://www.quackit.com/mongodb/tutorial/mongodb_sort_query_results.cfm
   
-
+  
 Special thanks to Guido Cecilio Garcia, my Code Institute mentor, for his guidance and advice whilst working on this project and also helping me to sort pagination issues.
 
 #####  Disclaimer
