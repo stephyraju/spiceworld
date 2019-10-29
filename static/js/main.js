@@ -1,3 +1,5 @@
+// Initialize Materialize Elements
+
 $(document).ready(function() {
     $('.sidenav').sidenav();
     $('select').formSelect();
@@ -5,13 +7,14 @@ $(document).ready(function() {
     $('.modal').modal();
     $('.tooltipped').tooltip();
     
- 
     $('.cancel-form').click(function() {
         window.history.back();
     });
- 
+
     });
-  
+
+// Add / Remove Ingredients
+
  var ingredientField = $(".ingredient").length;
     $("#add_ingredient").on("click", function () {
         $("select").formSelect("destroy");
@@ -28,6 +31,8 @@ $(document).ready(function() {
             ingredientField-= 1;
         }
     });
+
+// Add / Remove preparation
  
 var preparationField = $(".preparation").length;
     /* add new cloned item */
